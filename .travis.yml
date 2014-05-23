@@ -1,6 +1,5 @@
 language: ruby
 cache: bundler
-script: phantomjs testrunner.js
 rvm:
   - 1.9.3
 before_script:
@@ -10,4 +9,3 @@ before_script:
   - bundle exec rake db:test:prepare --trace
 script:
   - RAILS_ENV=test bundle exec rake spec
-  - phantomjs testrunner.js
