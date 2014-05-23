@@ -3,6 +3,7 @@
 # defaults to app/assets/javascripts
 src_dir: "app/assets/javascripts"
 
+
 # path to parent directory of css_files
 # relative path from Rails.root
 # defaults to app/assets/stylesheets
@@ -26,6 +27,7 @@ spec_dir: spec/javascripts
 # relative path from spec_dir
 helpers:
   - "helpers/**/*.{js.coffee,js,coffee}"
+  - "vendor/assets/javascripts/mock-ajax.js"
 
 # list of file expressions to include as specs into spec runner
 # relative path from spec_dir
