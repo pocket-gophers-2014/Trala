@@ -12,11 +12,10 @@
         <p>{{song.artist_name}} </p>
         <p>{{song.title}}</p>
       {{/each}}
-    {{/if}}
-
-    {{else}} {{#if song.is_not_valid_search}}
+    {{else}} 
+      {{#if song.is_not_valid_search}}
       <h3> Tralalala, try again dear. </h3>
-
-    {{/if}} {{/if}}
+      {{/if}}
+    {{/if}}
   </div>
 </div>
