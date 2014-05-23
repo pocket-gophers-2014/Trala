@@ -1,0 +1,21 @@
+<div class = "search-room-container">
+  <form action="/search.jsp">
+    Search by track title, artist, or genre: <input type="search" name="all_search"> <br>
+    <input type="submit">
+  </form>
+
+  <div class="search-results">
+  {{! only output album images and names if user hit enter and search is valid}}
+    {{#if song.is_valid_search}}
+      {{#each song.search_result}}
+        <img src="{{song.album_image_url}}"> <br>
+        <p>{{song.artist_name}} </p>
+        <p>{{song.title}}</p>
+      {{/each}}
+    {{else}} 
+      {{#if song.is_not_valid_search}}
+      <h3> Tralalala, try again dear. </h3>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

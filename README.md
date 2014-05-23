@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/pocket-gophers-2014/Trala.svg?branch=master)](https://travis-ci.org/pocket-gophers-2014/Trala)
+
 Trala
 [trah-lah]
 
@@ -9,7 +10,7 @@ Is it a playlist? Is it a tracklist? Is it a user-manipulated widget? Is it any 
 
 Nah-- not quite.
 
-**jRadio** is here to give you access to create music events on the fly. To allow you and those around you to dance, sing ... well, you know-- live-- all on one continually streaming sound.
+**Trala** is here to give you access to create music events on the fly. To allow you and those around you to dance, sing ... well, you know-- live-- all on one continually streaming sound.
 
 A community-inspired, community-involving world of music that doesn't miss a beat.
 
@@ -21,3 +22,14 @@ Alex,
 Lindsey,
 Mitch,
 Phil ]
+
+######Anh's Notes
+# style view <br>
+
+### notes: <br>
+
+stylesheet folder are organized in subdirectories: <br>
+  +base: styles that will never change, mixins, reset, grids, spaces, helper <br>
+
+  +application: default layout, typography, objects, modules <br>
+  +shared: popup, markdown
