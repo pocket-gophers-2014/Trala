@@ -3,17 +3,18 @@ development:
   database: trala_development
   pool: 5
   timeout: 5000
+  host: localhost
 
 test:
   adapter: postgresql
   database: trala_test
   pool: 5
   timeout: 5000
+  host: localhost
 
 production:
   adapter: postgresql
   database: trala_production
   pool: 5
   timeout: 5000
-
-
+  host: localhost
