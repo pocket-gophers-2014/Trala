@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pocket-gophers-2014/Trala.svg?branch=master)](https://travis-ci.org/pocket-gophers-2014/Trala)
+
 # style view <br>
 
 ### notes: <br>
