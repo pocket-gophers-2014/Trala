@@ -1,9 +1,8 @@
 development:
   adapter: postgresql
-  database: trala_dev
+  database: trala_development
   pool: 5
   timeout: 5000
-
 
 test:
   adapter: postgresql
@@ -13,6 +12,8 @@ test:
 
 production:
   adapter: postgresql
-  database: trala
+  database: trala_production
   pool: 5
   timeout: 5000
+
+
