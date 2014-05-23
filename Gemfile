@@ -24,3 +24,9 @@ end
 # handlebars gems
 gem 'handlebars-rails'
 gem 'handlebars_assets'
+
+
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'jbuilder'
+

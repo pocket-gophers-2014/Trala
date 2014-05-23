@@ -1,0 +1,10 @@
+<div class = "all-room-container">
+    <h3> Active Room </h3>
+    <p> Tralalala, join a rooooooom! <p>
+
+    <ul class = "room-container">
+      {{#each room}}
+      <button type="button"> <a href="../{{room.url}}#{{id}}" data-remote="true"> {{room.name}} </a> </button> <br>
+      {{/each}}
+    </ul>
+</div>
