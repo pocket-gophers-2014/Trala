@@ -4,3 +4,10 @@ rvm:
   - jruby-18mode # JRuby in 1.8 mode
   - jruby-19mode # JRuby in 1.9 mode
   - rbx-2.1.1
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database trala_test;' -U postgres
+  - bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare --trace
+script:
+  - RAILS_ENV=test bundle exec rake spec
