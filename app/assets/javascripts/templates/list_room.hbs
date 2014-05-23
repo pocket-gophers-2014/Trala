@@ -1,10 +1,24 @@
-<div class = "all-room-container">
-    <h3> Active Room </h3>
-    <p> Tralalala, join a rooooooom! <p>
+<div class="room_banner">
+  <h3> Active Room </h3>
+  <p> Tralalala, join a rooooooom! <p>
+</div>
 
-    <ul class = "room-container">
+<!-- example template after rendered from handlebars" -->
+<div class = "room-container">
+  <p> roomname </p>
+</div>
+<div class = "room-container">
+  <p> roomname </p>
+</div>
+<div class = "room-container">
+  <p> roomname </p>
+</div>
+
+<!-- when json object is ready! -->
+<div class = "room-container">
+  <ul>
       {{#each room}}
       <button type="button"> <a href="../{{room.url}}#{{id}}" data-remote="true"> {{room.name}} </a> </button> <br>
       {{/each}}
-    </ul>
+  </ul>
 </div>
