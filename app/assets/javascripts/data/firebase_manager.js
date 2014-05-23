@@ -1,4 +1,4 @@
-Data.FirebaseManager = function() {
+Data.FirebaseManager = function(refUrl) {
 
 }
 
