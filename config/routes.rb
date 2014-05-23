@@ -1,3 +1,3 @@
 Trala::Application.routes.draw do
- root "pages#index"
+ root to: "pages#index"
 end
