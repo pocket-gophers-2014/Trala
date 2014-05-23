@@ -1,0 +1,11 @@
+language: ruby
+cache: bundler
+rvm:
+  - 1.9.3
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database trala_test;' -U postgres
+  - bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare --trace
+script:
+  - RAILS_ENV=test bundle exec rake spec

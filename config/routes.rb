@@ -1,3 +1,4 @@
 Trala::Application.routes.draw do
- root to: "pages#index"
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  root to: "pages#index"
 end
