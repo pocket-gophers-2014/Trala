@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trala</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Changa+One' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="main_title">
+  <h1 class="logo"> Trala </h1>
+  <h3> mixing music and community on the go </h3>
+</div>
+
+<div class = "search-room-container">
+  <form action="/search.jsp">
+    search: <input type="search" name="all_search">
+    <input type="submit">
+  </form>
+</div>
+
+  <div class="search-results">
+    <p> <img src="album1.jpg"> </p>
+    <h5> AlbumTitle </h5>
+    <h5> The FakeArtistName </h5>
+
+    <!-- <div class="search-results">
+  {{! only output album images and names if user hit enter and search is valid}}
+    {{#if song.is_valid_search}}
+      {{#each song.search_result}}
+        <img src="{{song.album_image_url}}"> <br>
+        <p>{{song.artist_name}} </p>
+        <p>{{song.title}}</p>
+      {{/each}}
+    {{/if}}
+
+    {{else}} {{#if song.is_not_valid_search}}
+      <h3> Tralalala, try again dear. </h3>
+
+    {{/if}} {{/if}}
+  </div> -->
+
+  </div>
+</div>
+
+<!-- /////////////  TEMPLATE FOR SONG BASKET  ////////////////// -->
+<div class="song-basket">
+  <p> You need three songs </p>
+  <p id="song1">1. your first song</p>
+  <p id="song2">2. your need a song </p>
+  <p id="song3">3. your last song </p>
+</div>
+
+
+
+  {{#if song.length < 3 }}
+
+
+  {{else}} {{#if song.length === 3}}
+    <p> You need 3 items for your songlist. </p>
+  {{/if}}
+
+</div>
+
+</body>
+</html>
