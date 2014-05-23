@@ -5,6 +5,7 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'debugger'
 end
 
 group :test do
@@ -14,17 +15,18 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'rspec'
 end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
+
+  # handlebars gems
+  gem 'handlebars-rails'
+  gem 'handlebars_assets'
+  gem 'sprockets'
 end
-
-# handlebars gems
-gem 'handlebars-rails'
-gem 'handlebars_assets'
-
 
 gem 'coffee-rails'
 gem 'jquery-rails'
