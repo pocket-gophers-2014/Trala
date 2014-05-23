@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', :groups => [:development, :test]
+gem 'soundcloud'
+
 gem 'rails', '3.2.13'
 gem 'pg'
 
