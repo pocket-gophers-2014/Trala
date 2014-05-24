@@ -1,9 +1,9 @@
 Studio.View = function(){
-	this.contentSelector = '.content'
+	this.contentSelector = 'body'
 }
 
 Studio.View.prototype = {
-	drawInitial: function(song) {
-		$(this.contentSelector).empty.append(song)
+	drawInitial: function(playerTemplate) {
+		$(this.contentSelector).empty().append(playerTemplate)
 	}
 }

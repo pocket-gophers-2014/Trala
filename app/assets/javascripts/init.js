@@ -10,9 +10,13 @@ $(document).ready(function() {
   fbTest.setDataTriggers()
 
 
-  ///Studio Setup
-  songManager = new Data.SongManager();
+  //Studio Setup - TODO cleanup when search is complete
+  var songManager = new Data.SongManager();
+  songManager.init()
   var studioModel = new Studio.Model();
   var studioView = new Studio.View();
-  studioController = new Studio.Controller({model: studioModel, view: studioView})
+  studioController = new Studio.Controller({model: studioModel,
+  																					view: studioView,
+  																		 			songManager: songManager})
+ studioController.init(); 
 })

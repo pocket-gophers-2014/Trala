@@ -18,8 +18,16 @@ Data.SongManager.prototype = {
         streamable: true
       },
       function(tracks) {
+        tracks = this.appendClientIdToTracks(tracks)
         callback(tracks)
-    	})
+    	}.bind(this))
+  },
+
+  appendClientIdToTracks: function(tracks) {
+    for (var i = 0; i < tracks.length; i++ ) {
+      tracks[i].client_id = this.clientId
+    }
+    return tracks
   }
 }
 
