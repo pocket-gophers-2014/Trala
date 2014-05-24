@@ -20,7 +20,7 @@ Search.Controller.prototype = {
 
 	buildSearchWidget: function() {
 		return HandlebarsTemplates['search_widget'](songData)
-	}
+	},
 
 	buildResultsTemplate: function(songData) {
 		return HandlebarsTemplates['search_results'](songData)
