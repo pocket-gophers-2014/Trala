@@ -19,5 +19,9 @@ StudioCollection.Controller.prototype = {
     for (var i = 0; i < tempCollection.length; i++) {
         this.view.renderStudioCollection(tempCollection[i])
     }
+  },
+
+  loadInitial: function(){
+    debugger
   }	
 }
