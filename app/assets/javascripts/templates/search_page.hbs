@@ -1,0 +1,46 @@
+<div class = "search-room-container">
+  <!-- searchbox -->
+  <form action="/search.jsp">
+    search: <input type="search" name="all_search">
+    <input type="submit">
+  </form>
+</div>
+
+  <!-- search-results sample, uncomment after you have actual json object -->
+
+  <div class="search-results">
+    <h3> Search Results </h3>
+    <p><img src="album1.jpg"> </p>
+    <h5> SampleAlbumTitle </h5>
+    <h5> SampleArtistName </h5>
+  </div>
+
+<!-- after receiving actual search json object-->
+
+<div class="search-results">
+  {{! only output album images and names if user hit enter and search is valid}}
+    {{#if song.is_valid_search}}
+      {{#each song.search_result}}
+        <img src="{{song.album_image_url}}"> <br>
+        <p>{{song.artist_name}} </p>
+        <p>{{song.title}}</p>
+      {{/each}}
+    {{else}}
+      {{#if song.is_not_valid_search}}
+      <h3> Tralalala, try again dear. </h3>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>
+
+<!-- /////////////  TEMPLATE FOR SONG BASKET  ////////////////// -->
+
+<div class="song-basket">
+  <h3> Your playlist </h3>
+      <p id="song1">1. empty </p>
+      <p id="song2">2. empty </p>
+      <p id="song3">3. empty </p>
+</div>
+
+  <p id="enter-room-msg"> Your basket is full! Enter a room now! </p>
+    <button><a href="{{room.current_room}}"> Enter </a></button>
