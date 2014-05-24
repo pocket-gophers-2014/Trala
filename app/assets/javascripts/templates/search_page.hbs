@@ -20,15 +20,14 @@
 {{!-- <div class="search-results"> --}}
   {{! only output album images and names if user hit enter and search is valid}}
     {{!-- {{#if song.is_valid_search}} --}}
-    <div>
-      {{}}
-      {{#each songData }}   {{!-- .search_result --}}
-        <img src="{{artwork_url}}"> <br>
+    <div class = "result-container">
+      {{#each songData}}
+        <img src="{{artwork_url}}">
         <p>{{id}} </p>
         <p>{{title}}</p>
       {{/each}}
     </div>
-    {{!-- {{else}} --}}
+    {{!-- {{else}}
       {{!-- {{#if song.is_not_valid_search}}
       <h3> Tralalala, try again dear. </h3>
       {{/if}}

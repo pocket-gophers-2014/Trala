@@ -15,8 +15,10 @@ Search.Controller.prototype = {
     },
 
     updateResults: function( songData ) {
+        debugger
         resultsTemplate = this.buildResultsTemplate( songData )
         this.view.redraw( resultsTemplate )
+        //$(".result-container").append(resultsTemplate);
     },
 
 	buildSearchWidget: function() {
@@ -24,8 +26,14 @@ Search.Controller.prototype = {
 	},
 
     buildResultsTemplate: function( songData ) {
-        debugger
-        var test =  HandlebarsTemplates['search_page']( songData )
+        var test =  HandlebarsTemplates['result-container']( songData )
         return test
     }
+
+    // resultsTemplate: function(songData) {
+    //     debugger
+    //     var resultContainer = $(".result-container")
+    //     var song_title = songData[0].title
+    //     $(".result-container").append(song_title)
+    // }
 }
