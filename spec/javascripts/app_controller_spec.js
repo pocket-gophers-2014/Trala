@@ -1,6 +1,9 @@
 describe("App Controller", function(){
 	var appController;
-   beforeEach(function() { appController = new App.Controller(); });
+   beforeEach(function(){ 
+   	appController = new App.Controller(); 
+   	spyOn(appController, 'loadNewStudio');
+   });
 
 	it("should be defined", function(){
 		expect(appController).toBeDefined();
@@ -38,32 +41,32 @@ describe("App Controller", function(){
 		expect(appController.searchController).toEqual({});
 	}),
 
-	it("properly sets the 'controller' key when calling 'registerStudioCollectionController' ", function(){
+	it("sets the proper 'controller' key when calling 'registerStudioCollectionController' ", function(){
 		appController.registerStudioCollectionController("controller", "method")
 		expect(appController.studioCollectionController.controller).toEqual("controller");
 	}),
 
-	it("properly sets the 'callbackMethod' key when calling 'registerStudioCollectionController' ", function(){
+	it("sets the proper 'callbackMethod' key when calling 'registerStudioCollectionController' ", function(){
 		appController.registerStudioCollectionController("controller", "method")
 		expect(appController.studioCollectionController.callbackMethod).toEqual("method");
 	}),
 
-	it("properly sets the 'controller' key when calling 'registerStudioController' ", function(){
+	it("sets the proper 'controller' key when calling 'registerStudioController' ", function(){
 		appController.registerStudioController("controller", "method")
 		expect(appController.studioController.controller).toEqual("controller");
 	}),
 
-	it("properly sets the 'callbackMethod' key when calling 'registerStudioController' ", function(){
+	it("sets the proper 'callbackMethod' key when calling 'registerStudioController' ", function(){
 		appController.registerStudioController("controller", "method")
 		expect(appController.studioController.callbackMethod).toEqual("method");
 	}),
 
-	it("properly sets the 'controller' key when calling 'registerSearchController' ", function(){
+	it("sets the proper 'controller' key when calling 'registerSearchController' ", function(){
 		appController.registerSearchController("controller", "method")
 		expect(appController.searchController.controller).toEqual("controller");
 	}),
 
-	it("properly sets the 'callbackMethod' key when calling 'registerSearchController' ", function(){
+	it("sets the proper 'callbackMethod' key when calling 'registerSearchController' ", function(){
 		appController.registerSearchController("controller", "method")
 		expect(appController.searchController.callbackMethod).toEqual("method");
 	})
