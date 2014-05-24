@@ -24,5 +24,57 @@ describe("App Controller", function(){
 
 	it("has function 'registerSearchController' ", function(){
 		expect(appController.registerSearchController).toBeDefined();
+	}),
+
+	it("initializes with an empty 'this.studioCollectionController' ", function(){
+		expect(appController.studioCollectionController).toEqual({});
+	}),
+
+	it("initializes with an empty 'this.studioController' ", function(){
+		expect(appController.studioController).toEqual({});
+	}),
+
+	it("initializes with an empty 'this.searchController' ", function(){
+		expect(appController.searchController).toEqual({});
+	}),
+
+	it("properly sets the 'controller' key when calling 'registerStudioCollectionController' ", function(){
+		appController.registerStudioCollectionController("controller", "method")
+		expect(appController.studioCollectionController.controller).toEqual("controller");
+	}),
+
+	it("properly sets the 'callbackMethod' key when calling 'registerStudioCollectionController' ", function(){
+		appController.registerStudioCollectionController("controller", "method")
+		expect(appController.studioCollectionController.callbackMethod).toEqual("method");
+	}),
+
+	it("properly sets the 'controller' key when calling 'registerStudioController' ", function(){
+		appController.registerStudioController("controller", "method")
+		expect(appController.studioController.controller).toEqual("controller");
+	}),
+
+	it("properly sets the 'callbackMethod' key when calling 'registerStudioController' ", function(){
+		appController.registerStudioController("controller", "method")
+		expect(appController.studioController.callbackMethod).toEqual("method");
+	}),
+
+	it("properly sets the 'controller' key when calling 'registerSearchController' ", function(){
+		appController.registerSearchController("controller", "method")
+		expect(appController.searchController.controller).toEqual("controller");
+	}),
+
+	it("properly sets the 'callbackMethod' key when calling 'registerSearchController' ", function(){
+		appController.registerSearchController("controller", "method")
+		expect(appController.searchController.callbackMethod).toEqual("method");
 	})
 });
+
+
+
+
+
+
+
+
+
+
