@@ -1,37 +1,40 @@
 <div class = "search-room-container">
   <!-- searchbox -->
-  <form action="/search.jsp">
+  <form>
     search: <input type="search" name="all_search">
     <input type="submit">
   </form>
 </div>
 
   <!-- search-results sample, uncomment after you have actual json object -->
-
+{{!--
   <div class="search-results">
     <h3> Search Results </h3>
     <p><img src="album1.jpg"> </p>
     <h5> SampleAlbumTitle </h5>
     <h5> SampleArtistName </h5>
-  </div>
+  </div> --}}
 
 <!-- after receiving actual search json object-->
 
-<div class="search-results">
+{{!-- <div class="search-results"> --}}
   {{! only output album images and names if user hit enter and search is valid}}
-    {{#if song.is_valid_search}}
-      {{#each song.search_result}}
-        <img src="{{song.album_image_url}}"> <br>
-        <p>{{song.artist_name}} </p>
-        <p>{{song.title}}</p>
+    {{!-- {{#if song.is_valid_search}} --}}
+    <div>
+      {{}}
+      {{#each songData }}   {{!-- .search_result --}}
+        <img src="{{artwork_url}}"> <br>
+        <p>{{id}} </p>
+        <p>{{title}}</p>
       {{/each}}
-    {{else}}
-      {{#if song.is_not_valid_search}}
+    </div>
+    {{!-- {{else}} --}}
+      {{!-- {{#if song.is_not_valid_search}}
       <h3> Tralalala, try again dear. </h3>
       {{/if}}
     {{/if}}
-  </div>
-</div>
+  </div> --}}
+{{!-- </div> --}}
 
 <!-- /////////////  TEMPLATE FOR SONG BASKET  ////////////////// -->
 
@@ -42,5 +45,54 @@
       <p id="song3">3. empty </p>
 </div>
 
+
   <p id="enter-room-msg"> Your basket is full! Enter a room now! </p>
     <button><a href="{{room.current_room}}"> Enter </a></button>
+
+{{!-- {{#if song.length === 3 }}
+  <p id="enter-room-msg"> Your basket is full! Enter a room now! </p>
+    <button><a href="{{room.current_room}}"> Enter </a></button>
+{{/if}} --}}
+
+
+
+{{!-- artwork_url: "http://i1.sndcdn.com/artworks-000079419398-zsv6kj-large.jpg?30a2558"
+attachments_uri: "http://api.soundcloud.com/tracks/149502393/attachments"
+bpm: null
+comment_count: 69
+commentable: true
+created_at: "2014/05/14 15:10:18 +0000"
+description: "<b>Like the track? Click the [<i>↻ Repost</i>] button!</b>↵↵<b>Join the EDM Movement @ http://EDM.com</b>↵↵Free Download: http://on.fb.me/Sx2gj6↵••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••↵Follow Roger Wilco:↵https://www.facebook.com/IAmNotRogerWilco↵https://twitter.com/NotRogerWilco↵SC: @iamnotrogerwilco↵↵Follow Upscale Recordings:↵https://www.facebook.com/Upscalerecordings↵https://twitter.com/UpscaleRecords↵SC: @upscale-recordings↵↵Follow Us @ http://EDM.com↵www.Facebook.com/edmcom↵www.twitter.com/TheEDMNetwork↵www.youtube.com/EDM↵www.instagram.com/edm↵www.lockerdome.com/edm↵plus.google.com/+EDM↵SC: http://soundcloud.com/EDM↵•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••↵Send all demos to dropbox@Dubstep.NET to have your track featured!↵↵Send unreleased tracks to exclusive@Dubstep.NET to be considered for Exclusive release!↵•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+download_count: 1298
+download_url: "http://api.soundcloud.com/tracks/149502393/download"
+downloadable: true
+duration: 276740
+embeddable_by: "all"
+favoritings_count: 910
+genre: "Neuro Dubstep"
+id: 149502393
+isrc: null
+key_signature: null
+kind: "track"
+label_id: null
+label_name: null
+license: "all-rights-reserved"
+original_content_size: 11519910
+original_format: "mp3"
+permalink: "roger-wilco-i-o-u"
+permalink_url: "http://soundcloud.com/dubstep/roger-wilco-i-o-u"
+playback_count: 41667
+purchase_title: "Free Download!"
+purchase_url: "http://on.fb.me/Sx2gj6"
+release: null
+release_day: null
+release_month: null
+release_year: null
+sharing: "public"
+state: "finished"
+stream_url: "http://api.soundcloud.com/tracks/149502393/stream"
+streamable: true
+tag_list: "Neuro Dubstep Funk Hop Dark Filthy Roger Wilco Upscale I O U "I O U" Breaks Free Download New 2014"
+title: "Roger Wilco - I O U"
+track_type: null
+uri: "http://api.soundcloud.com/tracks/149502393" --}}

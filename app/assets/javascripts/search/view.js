@@ -1,5 +1,6 @@
 Search.View = function(){
-	this.searchResultsSelector
+  // the thing that we could select to find
+	// this.searchResultsSelector
 }
 
 Search.View.prototype = {

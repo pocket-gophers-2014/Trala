@@ -1,28 +1,31 @@
-Search.Controller = function(view, songManager) {
-    this.view = view
-    this.songManager = songManager
+
+Search.Controller = function( view, songManager ){
+	this.view = view
+	this.songManager = songManager
 }
 
 Search.Controller.prototype = {
-    loadWidget: function() {
-        widgetTemplate = buildSearchWidget()
-        this.view.drawIntial(widgetTemplate);
+	loadWidget: function() {
+		widgetTemplate = this.buildSearchWidget()
+		this.view.drawInitial( widgetTemplate );
+	},
+
+    searchSongs: function( query ) {
+        this.songManager.searchSongs( query, this.updateResults )
     },
 
-    searchSongs: function(query) {
-        this.songManager.searchSongs(query, this.updateView)
+    updateResults: function( songData ) {
+        resultsTemplate = this.buildResultsTemplate( songData )
+        this.view.redraw( resultsTemplate )
     },
 
-    updateResults: function(songData) {
-        resultsTemplate = this.buildResultsTemplate(data)
-        this.view.redraw(resultsTemplate)
-    },
+	buildSearchWidget: function() {
+		return HandlebarsTemplates.search_page
+	},
 
-    buildSearchWidget: function() {
-        return HandlebarsTemplates['search_widget'](songData)
-    },
-
-    buildResultsTemplate: function(songData) {
-        return HandlebarsTemplates['search_results'](songData)
+    buildResultsTemplate: function( songData ) {
+        debugger
+        var test =  HandlebarsTemplates['search_page']( songData )
+        return test
     }
 }

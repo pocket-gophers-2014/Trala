@@ -1,5 +1,5 @@
 <div class = "search-room-container">
-  <form action="/search.jsp">
+  <form action="#">
     Search by track title, artist, or genre: <input type="search" name="all_search"> <br>
     <input type="submit">
   </form>
@@ -12,7 +12,7 @@
         <p>{{song.artist_name}} </p>
         <p>{{song.title}}</p>
       {{/each}}
-    {{else}} 
+    {{else}}
       {{#if song.is_not_valid_search}}
       <h3> Tralalala, try again dear. </h3>
       {{/if}}
