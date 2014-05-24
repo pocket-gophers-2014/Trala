@@ -1,5 +1,5 @@
-Room = {}
-RoomList = {}
+Studio = {}
+StudioCollection = {}
 Data = {}
 Search = {}
 App = {}
