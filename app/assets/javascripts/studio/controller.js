@@ -1,6 +1,8 @@
 Studio.Controller = function(args){
+	// debugger
 	this.model = args.model
 	this.view = args.view
+
 	//Test
 	// this.songManager = args.songManager
 }
@@ -14,6 +16,8 @@ Studio.Controller.prototype = {
 	},
 
 	loadInitial: function() {
+		console.log("loadInitial for studio controller")
+		// debugger
 		playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
 		this.view.drawInitial(playerTemplate);
 	},

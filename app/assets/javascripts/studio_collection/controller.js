@@ -22,6 +22,7 @@ StudioCollection.Controller.prototype = {
   },
 
   loadInitial: function(){
-    debugger
+    console.log("loadInitial for StudioCollection controller")
+    // debugger
   }	
 }

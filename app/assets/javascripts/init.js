@@ -11,22 +11,24 @@ $(document).ready(function() {
 
 
   //Studio Setup - TODO cleanup when search is complete
-//   var songManager = new Data.SongManager();
-//   songManager.init()
-//   var studioModel = new Studio.Model();
-//   var studioView = new Studio.View();
-//   studioController = new Studio.Controller({model: studioModel,
-//   																					view: studioView,
-//   																		 			songManager: songManager})
-//  studioController.init(); 
-// })
+  var songManager = new Data.SongManager();
+  songManager.init()
+  var studioModel = new Studio.Model();
+  var studioView = new Studio.View();
+  studioController = new Studio.Controller({model: studioModel,
+  																					view: studioView,
+  																		 			songManager: songManager})
+ // studioController.init(); 
 
 // App Controller Setup
 var appController = new App.Controller()
 var appView = new App.View()
+var searchController = new Search.Controller()
 
 appView.registerEventDelegate(appController)
 appView.bindEvents()
 appController.registerStudioCollectionController(studioCollectionController, "loadInitial")
+appController.registerStudioController(studioController, "loadInitial")
+appController.registerSearchController(searchController, "loadWidget")
   
 })
