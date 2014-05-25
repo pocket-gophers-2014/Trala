@@ -53,12 +53,12 @@ StudioCollection.Controller.prototype = {
     song = {} //GET SONG FROM BACKEND
     player = this.buildPlayer(song)
     this.studioView.draw(player);
-  }
+  },
 
   //!!Currently not called
-  // loadInitialStudio: function() {
+  loadInitialStudio: function() {
   //   console.log("loadInitial for studio controller")
   //   // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
   //   // this.view.drawInitial(playerTemplate);
-  // }
+  }
 }
