@@ -1,5 +1,9 @@
  {{#each songData}}
-    <img src="{{artwork_url}}" alt="album cover">
-    <p>{{id}} </p>
-    <p>{{title}}</p>
+  <div class="each-song-container">
+    <div class="song-img-container">
+      <img src="{{artwork_url}}" alt="no album cover available">
+    <div>
+    <h3>Song Id: {{id}} </h3>
+    <h3> Title: {{title}} </h3>
+  </div>
  {{/each}}
