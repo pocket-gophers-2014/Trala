@@ -8,6 +8,10 @@ StudioCollection.Model.prototype = {
   this.controller.renderCollection()
  },
 
+ updateStudioState: function(studio, data) {
+  this.subscriber.modifyStudioState(studio, data)
+ },
+
   registerStudioCollectionSubscriber: function(subscriber) {
     this.subscriber = subscriber
   },

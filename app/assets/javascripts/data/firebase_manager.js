@@ -28,7 +28,7 @@ Data.FirebaseManager.prototype = {
   },
 
   studioStateModified: function(data) {
-    console.log("Studio state updated")
+    this.studioCollectionModel.updateStudioState(data.name(),data.val())
   },
 
   collectionStateUpdated: function(data) {
@@ -45,9 +45,9 @@ Data.FirebaseManager.prototype = {
     // }
     // if (uniqCount === 0) {
     this.collectionState = tempData
-   this.studioCollectionModel.updateState(this.collectionState)    
- 
-   
+    console.log(this.collectionState)
+    this.studioCollectionModel.updateState(this.collectionState)    
+   // this.studioCollectionRef.off('value', this.collectionStateUpdated.bind(this))
   },
 
   parseFbData: function(data) {
@@ -73,7 +73,7 @@ Data.FirebaseManager.prototype = {
     this.studioCollectionRef.on('value', this.collectionStateUpdated.bind(this))
     // this.studioCollectionRef.on('child_added', this.collectionStateUpdated.bind(this))
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-    this.studioCollectionRef.on('child_removed', this.collectionStateUpdated.bind(this))
+    //this.studioCollectionRef.on('child_removed', this.collectionStateUpdated.bind(this))
     this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
   }
 }
