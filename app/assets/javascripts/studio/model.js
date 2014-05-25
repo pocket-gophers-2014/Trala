@@ -1,6 +1,6 @@
 Studio.Model = function(studio) {
   this.name = studio.name
-  this.listeners = 1
+  this.listeners = studio.data.listeners || 1
   this.playlist = studio.data.playlist
   this.active = true
   this.removelistener = false

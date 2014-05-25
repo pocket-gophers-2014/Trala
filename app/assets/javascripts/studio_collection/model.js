@@ -3,14 +3,6 @@ StudioCollection.Model = function() {
 }
 
 StudioCollection.Model.prototype = {
-  // initialStateGenerate: function(stateData) {
-  //   for (var i = 0; i < stateData.length; i++) {
-  //     if (this.cleanStudio(stateData[i])) {
-  //       var newStudio = new Studio.Model(stateData[i])
-  //       this.state.push(newStudio)
-  //     }
-  //   }
-  // },
 
   createNewStudio: function(studioData) {
     var newStudio = new Studio.Model(studioData)
@@ -23,18 +15,21 @@ StudioCollection.Model.prototype = {
     this.subscriber.addStudio(packagedStudioData)
   },
 
-  setMonitorOnCurentUser: function(studioName) {
-    var currentListenerCount = this.fetchStudio(studioName).studio.listeners
-    var newListenerCount = currentListenerCount++
-    this.subscriber.setConnectionMonitor(studioName, newListenerCount)
+  addListenerToStudio: function(studioName) {
+    var studioData = this.packageStudioData(this.fetchStudio(studioName).studio)
+    var newListenerCount = studioData.data.listeners + 1
+    studioData.data.listeners = newListenerCount
+    this.subscriber.setConnectionMonitor(studioName)
+    this.updateStudioState(studioData)
   },
   
   updateCollectionState: function(studioData) {
-    var tempStudio = this.fetchStudio(studioData.name)
+   var tempStudio = this.fetchStudio(studioData.name)
     if ((tempStudio === false) && (this.cleanStudio(studioData))) {
       var newStudio = new Studio.Model(studioData)
       this.state.push(newStudio)
       this.controller.constructStudio(studioData)
+      
     }
     else {
       this.controller.constructStudio(studioData)
@@ -44,6 +39,11 @@ StudioCollection.Model.prototype = {
   cleanStudio: function(studioData) {
     if (studioData.data.removelistener) {
       var newListenerCount = studioData.data.listeners - 1
+      if (newListenerCount > 0) {
+        studioData.data.listeners = newListenerCount
+        studioData.data.removelistener = false
+        this.updateStudioState(studioData)
+      }
     }
     if ((newListenerCount === 0) || (studioData.data.listeners === 0)) {
       this.removeStudio(studioData)
@@ -70,16 +70,10 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
-    // if (studio.data.removelistener) {
-    //   this.toggleListenerCount(studio)
-    //   studio.data.listeners--
-    //   studio.data.removelistener = false
-    // }
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio
       for (var attribute in studio.data) {
         if (attribute !== "playlist") { 
-          debugger
           if (studioToModify[attribute] !== studio.data[attribute]) {
             studioToModify[attribute] = studio.data[attribute]
           }      
@@ -100,7 +94,7 @@ StudioCollection.Model.prototype = {
   fetchStudio: function(studioName) {
     for (var i = 0; i < this.state.length; i++) {
       if (studioName === this.state[i].name) {      
-        return { studio: this.state[i], index: i }
+        return { studio: jQuery.extend({},this.state[i]), index: i }
       }
     }
     return false

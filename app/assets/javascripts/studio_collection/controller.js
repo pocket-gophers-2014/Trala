@@ -39,6 +39,10 @@ StudioCollection.Controller.prototype = {
     } 
   },
 
+  initUserStudioState: function(studioName) {
+    this.studioCollectionModel.addListenerToStudio(studioName)
+   },
+
   initStudioCollection: function() {
     this.studioCollectionView.addUl()
   },
