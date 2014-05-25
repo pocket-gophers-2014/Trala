@@ -70,15 +70,16 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
-    if (studio.data.removelistener) {
-      this.toggleListenerCount(studio)
-      studio.data.listeners--
-      studio.data.removelistener = false
-    }
+    // if (studio.data.removelistener) {
+    //   this.toggleListenerCount(studio)
+    //   studio.data.listeners--
+    //   studio.data.removelistener = false
+    // }
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio
       for (var attribute in studio.data) {
         if (attribute !== "playlist") { 
+          debugger
           if (studioToModify[attribute] !== studio.data[attribute]) {
             studioToModify[attribute] = studio.data[attribute]
           }      

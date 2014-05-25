@@ -19,6 +19,7 @@ Data.FirebaseManager.prototype = {
   },
 
   modifyStudioState: function(newStudioData) {
+    
     this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
