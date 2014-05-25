@@ -1,0 +1,28 @@
+// navigation-list
+@mixin navigation-list {
+  list-style-type:none;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+  > li {
+      display:block;
+      float:left;
+      &:last-child {
+        margin-right:0px;
+      }
+    }
+}
+
+@mixin hide-text{
+    overflow:hidden;
+    text-indent:-9000px;
+    display:block;
+}
+
+// box-shadows
+$default-box-shadow-h-offset: 1px;
+$default-box-shadow-v-offset: 1px;
+$default-box-shadow-blur: 2px;
+$default-box-shadow-spread: false;
+$default-box-shadow-inset: false;
+

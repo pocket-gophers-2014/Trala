@@ -24,20 +24,16 @@ StudioCollection.Controller.prototype = {
 
   loadInitialStudioCollection: function(){
     console.log("loadInitial for StudioCollection controller")
-    // debugger
   },
 
   initStudio: function() {
-    // this.songManager.searchSongs('2pac', function(tracks) {
-    //  this.testSliceFirstSong(tracks)
-    // }.bind(this))
     this.loadInitial();
   },
-  
+
   buildPlayer: function(song) {
     return HandlebarsTemplates['player'](song)
   },
-  
+
   addSong: function(song) {
     this.studioModel.addSong(song);
     // this.loadInitial();
@@ -45,8 +41,7 @@ StudioCollection.Controller.prototype = {
 
   loadInitialStudio: function() {
     console.log("loadInitial for studio controller")
-    // debugger
-    playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
-    this.view.drawInitial(playerTemplate);
+    // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
+    // this.view.drawInitial(playerTemplate);
   }
 }
