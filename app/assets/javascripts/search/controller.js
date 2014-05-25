@@ -5,6 +5,8 @@ Search.Controller = function(view, songManager) {
 
 Search.Controller.prototype = {
     loadWidget: function() {
+        console.log("loadWidget for search controller")
+        // debugger
         widgetTemplate = buildSearchWidget()
         this.view.drawIntial(widgetTemplate);
     },
