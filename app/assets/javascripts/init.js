@@ -1,15 +1,16 @@
 $(document).ready(function() {
 	var songManager = new Data.SongManager();
-  var searchWidgetView = new Search.View()
+  var searchWidgetView = new Search.View( songManager )
   searchController = new Search.Controller( searchWidgetView,  songManager )
 
   // initialize  the soundcloud client
   songManager.init()
 
-  // Creating the Room
+  searchWidgetView.bind()
+  // Search Soundcloud
+
   $('.front_page_button').on( 'click', 'a', searchController.loadWidget.bind( searchController ) )
 
-  // Search Soundcloud
   $( 'body' ).on( 'submit', '.search-room-container', function(a) {
       a.preventDefault()
       data = $('form input').val()

@@ -1,4 +1,3 @@
-
 Search.Controller = function( view, songManager ){
 	this.view = view
 	this.songManager = songManager
@@ -17,7 +16,6 @@ Search.Controller.prototype = {
     updateResults: function( songData ) {
         resultsTemplate = this.buildResultsTemplate( songData )
         this.view.redraw( resultsTemplate )
-        //$(".result-container").append(resultsTemplate);
     },
 
 	buildSearchWidget: function() {
@@ -26,9 +24,6 @@ Search.Controller.prototype = {
 
     buildResultsTemplate: function( songData ) {
         var songData = { songData: songData }
-        var test =  HandlebarsTemplates['search_result_template']( songData)
-        debugger
-        $(".results-container").append(test)
-        //return test
+        return HandlebarsTemplates['search_result_template']( songData )
     }
 }

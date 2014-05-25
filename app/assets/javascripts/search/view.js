@@ -4,6 +4,7 @@ Search.View = function(){
 }
 
 Search.View.prototype = {
+
 	drawInitial: function(widgetTemplate) {
 		$('body').empty().append(widgetTemplate);
 	},
