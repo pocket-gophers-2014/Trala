@@ -44,6 +44,8 @@ and (min-device-width : 320px)
 and (max-device-width : 960px) { /* STYLES GO HERE */
 }
 
+@media screen and (max-width: 480px) { }
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
 
@@ -74,10 +76,10 @@ ul { padding: 0px; }
   }
 }
 
-.logo {
-  @include large-text();
-  background-color: $dark_blue;
-}
+// .logo {
+//   @include large-text();
+//   background-color: $dark_blue;
+// }
 
 .photo {
   @include container_setup();
