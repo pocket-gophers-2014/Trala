@@ -15,7 +15,7 @@ Search.View.prototype = {
     $(this.mainContainerSelector).on( 'submit', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
-      method.call(this.eventDelegate.controller, $(event.target).find('input').val())
+      method.call(this.eventDelegate.controller, $(e.target).find('input').val())
     }.bind(this))
   },
 
@@ -23,7 +23,7 @@ Search.View.prototype = {
      $(this.mainContainerSelector).on( 'click', '.each-song > img', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
-      method.call(this.eventDelegate.controller, event.target.id)
+      method.call(this.eventDelegate.controller, e.target.id)
     }.bind(this))
   },
 
