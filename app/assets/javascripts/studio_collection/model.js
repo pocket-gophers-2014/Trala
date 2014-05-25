@@ -3,12 +3,14 @@ StudioCollection.Model = function() {
 }
 
 StudioCollection.Model.prototype = {
-  initialStateGenerate: function(stateData) {
-    for (var i = 0; i < stateData.length; i++) {
-      var newStudio = new Studio.Model(stateData[i])
-      this.state.push(newStudio)
-    }
-  },
+  // initialStateGenerate: function(stateData) {
+  //   for (var i = 0; i < stateData.length; i++) {
+  //     if (this.cleanStudio(stateData[i])) {
+  //       var newStudio = new Studio.Model(stateData[i])
+  //       this.state.push(newStudio)
+  //     }
+  //   }
+  // },
 
   createNewStudio: function(studioData) {
     var newStudio = new Studio.Model(studioData)
@@ -22,19 +24,30 @@ StudioCollection.Model.prototype = {
   },
 
   setMonitorOnCurentUser: function(studioName) {
-    var currentListenerCount = this.fetchStudio({name: studioName}).studio.listeners
+    var currentListenerCount = this.fetchStudio(studioName).studio.listeners
     var newListenerCount = currentListenerCount++
     this.subscriber.setConnectionMonitor(studioName, newListenerCount)
   },
   
   updateCollectionState: function(studioData) {
     var tempStudio = this.fetchStudio(studioData.name)
-    if (tempStudio === false) {
-      var newStudio = new Studio.Model(studio)
+    if ((tempStudio === false) && (this.cleanStudio(studioData))) {
+      var newStudio = new Studio.Model(studioData)
       this.state.push(newStudio)
     }
     this.controller.constructStudio(studioData)
   },
+
+  cleanStudio: function(studioData) {
+    if (studioData.data.listeners === 0) {
+      this.removeStudio(studioData)
+      return false
+    }
+    else {
+      return true
+    }
+  },
+
 
   subscriberStateReactor: function(studioData, action) {
     if (action === "add") { 
@@ -46,15 +59,20 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
-    var studioToModify = this.fetchStudio(studio.name).studio
-    for (var attribute in studio.data) {
-      if (attribute !== "playlist") { 
-        if (studioToModify[attribute] !== studio.data[attribute]) {
-          studioToModify[attribute] = studio.data[attribute]
-        }      
+    if (this.cleanStudio(studio)) {
+      var studioToModify = this.fetchStudio(studio.name).studio
+      for (var attribute in studio.data) {
+        if (attribute !== "playlist") { 
+          if (studioToModify[attribute] !== studio.data[attribute]) {
+            studioToModify[attribute] = studio.data[attribute]
+          }      
+        }
       }
+      this.controller.modifyRenderedStudio(studio)
     }
-    this.controller.modifyRenderedStudio(studio)
+    else {
+      this.removeStudio(studio)
+    }
   },
 
   packageStudioData: function(studio) {
@@ -73,12 +91,17 @@ StudioCollection.Model.prototype = {
 
   removeStudio: function(studioData) {
     var studioToRemove = this.fetchStudio(studioData.name)
-    this.state.remove(studioToRemove.index)
-    this.controller.destructStudio(studioData)
+    if (studioToRemove === false) { 
+      this.subscriber.destroyStudio(studioData.name)  
+    }
+    else {
+      this.state.remove(studioToRemove.index)
+      this.controller.destructStudio(studioData)
+    }
   },
 
- updateStudioState: function(studio, data) {
-  this.subscriber.modifyStudioState(studio, data)
+ updateStudioState: function(studioName, studioData) {
+  this.subscriber.modifyStudioState(studioName, studioData)
  },
 
   registerStudioCollectionSubscriber: function(subscriber) {
