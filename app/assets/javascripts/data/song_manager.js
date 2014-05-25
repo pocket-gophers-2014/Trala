@@ -11,14 +11,23 @@ Data.SongManager.prototype = {
         })
     },
 
-    searchSongs: function(query, callback) {
-        this.soundcloud.get(this.soundcloudUrl, {
-                q: query,
-                streamable: true
-            },
-            function(tracks) {
-                callback(tracks)
-            }
-        )
+  searchSongs: function(query, callback) {
+    this.soundcloud.get(this.soundcloudUrl, 
+      {
+        q: query,
+        streamable: true
+      },
+      function(tracks) {
+        tracks = this.appendClientIdToTracks(tracks)
+        callback(tracks)
+    	}.bind(this))
+  },
+
+  appendClientIdToTracks: function(tracks) {
+    for (var i = 0; i < tracks.length; i++ ) {
+      tracks[i].client_id = this.clientId
     }
+    return tracks
+  }
 }
+

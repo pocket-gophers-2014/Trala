@@ -4,13 +4,14 @@ Search.Controller = function( view, songManager ){
 }
 
 Search.Controller.prototype = {
+
 	loadWidget: function() {
 		widgetTemplate = this.buildSearchWidget()
 		this.view.drawInitial( widgetTemplate );
 	},
 
     searchSongs: function( query ) {
-        this.songManager.searchSongs( query, this.updateResults )
+        this.songManager.searchSongs( query, this.updateResults.bind(this) )
     },
 
     updateResults: function( songData ) {

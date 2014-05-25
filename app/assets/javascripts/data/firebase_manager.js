@@ -1,34 +1,62 @@
-Data.FirebaseManager = function(fbRef) {
-  this.soundBoothHub = new Firebase('https://trala.firebaseio.com/booths')
+Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
+  this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
   this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
- // this.hubData = []
+  this.studioCollectionModel = studioCollectionModel
+  this.collectionState = []
 }
 
 Data.FirebaseManager.prototype = {
-  addBooth: function(data) {
-    var newBooth = this.soundBoothHub.push()
-    newBooth.set(data)
-    this.currentUserBooth = newBooth.name()
-    this.boothRef = new Firebase('https://trala.firebaseio.com/booths/' + this.currentUserBooth)
-    this.boothRef.onDisconnect().update({ subscribers: "gone"})
+  addStudio: function(name, data) {
+    //var newStudio = this.studioCollectionRef.push()
+    //newStudio.set(data)
+    //this.currentUserStudio = newStudio.name()
+    this.studioCollectionRef.child(name).set(data)
+    //this.studioRef = new Firebase('https://trala.firebaseio.com/studioCollection/' + this.currentUserStudio)
+   // this.studioRef.onDisconnect().update({ active: false})
   },
 
-  destroyBooth: function(booth) {
-    this.soundBoothHub.child(booth).set(null)
+  destroyStudio: function(studio) {
+    this.studioCollectionRef.child(studio).set(null)
   },
 
-  modifyBoothState: function(booth, newData) {
-    this.soundBoothHub.child(booth).update(newData)
+  modifyStudioState: function(studio, newData) {
+    this.studioCollectionRef.child(studio).update(newData)
   },
 
-  boothStateUpdated: function(data) {
-    
+  nukeCollection: function() {
+    this.studioCollectionRef.set(null)
   },
 
-  hubStateUpdated: function(data) {
-    // var boothId = data.name()
-    // var boothData = data.val()
-    this.hubData = data.val()
+  studioStateModified: function(data) {
+    this.studioCollectionModel.updateStudioState(data.name(),data.val())
+  },
+
+  collectionStateUpdated: function(data) {
+     var tempData = this.parseFbData(data)
+     //debugger
+    // var tempLength = this.collectionState.length
+    // var uniqCount = 0
+    // if (this.collectionState.length > 0) {  
+    //   for (var i = 0; i < tempLength; i++) {
+    //     if (tempData === this.collectionState[i]) {
+    //       uniqCount++
+    //     }
+    //   }
+    // }
+    // if (uniqCount === 0) {
+    this.collectionState = tempData
+    console.log(this.collectionState)
+    this.studioCollectionModel.updateState(this.collectionState)    
+   // this.studioCollectionRef.off('value', this.collectionStateUpdated.bind(this))
+  },
+
+  parseFbData: function(data) {
+    var tempData = []
+    data.forEach(function(data) {
+      var tempObj = { name: data.name(), subs: data.val().subs, active: data.val().active }
+     tempData.push(tempObj) 
+   })
+    return tempData
   },
 
   connectionStateUpdate: function(snapData) {
@@ -42,13 +70,10 @@ Data.FirebaseManager.prototype = {
   },
 
   setDataTriggers: function() {
-    this.soundBoothHub.on('value', this.hubStateUpdated.bind(this))
-    this.soundBoothHub.on('child_added', this.hubStateUpdated.bind(this))
-    this.soundBoothHub.on('child_changed', this.boothStateUpdated.bind(this))
-    this.soundBoothHub.on('child_removed', this.hubStateUpdated.bind(this))
+    this.studioCollectionRef.on('value', this.collectionStateUpdated.bind(this))
+    // this.studioCollectionRef.on('child_added', this.collectionStateUpdated.bind(this))
+    this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
+    //this.studioCollectionRef.on('child_removed', this.collectionStateUpdated.bind(this))
     this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
-    //
   }
 }
-var fbTest = new Data.FirebaseManager()
-fbTest.setDataTriggers()
