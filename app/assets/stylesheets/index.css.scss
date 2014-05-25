@@ -10,6 +10,8 @@ $green: #478B00;
 
 // ~~~~~~~~~~~~~ grid set-up ~~~~~~~~~~~~~~~~~~ \\
 
+/* @media screen and (min-width: 480px) */
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -19,9 +21,7 @@ $butter_cream: #F2F1A0;
 $dark_green: #2C5E1A;
 $light_opacity: 0.7;
 
-@mixin cute_font() {
-  font-family: 'Changa One', cursive;
-}
+
 @mixin container_setup() {
   margin: 2% auto;
   text-align: center;
@@ -35,9 +35,20 @@ $light_opacity: 0.7;
     weight: bold;
   }
   color: white;
-  text-shadow: 10px;
+  text-shadow: 12px;
 }
 
+@mixin footer_setup() {
+  @include container_setup();
+}
+
+@mixin text_engraved() {
+  text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+}
+
+@mixin cute_font() {
+  font-family: 'Changa One', cursive;
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
 html {
@@ -50,7 +61,7 @@ body { @include cute_font(); }
 h1 { color: $med_blue; }
 
 h3 {
-  text-align: center;
+  @include text_engraved();
   font-family: 'Play', sans-serif;
   opacity: $light_opacity;
 }
@@ -95,9 +106,7 @@ p { @include container_setup(); }
   opacity: $light_opacity;
 }
 
-.search-room-container:hover {
-  opacity: 0.8;
-}
+.search-room-container:hover { opacity: 1.0 ;}
 
 .song-basket {
   @include container_setup();
@@ -105,20 +114,20 @@ p { @include container_setup(); }
   opacity: 0.4;
 }
 
-
 .results-container{
   @include container_setup();
-  width: 25%;
   background-color: $butter_cream;
   opacity: $light_opacity;
 }
 
-.results-container:hover { opacity: 1.0; }
-
-
-.each-song{
-  background-color: clear;
+.results-container:hover {
+  .each-song {
+    background-color: clear;
+    img:hover { opacity: 1.0; }
+    }
 }
+
+
 
 .room-container {
   @include container_setup();
