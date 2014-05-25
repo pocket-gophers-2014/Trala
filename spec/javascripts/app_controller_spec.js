@@ -1,8 +1,6 @@
 describe("App Controller", function(){
-	var appController;
    beforeEach(function(){ 
-   	appController = new App.Controller(); 
-   	spyOn(appController, 'loadNewStudio');
+   	appController = new App.Controller();
    });
 
 	it("should be defined", function(){
@@ -69,9 +67,26 @@ describe("App Controller", function(){
 	it("sets the proper 'callbackMethod' key when calling 'registerSearchController' ", function(){
 		appController.registerSearchController("controller", "method")
 		expect(appController.searchController.callbackMethod).toEqual("method");
-	})
-});
+	}),
 
+	it("calls 'loadNewStudio' ", function(){
+		testStudio = jasmine.createSpyObj('testStudio', ['update']);
+		testSearch = jasmine.createSpyObj('testSearch', ['update']);
+		appController.registerStudioController(testStudio, 'update')
+		appController.registerSearchController(testSearch, 'update')
+		appController.loadNewStudio()
+		expect(testStudio.update).toHaveBeenCalled();
+		expect(testSearch.update).toHaveBeenCalled();
+	}),
+
+	it("calls 'loadStudioCollection' ", function(){	
+		subscriber = jasmine.createSpyObj('subscriber', ['update']);
+		appController.registerStudioCollectionController(subscriber, 'update')	
+		appController.loadStudioCollection()
+		expect(subscriber.update).toHaveBeenCalled();
+	})
+
+});
 
 
 
