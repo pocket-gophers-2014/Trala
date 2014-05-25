@@ -1,43 +1,76 @@
-/* for sass
-$TITLE_COLOR: #0B4374;
-$BLUE: #0166C0;
-$BODY: #EEEFF0;
-$HIGHLIGHTS: #F1CC0A;
-$FOR_TEXT: #9B6A0B;
+/**********  Sass setup ***********\
 font-family: 'Pacifico', cursive;
 font-family: 'Changa One', cursive;
 font-family: 'Play', sans-serif;
-
-
 $green: #478B00;
-*/
+\***********************************/
 
-body {
-  background-image:url("spots_bg.jpg");
-  font-family: 'Play', sans-serif;
-  /*opacity: 0.9;*/
+// import libraries and include other templates:
+
+
+// ~~~~~~~~~~~~~ grid set-up ~~~~~~~~~~~~~~~~~~ \\
+
+/* @media screen and (min-width: 480px) */
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$dark_blue: #021934;
+$med_blue: #0B4374;
+$butter_cream: #F2F1A0;
+$dark_green: #2C5E1A;
+$light_opacity: 0.7;
+
+
+@mixin container_setup() {
+  margin: 2% auto;
+  text-align: center;
+  font-size: 14px;
 }
 
-h1 {
-  color: #0B4374;
+@mixin large-text() {
+  font: {
+    family: Pacifico;
+    size: 350%;
+    weight: bold;
+  }
+  color: white;
+  text-shadow: 12px;
 }
+
+@mixin footer_setup() {
+  @include container_setup();
+}
+
+@mixin text_engraved() {
+  text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+}
+
+@mixin cute_font() {
+  font-family: 'Changa One', cursive;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+html {
+  background: url("spots_bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+body { @include cute_font(); }
+
+h1 { color: $med_blue; }
 
 h3 {
-  text-align: center;
+  @include text_engraved();
   font-family: 'Play', sans-serif;
-  opacity: 0.5;
+  opacity: $light_opacity;
 }
 
-p {
-  margin: 20px auto;
-  padding: 20px auto;
-  text-align: center;
-}
+p { @include container_setup(); }
 
 .main_page_navbar {
-  margin: 0;
-  padding: 0;
-  color: white;
+  width: 100%;
+    ul { list-style-type: none;}
 }
 
 .dropdown_menu {
@@ -49,86 +82,71 @@ p {
 }
 
 .logo {
-  background-color: #021934;
-  font-family: 'Pacifico', cursive;
-  text-align: center;
-  font-size: 350%;
-  color: white;
-  width: 100%;
+  @include large-text();
+  background-color: $dark_blue;
 }
 
+.photo {
+  @include container_setup();
+}
 
 .front_page_button {
+  @include container_setup();
   font-family: 'Bitter', serif;
-  margin: 4% auto;
-  width: 20%;
-  // background-color: #0B4374;
-  color: white;
-  // border: 2px solid #0166C0;
   border-radius: 10px;
-  text-align: center;
-  height: 55%;
-  text-decoration: none;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .search-room-container {
-  margin: 2% auto;
-  text-align: center;
-  font-size: 20px;
-  opacity: 0.5;
+  @include container_setup();
+  font-size: 22px;
+  opacity: $light_opacity;
 }
 
-.search-room-container:hover {
-  opacity: 0.8;
-}
+.search-room-container:hover { opacity: 1.0 ;}
 
 .song-basket {
-  margin: 2% auto;
-  width: 50%;
-  text-align: center;
-  font-size: 14px;
+  @include container_setup();
+  width: 30%;
   opacity: 0.4;
 }
 
-.search-results {
-  margin: 2% auto;
-  width: 25%;
-  text-align: center;
-  font-size: 14px;
-  /*background-color: #F2F1A0;*/
-  /*border-radius: 5px;*/
-  opacity: 0.3;
+.results-container{
+  @include container_setup();
+  background-color: $butter_cream;
+  opacity: $light_opacity;
 }
 
-.search-results:hover {
-  opacity: 1.0;
+.results-container:hover {
+  .each-song {
+    background-color: clear;
+    img:hover { opacity: 1.0; }
+    }
 }
+
+
 
 .room-container {
+  @include container_setup();
   height: 5%;
-  margin: 2% auto;
   width: 30%;
-  background-color: #0B4374;
+  background-color: $med_blue;
   border: 2px solid white;
   border-radius: 10px;
-  text-align: center;
   text: gray;
 }
 
 .song-basket {
-  // height: 5%;
-  margin: 2% auto;
-  background-color: #021934;
+  @include container_setup();
+  background-color: $dark_blue;
   color: white;
-  border-radius: 10px;
-  font-size: 12px
 }
 
 #enter-room-msg {
-  color: #2C5E1A;
+  color: $dark_blue;
 }
 
-
-
-/*88888888888888888888888888888888888888888888888*/
 

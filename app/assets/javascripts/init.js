@@ -35,16 +35,4 @@ $(document).ready(function() {
   searchView.registerEventDelegate(searchController, "searchSongs")
   searchView.bindEvents()
   // studioController.init();
-
-
-
-  // // Creating the Room
-  // $('.front_page_button').on( 'click', 'a', searchController.loadWidget.bind( searchController ) )
-
-  // // Search Soundcloud
-  // $( 'body' ).on( 'submit', '.search-room-container', function(a) {
-  //     a.preventDefault()
-  //     data = $('form input').val()
-  //     songManager.searchSongs( data, searchController.updateResults.bind( searchController ) )
-  // })
 })

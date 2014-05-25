@@ -1,4 +1,3 @@
-
 Search.Controller = function( view, songManager ){
 	this.view = view
 	this.songManager = songManager

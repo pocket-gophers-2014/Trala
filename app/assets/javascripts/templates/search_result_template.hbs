@@ -1,7 +1,8 @@
-    <div class = "results-container">
-      {{#each songData}}
-        <img src="{{artwork_url}}">
-        <p>{{id}} </p>
-        <p>{{title}}</p>
-      {{/each}}
-    </div>
+{{#each songData}}
+  <div class="each-song">
+    <img src="{{artwork_url}}" alt="no album cover available">
+    <h3>Song Id: {{id}} </h3>
+    <h3> {{title}} </h3>
+  </div>
+
+ {{/each}}
