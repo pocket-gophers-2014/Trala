@@ -1,46 +1,65 @@
-/* for sass
+/**********  Sass setup ***********\
 font-family: 'Pacifico', cursive;
 font-family: 'Changa One', cursive;
 font-family: 'Play', sans-serif;
 $green: #478B00;
-*/
+\***********************************/
+
+// import libraries and include other templates:
+
+
+// ~~~~~~~~~~~~~ grid set-up ~~~~~~~~~~~~~~~~~~ \\
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $dark_blue: #021934;
 $med_blue: #0B4374;
 $butter_cream: #F2F1A0;
+$dark_green: #2C5E1A;
+$light_opacity: 0.7;
 
+@mixin cute_font() {
+  font-family: 'Changa One', cursive;
+}
 @mixin container_setup() {
   margin: 2% auto;
   text-align: center;
   font-size: 14px;
 }
 
-body {
-  background-image:url("spots_bg.jpg") ;
-  font-family: 'Play', sans-serif;
+@mixin large-text() {
+  font: {
+    family: Pacifico;
+    size: 350%;
+    weight: bold;
+  }
+  color: white;
+  text-shadow: 10px;
 }
 
-h1 {
-  color: $med_blue;
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+html {
+  background: url("spots_bg.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
+
+body { @include cute_font(); }
+
+h1 { color: $med_blue; }
 
 h3 {
   text-align: center;
   font-family: 'Play', sans-serif;
-  opacity: 0.9;
+  opacity: $light_opacity;
 }
 
-p {
-  margin: 2% auto;
-  padding: 2% auto;
-  text-align: center;
-}
-
+p { @include container_setup(); }
 
 .main_page_navbar {
-  margin: 0;
-  padding: 0;
-  color: white;
+  width: 100%;
+    ul { list-style-type: none;}
 }
 
 .dropdown_menu {
@@ -52,30 +71,28 @@ p {
 }
 
 .logo {
+  @include large-text();
   background-color: $dark_blue;
-  font-family: 'Pacifico', cursive;
-  text-align: center;
-  font-size: 350%;
-  color: white;
-  text-indent: 5px ;
-  width: 100%;
 }
 
+.photo {
+  @include container_setup();
+}
 
 .front_page_button {
   @include container_setup();
   font-family: 'Bitter', serif;
   border-radius: 10px;
   a {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
   }
 }
 
 .search-room-container {
   @include container_setup();
   font-size: 22px;
-  opacity: 0.7;
+  opacity: $light_opacity;
 }
 
 .search-room-container:hover {
@@ -84,7 +101,7 @@ p {
 
 .song-basket {
   @include container_setup();
-  width: 50%;
+  width: 30%;
   opacity: 0.4;
 }
 
@@ -93,25 +110,23 @@ p {
   @include container_setup();
   width: 25%;
   background-color: $butter_cream;
-  border-radius: 5px;
-  opacity: 0.7;
+  opacity: $light_opacity;
 }
 
-.results-container:hover {
-  opacity: 1.0;
-}
+.results-container:hover { opacity: 1.0; }
 
 
-.each-song-container {
+.each-song{
+  background-color: clear;
 }
+
 .room-container {
+  @include container_setup();
   height: 5%;
-  margin: 2% auto;
   width: 30%;
   background-color: $med_blue;
   border: 2px solid white;
   border-radius: 10px;
-  text-align: center;
   text: gray;
 }
 
@@ -119,15 +134,10 @@ p {
   @include container_setup();
   background-color: $dark_blue;
   color: white;
-  border-radius: 10px;
-  font-size: 12px
 }
 
 #enter-room-msg {
-  color: #2C5E1A;
+  color: $dark_blue;
 }
 
-
-
-/*88888888888888888888888888888888888888888888888*/
 

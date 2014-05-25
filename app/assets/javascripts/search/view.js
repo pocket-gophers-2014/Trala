@@ -11,5 +11,4 @@ Search.View.prototype = {
 	redraw: function(resultsTemplate) {
 		$(this.searchResultsSelector).empty().append(resultsTemplate)
 	}
-
 }
