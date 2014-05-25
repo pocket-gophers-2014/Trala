@@ -18,8 +18,8 @@ Data.FirebaseManager.prototype = {
     this.studioRef.onDisconnect().update({ removelistener: true })
   },
 
-  modifyStudioState: function(studio, newData) {
-    this.studioCollectionRef.child(studio).update(newData)
+  modifyStudioState: function(newStudioData) {
+    this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
   nukeCollection: function() {
