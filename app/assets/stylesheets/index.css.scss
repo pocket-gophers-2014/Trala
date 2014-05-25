@@ -90,7 +90,7 @@ p {
   opacity: 0.4;
 }
 
-.search-results {
+.results-container{
   margin: 2% auto;
   width: 25%;
   text-align: center;
@@ -100,9 +100,12 @@ p {
   opacity: 0.3;
 }
 
-.search-results:hover {
+.results-container:hover {
   opacity: 1.0;
 }
+
+
+
 
 .room-container {
   height: 5%;
