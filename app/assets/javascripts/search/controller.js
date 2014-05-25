@@ -15,7 +15,6 @@ Search.Controller.prototype = {
     },
 
     updateResults: function( songData ) {
-        debugger
         resultsTemplate = this.buildResultsTemplate( songData )
         this.view.redraw( resultsTemplate )
         //$(".result-container").append(resultsTemplate);
@@ -26,14 +25,10 @@ Search.Controller.prototype = {
 	},
 
     buildResultsTemplate: function( songData ) {
-        var test =  HandlebarsTemplates['result-container']( songData )
-        return test
+        var songData = { songData: songData }
+        var test =  HandlebarsTemplates['search_result_template']( songData)
+        debugger
+        $(".results-container").append(test)
+        //return test
     }
-
-    // resultsTemplate: function(songData) {
-    //     debugger
-    //     var resultContainer = $(".result-container")
-    //     var song_title = songData[0].title
-    //     $(".result-container").append(song_title)
-    // }
 }

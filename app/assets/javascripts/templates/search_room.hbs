@@ -5,7 +5,6 @@
   </form>
 
   <div class="search-results">
-  {{! only output album images and names if user hit enter and search is valid}}
     {{#if song.is_valid_search}}
       {{#each song.search_result}}
         <img src="{{song.album_image_url}}"> <br>
