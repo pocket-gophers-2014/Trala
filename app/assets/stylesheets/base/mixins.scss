@@ -1,28 +1,23 @@
-// navigation-list
-@mixin navigation-list {
-  list-style-type:none;
-  padding:0;
-  margin:0;
-  overflow:hidden;
-  > li {
-      display:block;
-      float:left;
-      &:last-child {
-        margin-right:0px;
-      }
-    }
+@mixin container_setup() {
+  margin: 2% auto;
+  text-align: center;
+  font-size: 14px;
 }
 
-@mixin hide-text{
-    overflow:hidden;
-    text-indent:-9000px;
-    display:block;
+@mixin large-text() {
+  font: {
+    family: Pacifico;
+    size: 350%;
+    weight: bold;
+  }
+  color: white;
+  text-shadow: 12px;
 }
 
-// box-shadows
-$default-box-shadow-h-offset: 1px;
-$default-box-shadow-v-offset: 1px;
-$default-box-shadow-blur: 2px;
-$default-box-shadow-spread: false;
-$default-box-shadow-inset: false;
+@mixin text_engraved() {
+  text-shadow: 0px 3px 0px rgba(255,255,255, 0.2);
+}
 
+@mixin cute_font() {
+  font-family: 'Play', sans-serif;
+}

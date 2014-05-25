@@ -1,26 +1,15 @@
 /**********  Sass setup ***********\
 font-family: 'Pacifico', cursive;
 font-family: 'Changa One', cursive;
-font-family: 'Play', sans-serif;
 $green: #478B00;
 \***********************************/
-
-// import libraries and include other templates:
-
-
-// ~~~~~~~~~~~~~ grid set-up ~~~~~~~~~~~~~~~~~~ \\
-
-/* @media screen and (min-width: 480px) */
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $dark_blue: #021934;
 $med_blue: #0B4374;
 $butter_cream: #F2F1A0;
 $dark_green: #2C5E1A;
 $light_opacity: 0.7;
-
+$site_max_width: 320px;
 
 @mixin container_setup() {
   margin: 2% auto;
@@ -38,19 +27,28 @@ $light_opacity: 0.7;
   text-shadow: 12px;
 }
 
-@mixin footer_setup() {
-  @include container_setup();
-}
-
 @mixin text_engraved() {
-  text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+  text-shadow: 0px 3px 0px rgba(255,255,255, 0.2);
 }
 
 @mixin cute_font() {
-  font-family: 'Changa One', cursive;
+  font-family: 'Play', sans-serif;
 }
 
+
+// ~~~~~~~~~~~~~ grid set-up ~~~~~~~~~~~~~~~~~~ \\
+
+/* @media screen and (min-width: 320px) */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 960px) { /* STYLES GO HERE */
+}
+
+@media screen and (max-width: 480px) { }
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+
 html {
   background: url("spots_bg.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -58,33 +56,30 @@ html {
 
 body { @include cute_font(); }
 
-h1 { color: $med_blue; }
+h1 {
+  color: $med_blue;
+}
 
 h3 {
   @include text_engraved();
   font-family: 'Play', sans-serif;
-  opacity: $light_opacity;
 }
 
 p { @include container_setup(); }
 
-.main_page_navbar {
-  width: 100%;
+ul { padding: 0px; }
+
+.main-container {
+  .main_page_navbar {
+    width: 100%;
     ul { list-style-type: none;}
+  }
 }
 
-.dropdown_menu {
-  text-align: right;
-}
-
-.main_title {
-  text-align: center;
-}
-
-.logo {
-  @include large-text();
-  background-color: $dark_blue;
-}
+// .logo {
+//   @include large-text();
+//   background-color: $dark_blue;
+// }
 
 .photo {
   @include container_setup();
@@ -102,22 +97,26 @@ p { @include container_setup(); }
 
 .search-room-container {
   @include container_setup();
-  font-size: 22px;
-  opacity: $light_opacity;
-}
+  font-size: 16px;
+  opacity: 0.3;
+  background-color: none;}
 
 .search-room-container:hover { opacity: 1.0 ;}
 
 .song-basket {
-  @include container_setup();
-  width: 30%;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
+.song-basket:hover {
+    opacity: 0.6;
+  }
+
 .results-container{
-  @include container_setup();
-  background-color: $butter_cream;
-  opacity: $light_opacity;
+    div.each-song {
+      @include container_setup();
+      background-color: none;
+      opacity: $light_opacity;
+    }
 }
 
 .results-container:hover {
@@ -127,7 +126,11 @@ p { @include container_setup(); }
     }
 }
 
-
+@media all and (min-width: 321px) {
+  .results-container:after {
+    color: #666;
+  }
+}
 
 .room-container {
   @include container_setup();
@@ -149,4 +152,11 @@ p { @include container_setup(); }
   color: $dark_blue;
 }
 
+.song-info-container {
+
+}
+
+// iphone size is 320x in width
+// @media screen and (max-width: 320px) {}
+// @media screen and (min-width: 321px) {}
 
