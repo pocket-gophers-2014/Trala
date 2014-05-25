@@ -42,7 +42,7 @@ Data.FirebaseManager.prototype = {
   },
 
   initialCollectionState: function(data) {
-    var studioCollectionData = this.parseFbCollectionData(data)
+    var studioCollectionData = this.packageStudioCollectionData(data)
     this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
     this.studioCollectionRef.off('value', this.initialCollectionState.bind(this))
     this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this))

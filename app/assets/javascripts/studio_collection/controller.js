@@ -1,5 +1,5 @@
 StudioCollection.Controller = function(args) {
-  this.studioModel = args.studioModel
+  //this.studioModel = args.studioModel
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
@@ -13,8 +13,7 @@ StudioCollection.Controller = function(args) {
 
 StudioCollection.Controller.prototype = {
   createStudio: function(studioData) {
-    var studio = this.studioModel(studioData)
-    this.studioCollectionModel.addStudio(studio)
+    this.studioCollectionModel.createNewStudio(studioData)
   },
 
   destroyStudio: function(studioData) {
