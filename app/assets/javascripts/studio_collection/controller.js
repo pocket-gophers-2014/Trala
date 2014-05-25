@@ -3,6 +3,7 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
+  this.tempPlaylist = []
 }
 
 StudioCollection.Controller.prototype = {
@@ -34,8 +35,16 @@ StudioCollection.Controller.prototype = {
     return HandlebarsTemplates['player'](song)
   },
 
+  buildPlaylist: function(playlist) {
+    // debugger
+    playlist = { songs: playlist }
+    return HandlebarsTemplates['song_basket_item'](playlist)
+  },
+
   addSong: function(song) {
-    this.studioModel.addSong(song);
+    this.tempPlaylist.push(song)
+    playlist = this.buildPlaylist(this.tempPlaylist)
+    this.studioView.redrawPlaylist(playlist)
     // this.loadInitial();
   },
 
