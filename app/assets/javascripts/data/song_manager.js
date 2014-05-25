@@ -1,28 +1,33 @@
 Data.SongManager = function() {
-	// this.searchUrl = ""
-	// this.playlistUrl = ""
+    this.clientId = "d74d7683ae187691bec3da7a1798abce"
+    this.soundcloud = {}
+    this.soundcloudUrl = "http://api.soundcloud.com/tracks/"
 }
 
 Data.SongManager.prototype = {
-	// searchSongs: function(query, callback) {
-	// 	ajaxOptions = { url: this.searchUrl, 
-	// 		type: 'get', 
-	// 		success: function(){
-	// 			this.handleSongResponse(callback).bind(this)
-	// 		}
-	// 	$.ajax(ajaxOptions)
-	// },
+    init: function() {
+        this.soundcloud = SC.initialize({
+            client_id: this.clientId
+        })
+    },
 
-	// getPlaylistPlayer: function(ids, callback) {
-	// 	ajaxOptions = { url: this.playlistUrl, 
-	// 		type: 'get', 
-	// 		success: function(){
-	// 			this.handleSongResponse(callback).bind(this)
-	// 		}
-	// 	$.ajax(ajaxOptions)
-	// },
+  searchSongs: function(query, callback) {
+    this.soundcloud.get(this.soundcloudUrl, 
+      {
+        q: query,
+        streamable: true
+      },
+      function(tracks) {
+        tracks = this.appendClientIdToTracks(tracks)
+        callback(tracks)
+    	}.bind(this))
+  },
 
-	// handleSongResponse: function(serverData) {
-	// 	this.callback(serverData)
-	// }
+  appendClientIdToTracks: function(tracks) {
+    for (var i = 0; i < tracks.length; i++ ) {
+      tracks[i].client_id = this.clientId
+    }
+    return tracks
+  }
 }
+
