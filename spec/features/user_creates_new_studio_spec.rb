@@ -15,7 +15,7 @@ feature 'Search renders new results' do
     visit root_path
     page.find("#create-studio").click
     fill_in('all_search', :with => 'Beethoven')
-    page.find("#search-submit").click
+    page.find("Submit").click #This line not working, will come back to fix it
     expect(page).to have_content('Song Id:')
   end
 end
