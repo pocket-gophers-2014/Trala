@@ -1,0 +1,21 @@
+Handlebars.registerHelper('listItem', function (form, to, context, options)) {
+  var song_result = "";
+  for (var i = from, j = to; i < j; i++) {
+    song_result += song_result + options.fn(context[i]);
+  }
+  return song;
+});
+
+
+{{!-- Handlebars.registerHelper('listTopTen, function (form, to, context, options)) {
+  var song_result = "";
+  for (var i = from, j = to; i < j; i++) {
+    song_result += song_result + options.fn(context[i]);
+  }
+  return song;
+});
+
+    {{var topTen = function(songData) { }}
+       {{ return songData.slice(1,10); }}
+      {{ } }}
+ --}}
