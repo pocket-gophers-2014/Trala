@@ -16,6 +16,7 @@ StudioCollection.Controller.prototype = {
 
   renderCollection: function() {
     var tempCollection = this.fetchCollection()
+    $('.container ul').empty()
     for (var i = 0; i < tempCollection.length; i++) {
         this.view.renderStudioCollection(tempCollection[i])
     }
