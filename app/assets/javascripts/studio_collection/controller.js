@@ -27,9 +27,9 @@ StudioCollection.Controller.prototype = {
     console.log("loadInitial for StudioCollection controller")
   },
 
-  initStudio: function() {
-    this.loadInitial();
-  },
+  // initStudio: function() {
+  //   this.loadInitial();
+  // },
 
   buildPlayer: function(song) {
     return HandlebarsTemplates['player'](song)
@@ -45,12 +45,20 @@ StudioCollection.Controller.prototype = {
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
-    // this.loadInitial();
+    //this.loadInitial();
+    //Hit three songs and we proceed to load player
   },
 
-  loadInitialStudio: function() {
-    console.log("loadInitial for studio controller")
-    // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
-    // this.view.drawInitial(playerTemplate);
+  loadStudioWithPlayer: function() {
+    song = {} //GET SONG FROM BACKEND
+    player = this.buildPlayer(song)
+    this.studioView.draw(player);
   }
+
+  //!!Currently not called
+  // loadInitialStudio: function() {
+  //   console.log("loadInitial for studio controller")
+  //   // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
+  //   // this.view.drawInitial(playerTemplate);
+  // }
 }
