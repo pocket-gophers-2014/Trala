@@ -7,15 +7,28 @@ Search.View = function(){
 
 Search.View.prototype = {
   bindEvents: function() {
+    this.bindSearchEvent();
+    this.bindSongSelectionEvent();
+  },
+
+  bindSearchEvent: function() {
     $(this.mainContainerSelector).on( 'submit', function(e) {
       e.preventDefault()
-      var method = this.eventDelegate.controller[this.eventDelegate.callbackMethod]
+      var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
       method.call(this.eventDelegate.controller, $(event.target).find('input').val())
     }.bind(this))
   },
 
-  registerEventDelegate: function(controller, callbackMethod) {
-    this.eventDelegate = { controller: controller, callbackMethod: callbackMethod}
+  bindSongSelectionEvent: function() {
+     $(this.mainContainerSelector).on( 'click', '.each-song > img', function(e) {
+      e.preventDefault()
+      var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
+      method.call(this.eventDelegate.controller, event.target.id)
+    }.bind(this))
+  },
+
+  registerEventDelegate: function(controller, cbMethods) {
+    this.eventDelegate = { controller: controller, cbMethods: cbMethods}
   },
 
 	drawInitial: function(widgetTemplate) {
