@@ -1,17 +1,15 @@
-// describe("Song Manager", function() {
-// 	beforeEach(function() {
-//     jasmine.Ajax.install();
-//   });
+describe("Song Manager", function() {
+	describe("searchSongs", function(){
+		
+		beforeEach(function(){
+			soundCloud = jasmine.createSpyObj('soundCloud', ['get'])
+			songManager = new Data.SongManager();
+			// songManager.soundCloud = soundCloud
+		})
 
-//   afterEach(function() {
-//     jasmine.Ajax.uninstall();
-//   });
-
-//   it("responds with success", function() {
-//   	// debugger
-//   	// var success = jasmine.creatSpy("success")
-//   	var songManager = new Data.songManager('/songs/search')
-//   	songManager.searchSongs("2pac")
-//   	expect(jasmine.Ajax.requests.mostRecent().url).toBe('/songs/search')
-//   })
-// })
+		it("should call soundCloud#get ", function(){
+			songManager.searchSongs('2pac', 'function')
+			expect(soundCloud.get).toHaveBeenCalled();
+		})
+	})
+})

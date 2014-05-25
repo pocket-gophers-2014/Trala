@@ -20,7 +20,6 @@ Search.Controller.prototype = {
         this.view.redraw(resultsTemplate)
     },
 
-
 	buildSearchWidget: function() {
 		return HandlebarsTemplates['search_widget'](songData)
 	},
