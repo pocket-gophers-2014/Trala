@@ -1,9 +1,14 @@
 Studio.View = function(){
-	this.contentSelector = 'body'
+	this.mainContainer = '.main-container'
+  this.playlistSongsSelector = '.songs'
 }
 
 Studio.View.prototype = {
-	drawInitial: function(playerTemplate) {
-		$(this.contentSelector).empty().append(playerTemplate)
-	}
+	draw: function(playerTemplate) {
+		$(this.mainContainer).empty().append(playerTemplate)
+	},
+
+  redrawPlaylist: function(playlist) {
+    $(this.playlistSongsSelector).empty().append(playlist)
+  }
 }
