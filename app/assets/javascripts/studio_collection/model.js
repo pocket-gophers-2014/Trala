@@ -46,18 +46,12 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
-    debugger
     var studioToModify = this.fetchStudio(studio.name).studio
     for (var attribute in studio.data) {
-      if (attribute === "playlist") { 
-        for (var i = 0; i < studio.data.playlist.length; i++) {
-          for (var playlistData in studio.data.playlist[0]) {
-            if ()
-          }
-        }
-      }
-      if (studioToModify[attribute] !== studio.data[attribute]) {
-        studioToModify[attribute] = studio.data[attribute]
+      if (attribute !== "playlist") { 
+        if (studioToModify[attribute] !== studio.data[attribute]) {
+          studioToModify[attribute] = studio.data[attribute]
+        }      
       }
     }
     this.controller.modifyRenderedStudio(studio)
@@ -81,9 +75,7 @@ StudioCollection.Model.prototype = {
     var studioToRemove = this.fetchStudio(studioData.name)
     this.state.remove(studioToRemove.index)
     this.controller.destructStudio(studioData)
-    // this.subscriber.destroyStudio(studioData)
   },
-
 
  updateStudioState: function(studio, data) {
   this.subscriber.modifyStudioState(studio, data)
