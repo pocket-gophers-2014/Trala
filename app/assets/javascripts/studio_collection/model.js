@@ -43,7 +43,7 @@ StudioCollection.Model.prototype = {
 
   cleanStudio: function(studioData) {
     if (studioData.data.removelistener) {
-      var newListenerCount = studioData.data.listeners--
+      var newListenerCount = studioData.data.listeners - 1
     }
     if ((newListenerCount === 0) || (studioData.data.listeners === 0)) {
       this.removeStudio(studioData)
@@ -54,8 +54,10 @@ StudioCollection.Model.prototype = {
     }
   },
 
-  toggleListenerCount: function(studioData) {
-
+  toggleListenerCount: function(studio) {
+    studio.data.listeners--
+    var studioData = this.packageStudioData(studio)
+    this.updateStudioState(studioData)
   },
 
   subscriberStateReactor: function(studioData, action) {
@@ -68,6 +70,11 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
+    if (studio.data.removelistener) {
+      this.toggleListenerCount(studio)
+      studio.data.listeners--
+      studio.data.removelistener = false
+    }
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio
       for (var attribute in studio.data) {
