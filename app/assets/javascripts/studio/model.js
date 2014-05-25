@@ -1,8 +1,9 @@
-Studio.Model = function(studioData) {
-  this.name = studioData.name
+Studio.Model = function(studio) {
+  this.name = studio.name
   this.listeners = 0
-  this.playlist = studioData.playlist
+  this.playlist = studio.data.playlist
   this.active = true
+  this.removelistener = false
  }
 
 Studio.Model.prototype = {

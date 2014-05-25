@@ -3,7 +3,7 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
-  this.currentUserState
+  this.currentUserState = "collectionPage"
   Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
@@ -20,8 +20,23 @@ StudioCollection.Controller.prototype = {
     this.studioCollectionModel.removeStudio(studioData)
   },
 
-  collectionStateChange: function() {
-    var currentCollectionState = this.fetchStudioCollection()
+  constructStudio: function(studioData) {
+   // var currentCollectionState = this.fetchStudioCollection()
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.appendStudio(studioData)
+    }
+  },
+
+  destructStudio: function(studioData) {
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.removeStudio(studioData)
+    } 
+  },
+
+  modifyRenderedStudio: function(studioData) {
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.modifyStudio(studioData)
+    } 
   },
 
   initStudioCollection: function() {

@@ -5,14 +5,15 @@ StudioCollection.Model = function() {
 StudioCollection.Model.prototype = {
   initialStateGenerate: function(stateData) {
     for (var i = 0; i < stateData.length; i++) {
-      this.controller.createStudio(stateData[i])
+      var newStudio = new Studio.Model(stateData[i])
+      this.state.push(newStudio)
     }
   },
 
   createNewStudio: function(studioData) {
     var newStudio = new Studio.Model(studioData)
     this.state.push(newStudio)
-    this.addStudioToSubscriber(studioData)
+    this.addStudioToSubscriber(newStudio)
   },
 
   addStudioToSubscriber: function(studioData) {
@@ -20,22 +21,23 @@ StudioCollection.Model.prototype = {
     this.subscriber.addStudio(packagedStudioData)
   },
 
-  setUserCurrentStudio: function(studioName) {
+  setMonitorOnCurentUser: function(studioName) {
     var currentListenerCount = this.fetchStudio({name: studioName}).studio.listeners
     var newListenerCount = currentListenerCount++
     this.subscriber.setConnectionMonitor(studioName, newListenerCount)
   },
   
   updateCollectionState: function(studioData) {
-    var tempStudio = this.fetchStudio(studioData)
+    var tempStudio = this.fetchStudio(studioData.name)
     if (tempStudio === false) {
       var newStudio = new Studio.Model(studio)
       this.state.push(newStudio)
     }
+    this.controller.constructStudio(studioData)
   },
 
   subscriberStateReactor: function(studioData, action) {
-    if (action === "add") {
+    if (action === "add") { 
       this.updateCollectionState(studioData)
     }
     else if (action === "destroy") {
@@ -43,17 +45,26 @@ StudioCollection.Model.prototype = {
     }
   },
   
-  subscriberStudioStateReactor: function(studioData) {
-    var studioToModify = this.fetchStudio(studioData.name).studio
-    for (var attribute in modifiedStudio) {
-      if (studioToModify[attribute] !== studioData[attribute]) {
-        studioTomodify[attribute] = studioData[attribute]
+  subscriberStudioStateReactor: function(studio) {
+    debugger
+    var studioToModify = this.fetchStudio(studio.name).studio
+    for (var attribute in studio.data) {
+      if (attribute === "playlist") { 
+        for (var i = 0; i < studio.data.playlist.length; i++) {
+          for (var playlistData in studio.data.playlist[0]) {
+            if ()
+          }
+        }
+      }
+      if (studioToModify[attribute] !== studio.data[attribute]) {
+        studioToModify[attribute] = studio.data[attribute]
       }
     }
+    this.controller.modifyRenderedStudio(studio)
   },
 
   packageStudioData: function(studio) {
-    var studioData = { name: studio.name, listeners: studio.listeners, active: studio.active, playlist: studio.playlist }
+    var studioData = { name: studio.name, data: { listeners: studio.listeners, active: studio.active, playlist: studio.playlist } }
     return studioData
   },
 
@@ -67,9 +78,10 @@ StudioCollection.Model.prototype = {
   },
 
   removeStudio: function(studioData) {
-    var studioToRemove = this.fetchStudio(studioData)
+    var studioToRemove = this.fetchStudio(studioData.name)
     this.state.remove(studioToRemove.index)
-    this.subscriber.destroyStudio(studioData)
+    this.controller.destructStudio(studioData)
+    // this.subscriber.destroyStudio(studioData)
   },
 
 

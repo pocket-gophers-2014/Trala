@@ -5,8 +5,8 @@ Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
 }
 
 Data.FirebaseManager.prototype = {
-  addStudio: function(name, data) {
-    this.studioCollectionRef.child(name).set(data)
+  addStudio: function(studio) {
+    this.studioCollectionRef.child(studio.name).set(studio.data)
   },
 
   destroyStudio: function(studioName) {
@@ -44,18 +44,18 @@ Data.FirebaseManager.prototype = {
   initialCollectionState: function(data) {
     var studioCollectionData = this.packageStudioCollectionData(data)
     this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
-    this.studioCollectionRef.off('value', this.initialCollectionState.bind(this))
-    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this))
+    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
   },
 
   packageStudioData: function(data) {
-    var studioData = { name: data.name(), listeners: data.val().listeners, playlist: data.val().playlist, active: data.val().active }
+    var studioData = { name: data.name(), data: data.val() }
+    return studioData
   },
 
   packageStudioCollectionData: function(data) {
     var tempData = []
     data.forEach(function(data) {
-      var tempObj = { name: data.name(), subs: data.val().subs, active: data.val().active }
+      var tempObj = { name: data.name(), data: data.val() }
      tempData.push(tempObj) 
    })
     return tempData
@@ -72,7 +72,7 @@ Data.FirebaseManager.prototype = {
   },
 
   setDataTriggers: function() {
-    this.studioCollectionRef.on('value', this.initialCollectionState.bind(this))
+    this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
     this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
    // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
