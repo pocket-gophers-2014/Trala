@@ -9,7 +9,6 @@ $medium_gray: #ccc;
 $charcoal: #333;
 // font-family: 'Droid Serif', serif;
 
-
 html {
   background-color: $milk_gray;
 }
@@ -48,6 +47,7 @@ body {
     font-weight: bold;
     font-size: 40px;
   }
+
 }
 
 .container {
@@ -84,7 +84,7 @@ h3 {
   text-transform: uppercase;
   font-family: 'Play', sans-serif;
   opacity: 0.5;
-  font-size: 12px;
+  font-size: 25px;
 }
 
 h3:hover {
@@ -92,7 +92,9 @@ h3:hover {
 }
 
 .search-footer-container {
-  position: relative;
+  position: fixed;
+  left:0px;
+  bottom:0px;
   clear: both;
   text-align: center;
   width: 100%;
