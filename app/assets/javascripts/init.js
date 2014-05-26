@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  //geoLocaitonSetup
+  geoLocation = new Data.GeoLocation()
+  geoLocation.registerCoords()
+
   studioCollectionModel = new StudioCollection.Model()
   studioCollectionView = new StudioCollection.View()
   //var studioModel = new Studio.Model();
@@ -6,7 +10,8 @@ $(document).ready(function() {
 
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
-                                                                 studioView: studioView
+                                                                studioView: studioView,
+                                                                geoLocation: geoLocation
                                                                  })
 
   fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
@@ -35,4 +40,5 @@ $(document).ready(function() {
   searchView.registerEventDelegate(searchController, { search: "searchSongs", songSelection: "selectSong" })
   searchView.bindEvents()
   // studioController.init();
+
 })

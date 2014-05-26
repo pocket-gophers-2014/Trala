@@ -2,7 +2,7 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
-
+  this.geoLocation = args.geoLocation
   this.currentUserState = ""
   Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
