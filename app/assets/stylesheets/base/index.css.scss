@@ -79,6 +79,17 @@ body {
   border-radius: 3px;
 }
 
+h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Play', sans-serif;
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+h3:hover {
+  opacity: 1.0;
+}
 
 
 
