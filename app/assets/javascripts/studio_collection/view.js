@@ -1,5 +1,5 @@
 StudioCollection.View = function(){
-  this.eventDelegate  = {} 
+  this.eventDelegate  = {}
   this.mainContainerSelector = '.main-container'
   this.studioSelector = '.studio'
 }
@@ -22,7 +22,7 @@ StudioCollection.View.prototype = {
   },
 
   addUl: function() {
-    $('.container').append("<ul>")  
+    $('.container').append("<ul>")
   },
 
   draw: function(studioCollectionTemplate) {

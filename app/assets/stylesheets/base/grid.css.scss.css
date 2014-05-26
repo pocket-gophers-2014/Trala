@@ -97,7 +97,6 @@ section:first-of-type { border-top: none; }
 
 @media (min-width: 40rem) {
   section { padding: 4rem 0; }
-  img { width: 50%; }
 }
 
 /* Mobile First Grid
@@ -108,7 +107,8 @@ section:first-of-type { border-top: none; }
 @media (min-width: 40rem) {
   .column {
     float: left;
-    margin: 0;
+    /*change*/
+    margin: 3;
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -119,6 +119,8 @@ section:first-of-type { border-top: none; }
   .column.third { width: 33.3%; }
   .column.fourth { width: 25%; }
   .column.flow-opposite { float: right; }
+
+  img { width: 50%; }
 }
 
 /* Typography
@@ -269,7 +271,14 @@ img {
   display: block;
   height: auto;
   margin: 0 auto 1.5rem auto;
-  width: 90%;
+  width: 75%;
+}
+
+/*change */
+@media (max-width: 40rem) {
+  img {
+    width: 50%;
+  }
 }
 
 .rwd {

@@ -12,3 +12,9 @@ Studio.View.prototype = {
     $(this.playlistSongsSelector).empty().append(playlist)
   }
 }
+
+
+
+ // change the color
+// var backgroundChange = function(color) { $('html').css('background', color ) }
+

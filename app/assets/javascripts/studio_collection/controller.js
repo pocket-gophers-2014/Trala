@@ -43,11 +43,11 @@ StudioCollection.Controller.prototype = {
   },
 
   initUserStudioState: function(studioName) {
-    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0]) 
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0])
     if (this.studioCollectionModel.currentStudio === studioName) {
       this.playTrack()
-    }     
-      this.studioCollectionModel.addListenerToStudio(studioName) 
+    }
+      this.studioCollectionModel.addListenerToStudio(studioName)
    },
 
   renderStudioCollection: function() {
@@ -69,11 +69,11 @@ StudioCollection.Controller.prototype = {
   },
 
   updateTrackState: function(trackData) {
-    document.getElementById('audio_player').addEventListener('canplay', function(){ 
+    document.getElementById('audio_player').addEventListener('canplay', function(){
       var newTime = ((Date.now() - trackData.timeStamp) / 1000) + trackData.trackTime
       this.studioCollectionView.updateTrackState(newTime)
       this.playTrack()
-    }.bind(this, trackData))  
+    }.bind(this, trackData))
    // this.playTrack()
   },
 
