@@ -1,7 +1,8 @@
+$orchid_purple: #8b4789;
 $caesar_purple: #816687;
 $pastel_purple: #ddf;
 
-$THEME_COLOR: $caesar_purple;
+$THEME_COLOR: $orchid_purple;
 $cloud_gray: #e8e8e8;
 $milk_gray: #eee;
 $medium_gray: #ccc;
@@ -22,7 +23,6 @@ body {
   border-top-width: 5px;
 
   position: fixed;
-  top: 0;
   width: 100%;
   color: $medium_gray;
   height: 35px;
@@ -31,17 +31,16 @@ body {
   color: $cloud_gray;
 
   text-align: center;
-  text-shadow: 1px 2px 2px #333333;
+  text-shadow: 0.5px 0.5px $cloud_gray;
 
   ul {
     height: auto;
     margin: 0px;
-
   }
 
   li {
     display: inline;
-    padding: 20px;
+    padding: 6%;
     text-decoration: none;
     color: $caesar_purple;
     font-weight: bold;
@@ -50,7 +49,6 @@ body {
 }
 
 .container {
-  background-color: $charcoal;
   padding-top: 60px;
 }
 
@@ -75,7 +73,8 @@ body {
   width: 100%;
   text-align: center;
   font-size: 20px;
-  background-color: $pastel_purple;
+  // background-color: $THEME_COLOR;
+  border-radius: 3px;
 }
 
 
