@@ -106,7 +106,7 @@ StudioCollection.Controller.prototype = {
       var name = Math.random().toString(36).substring(7);
       this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
-      this.renderStudioCollection()
+      this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(name).studio.playlist[0])
     }
   },
 
