@@ -76,7 +76,7 @@ StudioCollection.Controller.prototype = {
   },
 
   updateTrackState: function() {
-      var newTime = ((Date.now() - this.studioCollectionModel.currentStudioState.timeWhenSent) / 1000) + this.studioCollectionModel.currentStudioState.trackTime + 0.2
+      var newTime = ((Date.now() - this.studioCollectionModel.currentStudioState.timeWhenSent) / 1000) + this.studioCollectionModel.currentStudioState.trackTime
       console.log(newTime)
       this.studioCollectionView.updateTrackState(newTime)
       this.studioCollectionModel.synced = true
