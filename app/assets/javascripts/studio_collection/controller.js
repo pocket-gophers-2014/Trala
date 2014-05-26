@@ -1,5 +1,4 @@
 StudioCollection.Controller = function(args) {
-  //this.studioModel = args.studioModel
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
@@ -21,7 +20,6 @@ StudioCollection.Controller.prototype = {
   },
 
   constructStudio: function(studioData) {
-   // var currentCollectionState = this.fetchStudioCollection()
     if (this.currentUserState === "collectionPage") {
       this.studioCollectionView.appendStudio(studioData)
     }
@@ -58,10 +56,6 @@ StudioCollection.Controller.prototype = {
         this.studioCollectionView.renderStudioCollection(tempCollection[i])
     }
   },
-
-  // generateInitialCollectionState: function(){
-  //   this.studioCollectionModel.initialStateGenerate
-  // },
 
   initStudio: function() {
     // this.songManager.searchSongs('2pac', function(tracks) {
