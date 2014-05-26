@@ -1,7 +1,7 @@
 $(document).ready(function() {
   //geoLocaitonSetup
-  geoLocation = new Data.GeoLocation()
-  geoLocation.registerCoords()
+  locationManager = new Data.LocationManager()
+  locationManager.registerCoords()
 
   studioCollectionModel = new StudioCollection.Model()
   studioCollectionView = new StudioCollection.View()
@@ -11,18 +11,11 @@ $(document).ready(function() {
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
                                                                 studioView: studioView,
-                                                                geoLocation: geoLocation
+                                                                geoLocation: locationManager
                                                                  })
 
   studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
   studioCollectionView.bindEvents()
-  // comment this out to fix room listeners text in main page"
-
-  // fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
-  // studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
-  // studioCollectionModel.registerController(studioCollectionController)
-  // studioCollectionController.initStudioCollection()
-  // fbTest.setDataTriggers()
 
   fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
   studioCollectionModel.registerStudioCollectionSubscriber(fbTest)

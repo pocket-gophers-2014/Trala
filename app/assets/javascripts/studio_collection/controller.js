@@ -107,19 +107,6 @@ StudioCollection.Controller.prototype = {
     this.loadInitial();
   },
 
-  loadInitialStudioCollection: function(){
-    // console.log("loadInitial for StudioCollection controller")
-  },
-
-  // loadInitialStudioCollection: function(){
-  //   console.log("loadInitial for StudioCollection controller")
-  // },
-
-  // initStudio: function() {
-  //   this.loadInitial();
-  // },
-
-
   buildPlayer: function(song) { // will take songData array
     return HandlebarsTemplates['player'](song)
   },
@@ -130,10 +117,6 @@ StudioCollection.Controller.prototype = {
   },
 
   addSong: function(song) {
-
-    // this.studioModel.addSong(song);
-    // this.loadInitial();
-
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
@@ -141,20 +124,12 @@ StudioCollection.Controller.prototype = {
       var name = String(Math.floor(Math.random() * 1000))
       this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
-      // this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(name).studio.playlist[0])
       this.initUserStudioState(name)
     }
   },
 
   loadStudioWithPlayer: function(song) {
-    // song = {} //GET SONG FROM BACKEND
     player = this.buildPlayer(song)
     this.studioView.draw(player);
   },
-
-  //!!Currently not called
-  loadInitialStudio: function() {
-  //   console.log("loadInitial for studio controller")
-    // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
-  }
 }

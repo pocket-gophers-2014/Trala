@@ -45,7 +45,6 @@ Data.FirebaseManager.prototype = {
   initialCollectionState: function(data) {
     var studioCollectionData = this.packageStudioCollectionData(data)
     this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
-   
   },
 
   packageStudioData: function(data) {

@@ -1,4 +1,4 @@
-Data.GeoLocation = function() {
+Data.LocationManager = function() {
 	this.startCoords = {}
 
 	Number.prototype.toRad = function() {
@@ -6,7 +6,7 @@ Data.GeoLocation = function() {
 	}
 }
 
-Data.GeoLocation.prototype = {
+Data.LocationManager.prototype = {
 	getCoords: function() {
 		return this.startCoords;
 	},
