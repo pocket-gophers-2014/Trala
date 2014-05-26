@@ -132,4 +132,8 @@ StudioCollection.Controller.prototype = {
     player = this.buildPlayer(song)
     this.studioView.draw(player);
   },
+
+  loadInitialStudio: function() {
+
+  }
 }
