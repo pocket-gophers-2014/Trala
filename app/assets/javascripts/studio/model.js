@@ -1,9 +1,10 @@
-Studio.Model = function(studioName, studioData) {
-  this.name = studioName
-  // this.active = studioData.active
-  // this.listeners = studioData.listeners
-  // this.playlist = studioData.playlist
-}
+Studio.Model = function(studio) {
+  this.name = studio.name
+  this.listeners = studio.data.listeners || 1
+  this.playlist = studio.data.playlist
+  this.active = true
+  this.removelistener = false
+ }
 
 Studio.Model.prototype = {
   updateCurrentTrack: function(track) {

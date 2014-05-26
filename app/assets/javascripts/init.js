@@ -1,13 +1,12 @@
 $(document).ready(function() {
   studioCollectionModel = new StudioCollection.Model()
   studioCollectionView = new StudioCollection.View()
-  var studioModel = new Studio.Model();
+  //var studioModel = new Studio.Model();
   var studioView = new Studio.View();
 
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
-                                                                studioModel: studioModel,
-                                                                studioView: studioView
+                                                                 studioView: studioView
                                                                  })
 
   fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Trala</title>
   <script src="http://connect.soundcloud.com/sdk.js"></script>
   <%= stylesheet_link_tag "application", :media => "all" %>
@@ -15,24 +16,28 @@
 
 </head>
 <body>
+  <div class="container">
+    <div class="column full">
+        <!-- <div class="row clearfix"> -->
+          <div class="main_title">
+            <h1 class="logo"> <a href="/">Trala</a> </h1>
+            <h3> mixing music and community on the go </h3>
+          </div>
+     <!--  <div>
+        <ul>
+          <li>
 
-<div class="main_page_navbar ">
-  <ul>
-    <li>
-      <div class="main_title">
-        <h1 class="logo"> Trala </h1>
-        <h3> mixing music and community on the go </h3>
-      </div>
-    </li>
-  </ul>
-</div>
+          </li>
+        </ul>
+      </div> -->
 
-<!-- <div class="main_title">
-  <h1 class="logo"> Trala </h1>
-  <h3> mixing music and community on the go </h3>
-</div>
- -->
-<%= yield %>
-
+    <!-- <div class="main_title">
+      <h1 class="logo"> Trala </h1>
+      <h3> mixing music and community on the go </h3>
+    </div>
+     -->
+       <%= yield %>
+    <!--  </div> -->
+  </div>
 </body>
 </html>

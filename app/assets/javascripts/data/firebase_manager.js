@@ -2,58 +2,61 @@ Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
   this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
   this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
   this.studioCollectionModel = studioCollectionModel
-  this.collectionState = []
 }
 
 Data.FirebaseManager.prototype = {
-  addStudio: function(name, data) {
-    //var newStudio = this.studioCollectionRef.push()
-    //newStudio.set(data)
-    //this.currentUserStudio = newStudio.name()
-    this.studioCollectionRef.child(name).set(data)
-    //this.studioRef = new Firebase('https://trala.firebaseio.com/studioCollection/' + this.currentUserStudio)
-   // this.studioRef.onDisconnect().update({ active: false})
+  addStudio: function(studio) {
+    this.studioCollectionRef.child(studio.name).set(studio.data)
   },
 
-  destroyStudio: function(studio) {
-    this.studioCollectionRef.child(studio).set(null)
+  destroyStudio: function(studioName) {
+    this.studioCollectionRef.child(studioName).set(null)
   },
 
-  modifyStudioState: function(studio, newData) {
-    this.studioCollectionRef.child(studio).update(newData)
+  setConnectionMonitor: function(studioName) {
+    this.studioRef = new Firebase('https://trala.firebaseio.com/studioCollection/' + studioName)
+    this.studioRef.onDisconnect().update({ removelistener: true })
+  },
+
+  modifyStudioState: function(newStudioData) {
+
+    this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
   nukeCollection: function() {
     this.studioCollectionRef.set(null)
   },
 
+  studioRemoved: function(data) {
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.subscriberStateReactor(studioData, "destroy")
+  },
+
   studioStateModified: function(data) {
-    this.studioCollectionModel.updateStudioState(data.name(),data.val())
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.subscriberStudioStateReactor(studioData)
+  },
+  
+  newStudioAdded: function(data) {
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.subscriberStateReactor(studioData, "add")
   },
 
-  collectionStateUpdated: function(data) {
-     var tempData = this.parseFbData(data)
-     //debugger
-    // var tempLength = this.collectionState.length
-    // var uniqCount = 0
-    // if (this.collectionState.length > 0) {  
-    //   for (var i = 0; i < tempLength; i++) {
-    //     if (tempData === this.collectionState[i]) {
-    //       uniqCount++
-    //     }
-    //   }
-    // }
-    // if (uniqCount === 0) {
-    this.collectionState = tempData
-    console.log(this.collectionState)
-    this.studioCollectionModel.updateState(this.collectionState)    
-   // this.studioCollectionRef.off('value', this.collectionStateUpdated.bind(this))
+  initialCollectionState: function(data) {
+    var studioCollectionData = this.packageStudioCollectionData(data)
+    this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
+   
   },
 
-  parseFbData: function(data) {
+  packageStudioData: function(data) {
+    var studioData = { name: data.name(), data: data.val() }
+    return studioData
+  },
+
+  packageStudioCollectionData: function(data) {
     var tempData = []
     data.forEach(function(data) {
-      var tempObj = { name: data.name(), subs: data.val().subs, active: data.val().active }
+      var tempObj = { name: data.name(), data: data.val() }
      tempData.push(tempObj) 
    })
     return tempData
@@ -70,10 +73,10 @@ Data.FirebaseManager.prototype = {
   },
 
   setDataTriggers: function() {
-    this.studioCollectionRef.on('value', this.collectionStateUpdated.bind(this))
-    // this.studioCollectionRef.on('child_added', this.collectionStateUpdated.bind(this))
+   // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
+    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-    //this.studioCollectionRef.on('child_removed', this.collectionStateUpdated.bind(this))
-    this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
+   // this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
+   // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
   }
 }

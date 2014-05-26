@@ -1,27 +1,74 @@
 StudioCollection.Controller = function(args) {
-  this.studioModel = args.studioModel
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
+
+  this.currentUserState = "collectionPage"
+  Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+  }
+
   this.tempPlaylist = []
+
 }
 
 StudioCollection.Controller.prototype = {
+  createStudio: function(studioData) {
+    this.studioCollectionModel.createNewStudio(studioData)
+  },
+
+  destroyStudio: function(studioData) {
+    this.studioCollectionModel.removeStudio(studioData)
+  },
+
+  constructStudio: function(studioData) {
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.appendStudio(studioData)
+    }
+  },
+
+  destructStudio: function(studioData) {
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.removeStudio(studioData)
+    } 
+  },
+
+  modifyRenderedStudio: function(studioData) {
+    if (this.currentUserState === "collectionPage") {
+      this.studioCollectionView.modifyStudio(studioData)
+    } 
+  },
+
+  initUserStudioState: function(studioName) {
+    this.studioCollectionModel.addListenerToStudio(studioName)
+   },
+
   initStudioCollection: function() {
     this.studioCollectionView.addUl()
   },
 
-  fetchCollection: function() {
+  fetchStudioCollection: function() {
     return this.studioCollectionModel.state
   },
 
   renderCollection: function() {
-    var tempCollection = this.fetchCollection()
+    var tempCollection = this.fetchStudioCollection()
     $('.container ul').empty()
     for (var i = 0; i < tempCollection.length; i++) {
         this.studioCollectionView.renderStudioCollection(tempCollection[i])
     }
   },
+
+
+  initStudio: function() {
+    // this.songManager.searchSongs('2pac', function(tracks) {
+    //  this.testSliceFirstSong(tracks)
+    // }.bind(this))
+    this.loadInitial();
+  },
+  
 
   loadInitialStudioCollection: function(){
     console.log("loadInitial for StudioCollection controller")
@@ -30,6 +77,7 @@ StudioCollection.Controller.prototype = {
   // initStudio: function() {
   //   this.loadInitial();
   // },
+
 
   buildPlayer: function(song) {
     return HandlebarsTemplates['player'](song)
@@ -42,11 +90,16 @@ StudioCollection.Controller.prototype = {
   },
 
   addSong: function(song) {
+
+    // this.studioModel.addSong(song);
+    // this.loadInitial();
+
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
     //this.loadInitial();
     //Hit three songs and we proceed to load player
+
   },
 
   loadStudioWithPlayer: function(song) {
