@@ -1,13 +1,23 @@
-<div class="track-information">
-  <img src={{artwork_url}} alt="Album artwork not available">
-  <p>Now Playing: {{title}} </p>
-  <p>Sound Brought To You By: {{user.username}}</p>
-  <a href={{permalink_url}}>Listen on SoundCloud</a>
+{{!NOTE: The 'T' on line 7 is a placeholder until we know more about the logo}}
+{{!NOTE: The mustache tag names may need to be changed depending on the structure of what is being passed to the template builder}}
+{{!NOTE: The audio player is currently hidden and set to play automatically. To change this for any debugging purposes, just change 'autoplay' to 'controls'}}
+
+
+<div class="main_title">
+  <a href={{root_path}}><h3 class="trala-logo">T</h3></a><h2>{{name}}</h2>
+</div>
+
+<div class="listener-count">
+  <h1>{{listeners}}</h1>
+</div>
+
+<div class="current-track">
+  <h3>Now Playing:</h3>
+  <h3>{{title}}
 </div>
 
 <div class="audio-player">
-  <audio controls>
+  <audio autoplay>
     <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
   </audio>
-  <a href={{permalink_url}}><img src="http://developers.soundcloud.com/assets/logo_black-818d16acb6c9e65c6a4b776f375ef6fc.png" alt="SoundCloud Logo"></a>
 </div>
