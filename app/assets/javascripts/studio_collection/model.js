@@ -1,6 +1,7 @@
 StudioCollection.Model = function() {
   this.state = []
   this.synced = false
+  this.currentStudioState = {}
 }
 
 StudioCollection.Model.prototype = {
@@ -84,7 +85,7 @@ StudioCollection.Model.prototype = {
       this.controller.fetchTrackState()
     }
     else if ((studio.data.flagtype === "setTimes") && (this.currentStudio === studio.name) && (this.synced === false)) {
-     this.controller.updateTrackState({ trackTime: studio.data.currentTrackTime, timeStamp: studio.data.timeStamp })
+     this.currentStudioState = { trackTime: studio.data.currentTrackTime, timeWhenSent: studio.data.timeStamp }
     }
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio

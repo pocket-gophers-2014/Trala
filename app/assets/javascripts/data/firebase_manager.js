@@ -72,10 +72,9 @@ Data.FirebaseManager.prototype = {
   },
 
   setDataTriggers: function() {
-   // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
     this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-   // this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
-   // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
+    this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
+
   }
 }

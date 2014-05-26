@@ -48,6 +48,7 @@ StudioCollection.Controller.prototype = {
       this.playTrack()
     }     
       this.studioCollectionModel.addListenerToStudio(studioName) 
+      this.playTrack()
    },
 
   renderStudioCollection: function() {
@@ -59,8 +60,14 @@ StudioCollection.Controller.prototype = {
 
   playTrack: function() {
     document.getElementById('audio_player').addEventListener('canplay', function() {
-      document.getElementById('audio_player').play()
-    })
+      if (this.studioCollectionModel.synced) {
+        document.getElementById('audio_player').play()
+      }
+      else {
+        this.updateTrackState()
+        document.getElementById('audio_player').play()
+      }
+    }.bind(this))
   },
 
   fetchTrackState: function() {
@@ -68,13 +75,11 @@ StudioCollection.Controller.prototype = {
     this.studioCollectionModel.updateStudioTrack(trackData)
   },
 
-  updateTrackState: function(trackData) {
-    document.getElementById('audio_player').addEventListener('canplay', function(){ 
-      var newTime = ((Date.now() - trackData.timeStamp) / 1000) + trackData.trackTime
+  updateTrackState: function() {
+      var newTime = ((Date.now() - this.studioCollectionModel.currentStudioState.timeWhenSent) / 1000) + this.studioCollectionModel.currentStudioState.trackTime + 0.2
+      console.log(newTime)
       this.studioCollectionView.updateTrackState(newTime)
-      this.playTrack()
-    }.bind(this, trackData))  
-   // this.playTrack()
+      this.studioCollectionModel.synced = true
   },
 
   fetchCurrentTrackStatus: function() {
