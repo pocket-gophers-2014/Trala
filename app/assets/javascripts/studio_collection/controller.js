@@ -91,8 +91,8 @@ StudioCollection.Controller.prototype = {
   // },
 
 
-  buildPlayer: function() { // will take songData array
-    return HandlebarsTemplates['player'] //(song)
+  buildPlayer: function(song) { // will take songData array
+    return HandlebarsTemplates['player'](song)
   },
 
   buildPlaylist: function(playlist) {
