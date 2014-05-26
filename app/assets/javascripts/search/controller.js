@@ -40,6 +40,7 @@ Search.Controller.prototype = {
     },
 
     selectSong: function(songID) {
+        debugger
         song = this.getSongFromCurrentResults( songID )
         this.notifySongSelectionSubscriber( song )
     },

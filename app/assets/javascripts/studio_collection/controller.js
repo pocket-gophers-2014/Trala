@@ -49,8 +49,8 @@ StudioCollection.Controller.prototype = {
     //Hit three songs and we proceed to load player
   },
 
-  loadStudioWithPlayer: function() {
-    song = {} //GET SONG FROM BACKEND
+  loadStudioWithPlayer: function(song) {
+    // song = {} //GET SONG FROM BACKEND
     player = this.buildPlayer(song)
     this.studioView.draw(player);
   },

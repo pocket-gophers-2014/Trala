@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 
   //Studio Setup - TODO cleanup when search is complete
-  var songManager = new Data.SongManager();
+  songManager = new Data.SongManager();
   songManager.init()
   var searchView = new Search.View()
   searchController = new Search.Controller( searchView,  songManager )
