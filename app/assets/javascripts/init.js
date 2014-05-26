@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  //MVP monday yayy
   //geoLocaitonSetup
   locationManager = new Data.LocationManager()
   locationManager.registerCoords()
