@@ -10,7 +10,6 @@ Search.View.prototype = {
   bindEvents: function() {
     this.bindSearchEvent();
     this.bindSongSelectionEvent();
-    this.bindSongRemovalEvent();
   },
 
   bindSearchEvent: function() {
@@ -26,22 +25,6 @@ Search.View.prototype = {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
       method.call(this.eventDelegate.controller, e.target.id)
-    }.bind(this))
-  },
-
-  bindSongRemovalEvent: function() {
-    $(  this.mainContainerSelector ).on( 'click', 'p', function() {
-
-      // change the chained function to Remove
-      // var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
-
-      // grab id ]
-      // locate song in the bin
-      // remove it
-      // redraw it
-
-      // call on the song id
-    //   method.call(this.eventDelegate.controller, event.target.id)
     }.bind(this))
   },
 

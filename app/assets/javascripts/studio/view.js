@@ -1,6 +1,6 @@
 Studio.View = function(){
 	this.mainContainer = '.main-container'
-  this.playlistSongsSelector = '.songs'
+  this.playlistSongsSelector = '.search-footer-container'
 }
 
 Studio.View.prototype = {

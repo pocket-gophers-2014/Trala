@@ -8,7 +8,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
-  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Changa+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -16,28 +16,19 @@
 
 </head>
 <body>
+  <div class="navigation">
+    <div class="inside-nav">
+    </div>
+      <ul>
+        <li> <a href="/">&uArr;</a> Trala </li>
+      </ul>
+  </div>
+           <!--  <h1 class="logo"> <a href="/">Trala</a> </h1>
+            <h3> mixing music and community on the go </h3> -->
+
   <div class="container">
     <div class="column full">
-        <!-- <div class="row clearfix"> -->
-          <div class="main_title">
-            <h1 class="logo"> <a href="/">Trala</a> </h1>
-            <h3> mixing music and community on the go </h3>
-          </div>
-     <!--  <div>
-        <ul>
-          <li>
-
-          </li>
-        </ul>
-      </div> -->
-
-    <!-- <div class="main_title">
-      <h1 class="logo"> Trala </h1>
-      <h3> mixing music and community on the go </h3>
-    </div>
-     -->
        <%= yield %>
-    <!--  </div> -->
   </div>
 </body>
 </html>
