@@ -73,11 +73,39 @@ describe("Studio Collection Controller", function(){
     expect(testStudioCollectionModel.updateStudioTrack).toHaveBeenCalled();
   }),
 
-  
+  //HEY***come back to test updateTrackState***HEY
+
+  //HEY***come back to test fetchCurentTrackStatus***HEY
+
+  it("returns the state of the model when 'fetchStudioCollection' is called", function(){
+    expect(studioCollectionController.fetchStudioCollection()).toEqual(testStudioCollectionModel.state)
+  }),
+
+  it("returns the list_room handlebars template when buildStudioCollectionTemplate is called", function(){
+    expect(studioCollectionController.buildStudioCollectionTemplate("fakeStudioCollection")).toEqual(HandlebarsTemplates['list_room']("fakeStudioCollection"))
+  }),
+
+  it("returns the player handlebars template when 'buildPlayer' is called", function(){
+    expect(studioCollectionController.buildPlayer("fakeSong")).toEqual(HandlebarsTemplates['player']("fakeSong"))
+  }),
+
+  it("returns the song_basket_item handlebars template when 'buildPlaylist' is called", function(){
+    expect(studioCollectionController.buildPlaylist("fakePlaylist")).toEqual(HandlebarsTemplates['song_basket_item']("fakePlaylist"))
+  }),
+
+  it("calls 'buildPlayer' from 'loadStudioWithPlayer'", function(){
+    spyOn(studioCollectionController, 'buildPlayer')
+    studioCollectionController.loadStudioWithPlayer("fakeSong")
+    expect(studioCollectionController.buildPlayer).toHaveBeenCalled();
+  })
 
   it("calls 'draw' from 'loadStudioWithPlayer'", function(){
     spyOn(studioCollectionController, 'buildPlayer')
     studioCollectionController.loadStudioWithPlayer("fakeSong")
     expect(studioCollectionController.buildPlayer).toHaveBeenCalled();
+  }),
+
+  it("defines 'loadInitialStudio'", function(){
+    expect(studioCollectionController.loadInitialStudio).toBeDefined();
   })
 })
