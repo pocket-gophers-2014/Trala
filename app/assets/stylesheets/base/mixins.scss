@@ -1,0 +1,23 @@
+@mixin container_setup() {
+  margin: 2% auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+@mixin large-text() {
+  font: {
+    family: Pacifico;
+    size: 350%;
+    weight: bold;
+  }
+  color: white;
+  text-shadow: 12px;
+}
+
+@mixin text_engraved() {
+  text-shadow: 0px 3px 0px rgba(255,255,255, 0.2);
+}
+
+@mixin cute_font() {
+  font-family: 'Play', sans-serif;
+}

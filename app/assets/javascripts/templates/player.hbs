@@ -1,10 +1,13 @@
+<div class="track-information">
+  <img src={{artwork_url}} alt="Album artwork not available">
+  <p>Now Playing: {{title}} </p>
+  <p>Sound Brought To You By: {{user.username}}</p>
+  <a href={{permalink_url}}>Listen on SoundCloud</a>
+</div>
+
 <div class="audio-player">
   <audio controls>
     <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
   </audio>
+  <a href={{permalink_url}}><img src="http://developers.soundcloud.com/assets/logo_black-818d16acb6c9e65c6a4b776f375ef6fc.png" alt="SoundCloud Logo"></a>
 </div>
-<a href={{permalink_url}}><img src="http://developers.soundcloud.com/assets/logo_black-818d16acb6c9e65c6a4b776f375ef6fc.png" alt="SoundCloud Logo"></a>
-<p>Now Playing: {{title}} </p>
-<p>Sound Brought To You By: {{user.username}}</p>
-<p>SoundCloud Link: {{permalink_url}}</p>
-

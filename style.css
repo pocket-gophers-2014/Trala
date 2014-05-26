@@ -1,0 +1,130 @@
+/* for sass
+$TITLE_COLOR: #0B4374;
+$BLUE: #0166C0;
+$BODY: #EEEFF0;
+$HIGHLIGHTS: #F1CC0A;
+$FOR_TEXT: #9B6A0B;
+font-family: 'Pacifico', cursive;
+font-family: 'Changa One', cursive;
+font-family: 'Play', sans-serif;
+$green: #478B00;
+*/
+
+body {
+  background-image:url("spots_bg.jpg");
+  font-family: 'Play', sans-serif;
+  /*opacity: 0.9;*/
+}
+
+h1 {
+  color: #0B4374;
+}
+
+h3 {
+  text-align: center;
+  font-family: 'Play', sans-serif;
+  opacity: 0.5;
+}
+
+p {
+  margin: 20px auto;
+  padding: 20px auto;
+  text-align: center;
+}
+
+.main_page_navbar {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+.dropdown_menu {
+  text-align: right;
+}
+
+.main_title {
+  text-align: center;
+}
+
+.logo {
+  background-color: #021934;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  font-size: 350%;
+  color: white;
+  width: 100%;
+}
+
+
+.front_page_button {
+  font-family: 'Bitter', serif;
+  margin: 4% auto;
+  width: 20%;
+  background-color: #0B4374;
+  color: white;
+  border: 2px solid #0166C0;
+  border-radius: 10px;
+  text-align: center;
+  height: 55%;
+  text-decoration: none;
+  display: block;
+}
+
+.search-room-container {
+  margin: 2% auto;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  /*background-color: #0B4374;*/
+  opacity: 0.6;
+}
+
+.song-basket {
+  margin: 2% auto;
+  width: 50%;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.search-results {
+  margin: 2% auto;
+  width: 25%;
+  text-align: center;
+  font-size: 14px;
+  /*background-color: #F2F1A0;*/
+  /*border-radius: 5px;*/
+  opacity: 0.3;
+}
+
+.search-results:hover {
+  opacity: 1.0;
+}
+
+.room-container {
+  height: 5%;
+  margin: 2% auto;
+  width: 30%;
+  background-color: #0B4374;
+  border: 2px solid white;
+  border-radius: 10px;
+  text-align: center;
+  text: gray;
+}
+
+.song-basket {
+  height: 5%;
+  margin: 2% auto;
+  background-color: #021934;
+  color: white;
+  border-radius: 10px;
+  font-size: 12px
+}
+
+#enter-room-msg {
+  color: #2C5E1A;
+}
+
+
+/*88888888888888888888888888888888888888888888888*/
+

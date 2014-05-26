@@ -2,12 +2,16 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
+
   this.currentUserState = "collectionPage"
   Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
   }
+
+  this.tempPlaylist = []
+
 }
 
 StudioCollection.Controller.prototype = {
@@ -57,6 +61,7 @@ StudioCollection.Controller.prototype = {
     }
   },
 
+
   initStudio: function() {
     // this.songManager.searchSongs('2pac', function(tracks) {
     //  this.testSliceFirstSong(tracks)
@@ -64,19 +69,49 @@ StudioCollection.Controller.prototype = {
     this.loadInitial();
   },
   
+
+  loadInitialStudioCollection: function(){
+    console.log("loadInitial for StudioCollection controller")
+  },
+
+  // initStudio: function() {
+  //   this.loadInitial();
+  // },
+
+
   buildPlayer: function(song) {
     return HandlebarsTemplates['player'](song)
   },
-  
-  addSong: function(song) {
-    // this.studioModel.addSong(song);
-    // this.loadInitial();
+
+  buildPlaylist: function(playlist) {
+    // debugger
+    playlist = { songs: playlist }
+    return HandlebarsTemplates['song_basket_item'](playlist)
   },
 
+  addSong: function(song) {
+
+    // this.studioModel.addSong(song);
+    // this.loadInitial();
+
+    this.tempPlaylist.push(song)
+    playlist = this.buildPlaylist(this.tempPlaylist)
+    this.studioView.redrawPlaylist(playlist)
+    //this.loadInitial();
+    //Hit three songs and we proceed to load player
+
+  },
+
+  loadStudioWithPlayer: function(song) {
+    // song = {} //GET SONG FROM BACKEND
+    player = this.buildPlayer(song)
+    this.studioView.draw(player);
+  },
+
+  //!!Currently not called
   loadInitialStudio: function() {
-    console.log("loadInitial for studio controller")
-    // debugger
-    playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
-    this.view.drawInitial(playerTemplate);
+  //   console.log("loadInitial for studio controller")
+  //   // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
+  //   // this.view.drawInitial(playerTemplate);
   }
 }
