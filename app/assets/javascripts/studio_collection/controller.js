@@ -99,16 +99,15 @@ StudioCollection.Controller.prototype = {
   },
 
   addSong: function(song) {
-
-    // this.studioModel.addSong(song);
-    // this.loadInitial();
-
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
-    //this.loadInitial();
-    //Hit three songs and we proceed to load player
-
+    if (this.tempPlaylist.length > 2) {
+      var name = Math.random().toString(36).substring(7);
+      this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
+      this.tempPlaylist = []
+      this.renderStudioCollection()
+    }
   },
 
   loadStudioWithPlayer: function(song) {
