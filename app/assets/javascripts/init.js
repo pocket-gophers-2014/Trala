@@ -14,6 +14,8 @@ $(document).ready(function() {
                                                                 geoLocation: geoLocation
                                                                  })
 
+  studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
+  studioCollectionView.bindEvents()
   // comment this out to fix room listeners text in main page"
 
   // fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)

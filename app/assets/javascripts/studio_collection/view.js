@@ -1,5 +1,7 @@
 StudioCollection.View = function(){
+  this.eventDelegate  = {} 
   this.mainContainerSelector = '.main-container'
+  this.studioSelector = '.studio'
 }
 
 StudioCollection.View.prototype = {
@@ -25,6 +27,18 @@ StudioCollection.View.prototype = {
 
   draw: function(studioCollectionTemplate) {
     $(this.mainContainerSelector).empty().append(studioCollectionTemplate)
+  },
+
+  bindEvents: function() {
+    $(this.mainContainerSelector).on('click', this.studioSelector, function(e) {
+      var controller = this.eventDelegate.controller;
+      cbMethod = controller[this.eventDelegate.cbMethod]
+      cbMethod.call( controller, e.target.id )
+    }.bind(this))
+  },
+
+  registerEventDelegate: function( controller, cbMethod ) {
+    this.eventDelegate = { controller: controller, cbMethod: cbMethod }
   },
 
   updateTrackState: function(trackData) {
