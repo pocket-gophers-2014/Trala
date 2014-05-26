@@ -28,8 +28,7 @@ StudioCollection.Model.prototype = {
     if ((tempStudio === false) && (this.cleanStudio(studioData))) {
       var newStudio = new Studio.Model(studioData)
       this.state.push(newStudio)
-      this.controller.constructStudio(studioData)
-      
+      this.controller.constructStudio(studioData)   
     }
     else {
       this.controller.constructStudio(studioData)
@@ -81,9 +80,6 @@ StudioCollection.Model.prototype = {
       }
       this.controller.modifyRenderedStudio(studio)
     }
-    else {
-      this.removeStudio(studio)
-    }
   },
 
   packageStudioData: function(studio) {
@@ -102,12 +98,14 @@ StudioCollection.Model.prototype = {
 
   removeStudio: function(studioData) {
     var studioToRemove = this.fetchStudio(studioData.name)
-    if (studioToRemove === false) { 
+    if (studioToRemove === false) {  
+      this.controller.destructStudio(studioData)
       this.subscriber.destroyStudio(studioData.name)  
     }
-    else {
+    else { 
       this.state.remove(studioToRemove.index)
       this.controller.destructStudio(studioData)
+      this.subscriber.destroyStudio(studioData.name) 
     }
   },
 

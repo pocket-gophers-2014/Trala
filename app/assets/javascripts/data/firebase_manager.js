@@ -19,7 +19,7 @@ Data.FirebaseManager.prototype = {
   },
 
   modifyStudioState: function(newStudioData) {
-    
+
     this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
@@ -76,7 +76,7 @@ Data.FirebaseManager.prototype = {
    // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
     this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-    this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
+   // this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
    // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
   }
 }
