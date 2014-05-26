@@ -33,13 +33,13 @@ StudioCollection.Controller.prototype = {
   destructStudio: function(studioData) {
     if (this.currentUserState === "collectionPage") {
       this.studioCollectionView.removeStudio(studioData)
-    } 
+    }
   },
 
   modifyRenderedStudio: function(studioData) {
     if (this.currentUserState === "collectionPage") {
       this.studioCollectionView.modifyStudio(studioData)
-    } 
+    }
   },
 
   initUserStudioState: function(studioName) {
@@ -77,7 +77,10 @@ StudioCollection.Controller.prototype = {
     // }.bind(this))
     this.loadInitial();
   },
-  
+
+  loadInitialStudioCollection: function(){
+    // console.log("loadInitial for StudioCollection controller")
+  },
 
   // loadInitialStudioCollection: function(){
   //   console.log("loadInitial for StudioCollection controller")
@@ -88,17 +91,20 @@ StudioCollection.Controller.prototype = {
   // },
 
 
-  buildPlayer: function(song) {
+  buildPlayer: function(song) { // will take songData array
     return HandlebarsTemplates['player'](song)
   },
 
   buildPlaylist: function(playlist) {
-    // debugger
     playlist = { songs: playlist }
     return HandlebarsTemplates['song_basket_item'](playlist)
   },
 
   addSong: function(song) {
+
+    // this.studioModel.addSong(song);
+    // this.loadInitial();
+
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
@@ -119,7 +125,6 @@ StudioCollection.Controller.prototype = {
   //!!Currently not called
   loadInitialStudio: function() {
   //   console.log("loadInitial for studio controller")
-  //   // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
-  //   // this.view.drawInitial(playerTemplate);
+    // playerTemplate = this.buildPlayer(this.model.getCurrentSong()[0]);
   }
 }

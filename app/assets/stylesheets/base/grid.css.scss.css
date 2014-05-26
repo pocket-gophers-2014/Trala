@@ -16,6 +16,7 @@ html {
 
 @media (min-width: 40rem) {
   html { font-size: 112%; }
+
 }
 
 @media (min-width: 64rem) {
@@ -96,6 +97,7 @@ section:first-of-type { border-top: none; }
 
 @media (min-width: 40rem) {
   section { padding: 4rem 0; }
+  img { width: 50%; }
 }
 
 /* Mobile First Grid
@@ -267,7 +269,7 @@ img {
   display: block;
   height: auto;
   margin: 0 auto 1.5rem auto;
-  width: 100%;
+  width: 90%;
 }
 
 .rwd {
