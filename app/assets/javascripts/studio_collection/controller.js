@@ -43,7 +43,11 @@ StudioCollection.Controller.prototype = {
   },
 
   initUserStudioState: function(studioName) {
-    this.studioCollectionModel.addListenerToStudio(studioName)
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0]) 
+    if (this.studioCollectionModel.currentStudio === studioName) {
+      this.playTrack()
+    }     
+      this.studioCollectionModel.addListenerToStudio(studioName) 
    },
 
   renderStudioCollection: function() {
@@ -51,6 +55,31 @@ StudioCollection.Controller.prototype = {
     var studioCollection = { studio: this.fetchStudioCollection() }
     var studioCollectionTemplate = this.buildStudioCollectionTemplate(studioCollection)
     this.studioCollectionView.draw(studioCollectionTemplate)
+  },
+
+  playTrack: function() {
+    document.getElementById('audio_player').addEventListener('canplay', function() {
+      document.getElementById('audio_player').play()
+    })
+  },
+
+  fetchTrackState: function() {
+    var trackData = this.fetchCurrentTrackStatus()
+    this.studioCollectionModel.updateStudioTrack(trackData)
+  },
+
+  updateTrackState: function(trackData) {
+    document.getElementById('audio_player').addEventListener('canplay', function(){ 
+      var newTime = ((Date.now() - trackData.timeStamp) / 1000) + trackData.trackTime
+      this.studioCollectionView.updateTrackState(newTime)
+      this.playTrack()
+    }.bind(this, trackData))  
+   // this.playTrack()
+  },
+
+  fetchCurrentTrackStatus: function() {
+    var trackData = document.getElementById('audio_player').currentTime
+    return trackData
   },
 
   fetchStudioCollection: function() {
@@ -103,10 +132,11 @@ StudioCollection.Controller.prototype = {
     playlist = this.buildPlaylist(this.tempPlaylist)
     this.studioView.redrawPlaylist(playlist)
     if (this.tempPlaylist.length > 2) {
-      var name = Math.random().toString(36).substring(7);
+      var name = String(Math.floor(Math.random() * 1000))
       this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
-      this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(name).studio.playlist[0])
+      // this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(name).studio.playlist[0])
+      this.initUserStudioState(name)
     }
   },
 

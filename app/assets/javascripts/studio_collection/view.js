@@ -25,6 +25,10 @@ StudioCollection.View.prototype = {
 
   draw: function(studioCollectionTemplate) {
     $(this.mainContainerSelector).empty().append(studioCollectionTemplate)
+  },
+
+  updateTrackState: function(trackData) {
+    document.getElementById('audio_player').currentTime = trackData
   }
 
 }
