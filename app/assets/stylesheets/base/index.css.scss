@@ -1,10 +1,18 @@
-$pastel_purple: #816687;
-$THEME_COLOR: $pastel_purple;
+$caesar_purple: #816687;
+$pastel_purple: #ddf;
+
+$THEME_COLOR: $caesar_purple;
+$cloud_gray: #e8e8e8;
+$milk_gray: #eee;
+$medium_gray: #ccc;
+$charcoal: #333;
 
 .container {
   color: $THEME_COLOR;
+  background-color: $milk_gray;
 }
 
+// ----------------------------------------------
 
 // $TITLE_COLOR: #0B4374;
 // $BLUE: #0166C0;
