@@ -9,11 +9,13 @@ $(document).ready(function() {
                                                                  studioView: studioView
                                                                  })
 
-  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
-  studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
-  studioCollectionModel.registerController(studioCollectionController)
-  studioCollectionController.initStudioCollection()
-  fbTest.setDataTriggers()
+  // comment this out to fix room listeners text in main page"
+
+  // fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
+  // studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
+  // studioCollectionModel.registerController(studioCollectionController)
+  // studioCollectionController.initStudioCollection()
+  // fbTest.setDataTriggers()
 
   // App Controller Setup
   var appController = new App.Controller()
