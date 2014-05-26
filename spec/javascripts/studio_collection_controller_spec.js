@@ -5,6 +5,7 @@ describe("Studio Collection Controller", function(){
     testStudioCollectionView = jasmine.createSpyObj('testStudioCollectionView', ['appendStudio', 'removeStudio', 'modifyStudio', 'draw', 'updateTrackState', 'renderStudioCollection'])
     testGeolocation = 'testGeoLocation'
     studioCollectionController = new StudioCollection.Controller({studioView: testStudioView, studioCollectionModel: testStudioCollectionModel, studioCollectionView: testStudioCollectionView, geoLocation: testGeolocation})
+
     studioCollectionController.currentUserState = "collectionPage"
   });
 
@@ -37,5 +38,46 @@ describe("Studio Collection Controller", function(){
   it("calls 'testStudioCollectionView.modifyStudio' from 'modifyRenderedStudio' if currentUserState is 'collectionPage'", function(){
     studioCollectionController.modifyRenderedStudio("fakeStudioData")
     expect(testStudioCollectionView.modifyStudio).toHaveBeenCalled();
+  }),
+
+  // HEY***come back to test initUserStudioState***HEY
+
+  it("calls 'fetchStudioCollection' from 'renderStudioCollection'", function(){
+    spyOn(studioCollectionController, 'fetchStudioCollection')
+    studioCollectionController.renderStudioCollection()
+    expect(studioCollectionController.fetchStudioCollection).toHaveBeenCalled();
+  }),
+
+  it("calls 'buildStudioCollectionTemplate' from 'renderStudioCollection'", function(){
+    spyOn(studioCollectionController, 'buildStudioCollectionTemplate')
+    studioCollectionController.renderStudioCollection()
+    expect(studioCollectionController.buildStudioCollectionTemplate).toHaveBeenCalled();
+  }),
+
+  it("calls 'studioCollectionView.draw' from 'renderStudioCollection'", function(){
+    studioCollectionController.renderStudioCollection()
+    expect(testStudioCollectionView.draw).toHaveBeenCalled();
+  }),
+
+// HEY***come back to test 'playTrack'***HEY
+
+  it("calls 'fetchCurrentTrackStatus' from 'fetchTrackState'", function(){
+    spyOn(studioCollectionController, 'fetchCurrentTrackStatus')
+    studioCollectionController.fetchTrackState()
+    expect(studioCollectionController.fetchCurrentTrackStatus).toHaveBeenCalled();
+  }),
+
+  it("calls 'updateStudioTrack' from 'fetchTrackState'", function(){
+    spyOn(studioCollectionController, 'fetchCurrentTrackStatus')
+    studioCollectionController.fetchTrackState()
+    expect(testStudioCollectionModel.updateStudioTrack).toHaveBeenCalled();
+  }),
+
+  
+
+  it("calls 'draw' from 'loadStudioWithPlayer'", function(){
+    spyOn(studioCollectionController, 'buildPlayer')
+    studioCollectionController.loadStudioWithPlayer("fakeSong")
+    expect(studioCollectionController.buildPlayer).toHaveBeenCalled();
   })
 })
