@@ -91,7 +91,22 @@ h3:hover {
   opacity: 1.0;
 }
 
+.search-footer-container {
+  position: relative;
+  clear: both;
+  text-align: center;
+  width: 100%;
+  background-color: $medium_gray;
+}
 
+img {
+  border-radius: 3px;
+  opacity: 0.8;
+}
+
+img:hover {
+  opacity: 1.0;
+}
 
 // // css /////////////////////////////////////////
 
