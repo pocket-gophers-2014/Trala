@@ -2,24 +2,14 @@
   <h3> Active Room </h3>
   <p> Tralalala, join a rooooooom! <p>
 </div>
-
-<!-- example template after rendered from handlebars" -->
-{{!-- <div class = "room-container">
-  <p> roomname </p>
-</div>
 <div class = "room-container">
-  <p> roomname </p>
-</div>
-<div class = "room-container">
-  <p> roomname </p>
-</div>
- --}}
-<!-- when json object is ready! -->
-{{!-- <div class = "room-container">
   <ul>
-      {{#each room}}
-      <button type="button"> <a href="../{{room.url}}#{{id}}" data-remote="true"> {{room.name}} </a> </button> <br>
+      {{#each studio}}
+      <div style="border: 1px solid black" id="{{name}}">
+        <p>Name: {{name}}</p></br>
+        <p>Listeners: {{listeners}}</p>
+        <p></p>
+      </div>
       {{/each}}
   </ul>
 </div>
- --}}

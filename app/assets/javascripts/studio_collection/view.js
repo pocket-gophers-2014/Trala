@@ -1,5 +1,5 @@
 StudioCollection.View = function(){
-
+  this.mainContainerSelector = '.main-container'
 }
 
 StudioCollection.View.prototype = {
@@ -21,6 +21,10 @@ StudioCollection.View.prototype = {
 
   addUl: function() {
     $('.container').append("<ul>")  
+  },
+
+  draw: function(studioCollectionTemplate) {
+    $(this.mainContainerSelector).empty().append(studioCollectionTemplate)
   }
 
 }

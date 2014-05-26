@@ -17,13 +17,19 @@ $(document).ready(function() {
   // studioCollectionController.initStudioCollection()
   // fbTest.setDataTriggers()
 
+  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
+  studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
+  studioCollectionModel.registerController(studioCollectionController)
+  // studioCollectionController.initStudioCollection()
+  fbTest.setDataTriggers()
+
   // App Controller Setup
   var appController = new App.Controller()
   var appView = new App.View()
 
   appView.registerEventDelegate(appController)
   appView.bindEvents()
-  appController.registerStudioCollectionController(studioCollectionController, "loadInitialStudioCollection")
+  appController.registerStudioCollectionController(studioCollectionController, "renderStudioCollection")
   appController.registerStudioController(studioCollectionController, "loadInitialStudio")
 
 
