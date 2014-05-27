@@ -7,7 +7,7 @@ describe("Studio Collection Controller", function(){
     studioCollectionController = new StudioCollection.Controller({studioView: testStudioView, studioCollectionModel: testStudioCollectionModel, studioCollectionView: testStudioCollectionView, geoLocation: testGeolocation})
 
     studioCollectionController.currentUserState = "collectionPage"
-  });
+xx  });
 
   it("should be defined", function(){
     expect(studioCollectionController).toBeDefined();
@@ -40,8 +40,6 @@ describe("Studio Collection Controller", function(){
     expect(testStudioCollectionView.modifyStudio).toHaveBeenCalled();
   }),
 
-  // HEY***come back to test initUserStudioState***HEY
-
   it("calls 'fetchStudioCollection' from 'renderStudioCollection'", function(){
     spyOn(studioCollectionController, 'fetchStudioCollection')
     studioCollectionController.renderStudioCollection()
@@ -59,16 +57,6 @@ describe("Studio Collection Controller", function(){
     expect(testStudioCollectionView.draw).toHaveBeenCalled();
   }),
 
-// HEY***come back to test 'playTrack'***HEY
-
-  xit("calls 'play' on the 'audio_player' DOM id", function(){
-    fakeTrackData = jasmine.createSpyObj('fakeTrackData', ['trackTime'])
-    var fixture = setFixtures('<div id="audio_player"><audio><source src="" type="audio/mpeg></audio></div>')
-    studioCollectionController.updateTrackState(fakeTrackData)
-    expect(fakeTrackData.trackTime).toHaveBeenCalled();
-
-  })
-
   it("calls 'fetchCurrentTrackStatus' from 'fetchTrackState'", function(){
     spyOn(studioCollectionController, 'fetchCurrentTrackStatus')
     studioCollectionController.fetchTrackState()
@@ -80,15 +68,6 @@ describe("Studio Collection Controller", function(){
     studioCollectionController.fetchTrackState()
     expect(testStudioCollectionModel.updateStudioTrack).toHaveBeenCalled();
   }),
-
-  //HEY***come back to test updateTrackState***HEY
-
-  xit("adds an Event Listener to the 'audio_player' id when 'updateTrackState' is called", function(){
-    studioCollectionController.updateTrackState("fakeTrackData")
-    expect(studioCollectionController.playTrack).toHaveBeenCalled();
-  }),
-
-  //HEY***come back to test fetchCurentTrackStatus***HEY
 
   it("returns trackData when 'fetchCurentTrackStatus' is called", function(){
 
