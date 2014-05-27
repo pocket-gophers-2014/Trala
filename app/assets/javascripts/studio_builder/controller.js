@@ -1,34 +1,44 @@
-// StudioBuilder.Controller = function(view) {
-// 	this.newStudioSubscriber = {}
-// 	this.view = view
-// 	this.playlist = []
-// }
+StudioBuilder.Controller = function( view ) {
+	this.newStudioSubscriber = {}
+	this.view = view
+	this.playlist = []
+}
 
-// StudioBuilder.Controller.prototype = {
-// 	addSong: function(song) {
-//     this.tempPlaylist.push(song)
-//     playlist = this.buildPlaylist(this.tempPlaylist)
-//     this.view.redrawPlaylist(playlist)
-//     if (this.tempPlaylist.length > 2) {
-//       var name = String(Math.floor(Math.random() * 1000))
-//       this.notifyNewStudioSubscribers({name: name, data: { playlist: this.tempPlaylist }})
-//       this.tempPlaylist = []
-//       this.initUserStudioState(name)
-//     }
-//   },
+StudioBuilder.Controller.prototype = {
+	addSong: function(song) {
+    this.playlist.push(song)
 
-//   buildPlaylist: function(playlist) {
-//     playlist = { songs: playlist }
-//     return HandlebarsTemplates['song_basket_item'](playlist)
-//   },
+    playlist = this.buildPlaylist( this.playlist )
 
-// 	registerNewStudioSubscriber: function( controller, cbMethod ) {
-// 		this.newStudioSubscriber = { controller: controller cbMethod: cbMethod }
-// 	},
+    this.view.redrawPlaylist(playlist)
+    // this.view.redrawPlaylist()
 
-// 	notifyNewStudioSubscribers: function(studioData) {
-// 		var controller = this.newStudioSubscriber.controller
-// 		var cbMethod = controller[this.newStudioSubscriber.cbMethod]
-// 		cbMethod.call( controller, studioData )
-// 	}
-// }
+    if (this.playlist.length > 2) {
+      var name = String(Math.floor(Math.random() * 1000))
+
+      this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.playlist }} )
+      this.newStudioSubscriber.controller.currentUserState = "studio"
+      this.playlist = []
+
+      // this.initUserStudioState(name)
+    }
+
+
+  },
+
+  buildPlaylist: function(playlist) {
+    playlist = { songs: playlist }
+    return HandlebarsTemplates['song_basket_item'](playlist)
+  },
+
+  //
+	registerNewStudioSubscriber: function( controller, cbMethod ) {
+		this.newStudioSubscriber = { controller: controller, cbMethod: cbMethod }
+	},
+
+	notifyNewStudioSubscribers: function(studioData) {
+		var controller = this.newStudioSubscriber.controller
+		var cbMethod = controller[this.newStudioSubscriber.cbMethod]
+		cbMethod.call( controller, studioData )
+	}
+}

@@ -7,6 +7,7 @@ StudioCollection.Model.prototype = {
 
   createNewStudio: function(studioData) {
     var newStudio = new Studio.Model(studioData)
+
     this.state.push(newStudio)
     this.currentStudio = studioData.name
     this.synced = true
@@ -22,7 +23,7 @@ StudioCollection.Model.prototype = {
     var studioData = this.packageStudioData(this.fetchStudio(studioName).studio)
     if (this.currentStudio !== studioName) {
       var newListenerCount = studioData.data.listeners + 1
-      studioData.data.listeners = newListenerCount    
+      studioData.data.listeners = newListenerCount
       this.currentStudio = studioName
     }
     else if (this.currentStudio === studioName) {
@@ -33,13 +34,13 @@ StudioCollection.Model.prototype = {
     this.subscriber.setConnectionMonitor(studioName)
     this.updateStudioState(studioData)
   },
-  
+
   updateCollectionState: function(studioData) {
    var tempStudio = this.fetchStudio(studioData.name)
     if ((tempStudio === false) && (this.cleanStudio(studioData))) {
       var newStudio = new Studio.Model(studioData)
       this.state.push(newStudio)
-      this.controller.constructStudio(studioData)   
+      this.controller.constructStudio(studioData)
     }
     else {
       this.controller.constructStudio(studioData)
@@ -71,14 +72,14 @@ StudioCollection.Model.prototype = {
   },
 
   subscriberStateReactor: function(studioData, action) {
-    if (action === "add") { 
+    if (action === "add") {
       this.updateCollectionState(studioData)
     }
     else if (action === "destroy") {
       this.removeStudio(studioData)
     }
   },
-  
+
   subscriberStudioStateReactor: function(studio) {
     if ((studio.data.flagtype === "getTimes") && (this.currentStudio === studio.name) && (this.synced)) {
       this.controller.fetchTrackState()
@@ -89,10 +90,10 @@ StudioCollection.Model.prototype = {
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio
       for (var attribute in studio.data) {
-        if (attribute !== "playlist") { 
+        if (attribute !== "playlist") {
           if (studioToModify[attribute] !== studio.data[attribute]) {
             studioToModify[attribute] = studio.data[attribute]
-          }      
+          }
         }
       }
       this.controller.modifyRenderedStudio(studio)
@@ -111,7 +112,7 @@ StudioCollection.Model.prototype = {
 
   fetchStudio: function(studioName) {
     for (var i = 0; i < this.state.length; i++) {
-      if (studioName === this.state[i].name) {      
+      if (studioName === this.state[i].name) {
         return { studio: jQuery.extend({},this.state[i]), index: i }
       }
     }
@@ -120,14 +121,14 @@ StudioCollection.Model.prototype = {
 
   removeStudio: function(studioData) {
     var studioToRemove = this.fetchStudio(studioData.name)
-    if (studioToRemove === false) {  
+    if (studioToRemove === false) {
       this.controller.destructStudio(studioData)
-      this.subscriber.destroyStudio(studioData.name)  
+      this.subscriber.destroyStudio(studioData.name)
     }
-    else { 
+    else {
       this.state.remove(studioToRemove.index)
       this.controller.destructStudio(studioData)
-      this.subscriber.destroyStudio(studioData.name) 
+      this.subscriber.destroyStudio(studioData.name)
     }
   },
 

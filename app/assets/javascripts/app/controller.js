@@ -2,6 +2,7 @@ App.Controller = function(){
 	this.studioCollectionController = {}
 	this.studioController = {}
 	this.searchController = {}
+	this.studioBuilderController = {}
 }
 
 App.Controller.prototype = {
@@ -26,10 +27,14 @@ App.Controller.prototype = {
 	},
 
 	registerStudioController: function( controller, callbackMethod ){
-		this.studioController = {controller: controller, callbackMethod: callbackMethod}
+		this.studioController = { controller: controller, callbackMethod: callbackMethod }
 	},
 
 	registerSearchController: function( controller, callbackMethod ){
 		this.searchController = { controller: controller, callbackMethod: callbackMethod }
+	},
+
+	registerStudioBuilderController: function( controller, callbackMethod) {
+		this.studioBuilderController = { controller: controller, callbackMethod: callbackMethod }
 	}
 }

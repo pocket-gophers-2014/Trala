@@ -1,14 +1,17 @@
 Studio.View = function(){
 	this.mainContainer = '.main-container'
-  this.playlistSongsSelector = '.search-footer-container'
+  // this.playlistSongsSelector = '.search-footer-container'
 }
 
 Studio.View.prototype = {
 	draw: function(playerTemplate) {
 		$(this.mainContainer).empty().append(playerTemplate)
-	},
+	}//,
 
-  redrawPlaylist: function(playlist) {
-    $(this.playlistSongsSelector).empty().append(playlist)
-  }
+
+  // promoting to the studio builder
+  // redrawPlaylist: function( playlist ) {
+
+  //   $(this.playlistSongsSelector).empty().append( playlist )
+  // }
 }

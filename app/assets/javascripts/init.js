@@ -38,9 +38,28 @@ $(document).ready(function() {
   songManager.init()
   var searchView = new Search.View()
   searchController = new Search.Controller( searchView,  songManager )
-  searchController.registerSongSelectionSubscriber(studioCollectionController, "addSong")
+
+
+
+  // studio builder skeleton
+  studioBuilderView = new StudioBuilder.View()
+  studioBuilderController = new StudioBuilder.Controller( studioBuilderView )
+  studioBuilderController.registerNewStudioSubscriber( studioCollectionController, 'createStudio' ) //
+  // studioBuilderController.registerNewStudioSubscriber( )
+  searchController.registerSongSelectionSubscriber( studioBuilderController, "addSong" )
+  // searchController.registerSongSelectionSubscriber( studioBuilderController, "addSong" )
+
+
+
+
+
+
+  // new register for add song with studio manager and callback
+
+
   appController.registerSearchController(searchController, "loadWidget")
-  searchView.registerEventDelegate(searchController, { search: "searchSongs", songSelection: "selectSong" })
+  // searchView.registerStudioBuilderDelegate( studioBuilderController, { })
+  searchView.registerEventDelegate( searchController, { search: "searchSongs", songSelection: "selectSong" } )
   searchView.bindEvents()
   // studioController.init();
 

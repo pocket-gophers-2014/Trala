@@ -36,7 +36,7 @@ Search.Controller.prototype = {
     },
 
     registerSongSelectionSubscriber: function(controller, cbMethod) {
-        this.songSelectionSubscriber = {controller: controller, cbMethod: cbMethod }
+        this.songSelectionSubscriber = { controller: controller, cbMethod: cbMethod }
     },
 
     selectSong: function(songID) {

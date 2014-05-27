@@ -43,11 +43,11 @@ StudioCollection.Controller.prototype = {
   },
 
   initUserStudioState: function(studioName) {
-    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0]) 
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0])
     if (this.studioCollectionModel.currentStudio === studioName) {
       this.playTrack()
-    }     
-      this.studioCollectionModel.addListenerToStudio(studioName) 
+    }
+      this.studioCollectionModel.addListenerToStudio(studioName)
    },
 
   renderStudioCollection: function() {
@@ -69,11 +69,11 @@ StudioCollection.Controller.prototype = {
   },
 
   updateTrackState: function(trackData) {
-    document.getElementById('audio_player').addEventListener('canplay', function(){ 
+    document.getElementById('audio_player').addEventListener('canplay', function(){
       var newTime = ((Date.now() - trackData.timeStamp) / 1000) + trackData.trackTime
       this.studioCollectionView.updateTrackState(newTime)
       this.playTrack()
-    }.bind(this, trackData))  
+    }.bind(this, trackData))
    // this.playTrack()
   },
 
@@ -107,31 +107,37 @@ StudioCollection.Controller.prototype = {
     this.loadInitial();
   },
 
-  buildPlayer: function(song) { // will take songData array
+  buildPlayer: function(song) {
     return HandlebarsTemplates['player'](song)
   },
 
-  buildPlaylist: function(playlist) {
-    playlist = { songs: playlist }
-    return HandlebarsTemplates['song_basket_item'](playlist)
-  },
+  // studio_builder
+  // buildPlaylist: function(playlist) {
+  //   playlist = { songs: playlist }
+  //   return HandlebarsTemplates['song_basket_item'](playlist)
+  // },
 
-  addSong: function(song) {
-    this.tempPlaylist.push(song)
-    playlist = this.buildPlaylist(this.tempPlaylist)
-    this.studioView.redrawPlaylist(playlist)
-    if (this.tempPlaylist.length > 2) {
-      var name = String(Math.floor(Math.random() * 1000))
-      this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
-      this.tempPlaylist = []
-      this.initUserStudioState(name)
-    }
-  },
+  // studio_builder
+  // addSong: function(song) {
 
-  loadStudioWithPlayer: function(song) {
-    player = this.buildPlayer(song)
-    this.studioView.draw(player);
-  },
+  //   this.tempPlaylist.push(song)
+  //   playlist = this.buildPlaylist(this.tempPlaylist)
+  //   this.studioView.redrawPlaylist(playlist)
+  //   if (this.tempPlaylist.length > 2) {
+  //     var name = String(Math.floor(Math.random() * 1000))
+
+  //     // sub and callback
+  //     this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
+
+  //     this.tempPlaylist = []
+  //     this.initUserStudioState(name)
+  //   }
+  // },
+
+  // loadStudioWithPlayer: function(song) {
+  //   player = this.buildPlayer(song)
+  //   this.studioView.draw(player);
+  // },
 
   loadInitialStudio: function() {
 
