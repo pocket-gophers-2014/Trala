@@ -1,6 +1,7 @@
 Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
-  this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
-  this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
+  // mock
+  this.studioCollectionRef= new Firebase('https://tralatest.firebaseio.com/studioCollection')
+  this.connectionRef = new Firebase('https://tralatest.firebaseio.com/.info/connected')
   this.studioCollectionModel = studioCollectionModel
 }
 
@@ -36,7 +37,7 @@ Data.FirebaseManager.prototype = {
     var studioData = this.packageStudioData(data)
     this.studioCollectionModel.subscriberStudioStateReactor(studioData)
   },
-  
+
   newStudioAdded: function(data) {
     var studioData = this.packageStudioData(data)
     this.studioCollectionModel.subscriberStateReactor(studioData, "add")
@@ -44,7 +45,7 @@ Data.FirebaseManager.prototype = {
 
   initialCollectionState: function(data) {
     var studioCollectionData = this.packageStudioCollectionData(data)
-    this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
+    this.studioCollectionModel.initialStateGenerate(studioCollectionData)
   },
 
   packageStudioData: function(data) {
@@ -56,7 +57,7 @@ Data.FirebaseManager.prototype = {
     var tempData = []
     data.forEach(function(data) {
       var tempObj = { name: data.name(), data: data.val() }
-     tempData.push(tempObj) 
+     tempData.push(tempObj)
    })
     return tempData
   },
@@ -73,7 +74,7 @@ Data.FirebaseManager.prototype = {
 
   setDataTriggers: function() {
    // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
-    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
+    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this))
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
    // this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
    // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))

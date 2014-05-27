@@ -37,6 +37,7 @@ StudioCollection.View.prototype = {
     }.bind(this))
   },
 
+
   registerEventDelegate: function( controller, cbMethod ) {
     this.eventDelegate = { controller: controller, cbMethod: cbMethod }
   },

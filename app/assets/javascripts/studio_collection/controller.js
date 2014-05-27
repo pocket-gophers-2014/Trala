@@ -111,11 +111,14 @@ StudioCollection.Controller.prototype = {
     return HandlebarsTemplates['player'](song)
   },
 
+
+  // studio builder
   buildPlaylist: function(playlist) {
     playlist = { songs: playlist }
     return HandlebarsTemplates['song_basket_item'](playlist)
   },
 
+  // studio builder
   addSong: function(song) {
     this.tempPlaylist.push(song)
     playlist = this.buildPlaylist(this.tempPlaylist)

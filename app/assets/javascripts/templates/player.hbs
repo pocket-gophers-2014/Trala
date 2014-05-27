@@ -1,10 +1,14 @@
-<div class="container track-information">
+<div class="track-information">
   <div class="column full">
-    <img src={{artwork_url}} alt="Album artwork not available">
-    <p>Now Playing: {{title}} </p>
+    {{!-- <img src={{artwork_url}} alt="Album artwork not available"> --}}
+     <div class="listener-container">
+     </div>
     {{!-- <p>Sound Brought To You By: {{user.username}}</p> --}}
   </div>
   {{!-- <a href={{permalink_url}}>Listen on SoundCloud</a> --}}
+  <footer class="column full">
+    <p>Now Playing: {{title}}</p>
+  </footer>
 </div>
 
 <div class="audio-player">

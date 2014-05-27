@@ -5,11 +5,17 @@ Studio.View = function(){
 
 Studio.View.prototype = {
 	draw: function(playerTemplate) {
+    debugger
+    // this.changeHTMLColorEvent()
 		$(this.mainContainer).empty().append(playerTemplate)
 	},
 
   redrawPlaylist: function(playlist) {
     $(this.playlistSongsSelector).empty().append(playlist)
+  },
+
+  changeHTMLColorEvent: function() {
+    $('html').css( 'background', 'red' )
   }
 }
 

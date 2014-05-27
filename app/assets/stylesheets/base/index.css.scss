@@ -27,7 +27,7 @@ body {
   z-index: 1;
   width: 100%;
   color: $milk_gray;
-  height: 60px;
+  height: 70px;
 
   background-color: $charcoal;
   color: $cloud_gray;
@@ -52,22 +52,24 @@ body {
 }
 
 .container {
-  padding-top: 60px;
+  padding-top: 75px;
 }
 
+.room-container {
+  padding-top: 30px;
+}
 
 
 .front_page_button {
   font-family: 'Bitter', serif;
   margin: 4% auto;
-  width: 20%;
-  background-color: $medium_gray;
-  color: white;
+
+  width: 30%;
+  background: $medium_gray;
   border: 2px solid $cloud_gray;
-  border-radius: 4px;
+  border-radius: 6px;
   text-align: center;
-  height: 65%;
-  text-decoration: none;
+  height: 55%;
   display: block;
 }
 
@@ -79,6 +81,23 @@ body {
   // background-color: $THEME_COLOR;
   border-radius: 3px;
 }
+
+.search-footer-container, .track-information {
+  position: fixed;
+  left:0px;
+  bottom:0px;
+  clear: both;
+  text-align: center;
+  width: 100%;
+  background-color: $medium_gray;
+}
+
+.studio {
+  margin: 4% auto;
+  border-radius: 3px;
+
+}
+
 
 h3 {
   text-align: center;
@@ -92,16 +111,6 @@ h3:hover {
   opacity: 1.0;
 }
 
-.search-footer-container {
-  position: fixed;
-  left:0px;
-  bottom:0px;
-  clear: both;
-  text-align: center;
-  width: 100%;
-  background-color: $medium_gray;
-}
-
 img {
   border-radius: 3px;
   opacity: 0.8;
@@ -111,8 +120,9 @@ img:hover {
   opacity: 1.0;
 }
 
-.room-container {
-  padding-top: 30px;
+
+[user-icon]:before {
+
 }
 
 // // css /////////////////////////////////////////
