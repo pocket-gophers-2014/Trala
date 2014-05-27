@@ -12,6 +12,7 @@ $medium_gray: #ccc;
 $charcoal: #333;
 $silver: #E3E5E7;
 $white: #fff;
+$mint: #01dfa5;
 // font-family: 'Droid Serif', serif;
 
 html {
@@ -22,6 +23,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Oxygen', sans-serif;
+}
+
+.song-header {
+  height: 10px;
+  background-color: black;
 }
 
 .navigation {
@@ -37,7 +43,7 @@ body {
 
   /*background-color: $charcoal;*/
   /*background-color: $white;*/
-  background-color: $salmon;
+  background-color: $mint;
   color: $cloud_gray;
 
   text-align: left;
