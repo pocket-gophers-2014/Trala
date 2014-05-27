@@ -102,6 +102,9 @@ div {
   text-align: center;
   width: 100%;
   background-color: $medium_gray;
+  border-top: $mint_cream;
+
+  h3 { font-size: 20px;}
 }
 
 .studio {
@@ -131,12 +134,14 @@ img:hover {
 
 .each-song {
   img {
-    border-top: 10px solid $mint;
+    border-top: 8px solid $mint;
     border-bottom: 5px solid $cloud_gray;
   }
 }
 
 .song-header {
+  color: $white;
+  content: "title";
   p {
     font-size: 10px;
     opacity: 0.5;
