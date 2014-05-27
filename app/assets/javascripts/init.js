@@ -17,7 +17,7 @@ $(document).ready(function() {
   studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
   studioCollectionView.bindEvents()
 
-  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
+  fbTest = new Data.FirebaseManager('https://tralatest.firebaseio.com/studioCollection', studioCollectionModel)
   studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
   studioCollectionModel.registerController(studioCollectionController)
   // studioCollectionController.initStudioCollection()

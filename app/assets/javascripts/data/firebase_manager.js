@@ -1,6 +1,6 @@
 Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
-  this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
-  this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
+  this.studioCollectionRef= new Firebase('https://tralatest.firebaseio.com/studioCollection')
+  this.connectionRef = new Firebase('https://tralatest.firebaseio.com/.info/connected')
   this.studioCollectionModel = studioCollectionModel
 }
 
