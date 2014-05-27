@@ -25,7 +25,6 @@ group :assets do
 
   #add gem for icons and fonts
   gem 'foundicons-rails'
-  # gem 'foundation-icons-sass-rails'
 
   # handlebars gems
   gem 'handlebars-rails'
