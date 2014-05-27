@@ -43,7 +43,7 @@ StudioCollection.Controller.prototype = {
   },
 
   initUserStudioState: function(studioName) {
-    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0]) 
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName)) 
     if (this.studioCollectionModel.currentStudio === studioName) {
       this.playTrack()
     }     
@@ -122,14 +122,22 @@ StudioCollection.Controller.prototype = {
     this.studioView.redrawPlaylist(playlist)
     if (this.tempPlaylist.length > 2) {
       var name = String(Math.floor(Math.random() * 1000))
+      this.tempPlaylist = this.addIndex(this.tempPlaylist)
       this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
       this.initUserStudioState(name)
     }
   },
 
-  loadStudioWithPlayer: function(song) {
-    player = this.buildPlayer(song)
+  addIndex: function(playlist) {
+    for (var i = 0; i < playlist.length; i ++){
+      playlist[i].index = i
+    }
+    return playlist
+  },
+
+  loadStudioWithPlayer: function(studio) {
+    player = this.buildPlayer(studio)
     this.studioView.draw(player);
   },
 
