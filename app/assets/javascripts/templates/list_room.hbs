@@ -7,9 +7,9 @@
           {{#each studio}}
           <div id="{{name}}" class="studio column full">
             <p id="{{name}}">
-              Name {{name}}
-              <i class="fi-people"> {{listeners}} </i>
-               <i class="fi-location"> {{distance}} </i>
+              <span class="list_room_text"> Name    {{name}}</span>
+              <span class="list_room_text"> <i class="fi-people"> {{listeners}} </i> </span>
+              <span class="list_room_text"> <i class="fi-location"> {{distance}} ft </i> </span>
             </p>
           </div>
           {{/each}}

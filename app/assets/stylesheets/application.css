@@ -13,5 +13,8 @@
  *= require 'foundicons_social'
  *= require 'foundicons_enclosed'
  *= require 'foundicons_accessibility'
+ *= require 'font-awesome'
  *= require_tree .
  */
+
+@import 'font-awesome';
