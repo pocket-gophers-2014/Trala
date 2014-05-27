@@ -1,12 +1,17 @@
 $orchid_purple: #8b4789;
 $caesar_purple: #816687;
 $pastel_purple: #ddf;
+$alizarin_red: #E74C3C;
+$salmon: #F37366;
+$salmon: #FF7676;
 
-$THEME_COLOR: $orchid_purple;
+$THEME_COLOR: $salmon;
 $cloud_gray: #e8e8e8;
 $milk_gray: #eee;
 $medium_gray: #ccc;
 $charcoal: #333;
+$silver: #E3E5E7;
+$white: #fff;
 // font-family: 'Droid Serif', serif;
 
 html {
@@ -22,6 +27,7 @@ body {
 .navigation {
   border-top-color: $THEME_COLOR;
   border-top-width: 5px;
+  border-bottom: 1px solid $silver;
 
   position: fixed;
   z-index: 1;
@@ -29,7 +35,9 @@ body {
   color: $milk_gray;
   height: 60px;
 
-  background-color: $charcoal;
+  /*background-color: $charcoal;*/
+  /*background-color: $white;*/
+  background-color: $salmon;
   color: $cloud_gray;
 
   text-align: left;
@@ -44,9 +52,14 @@ body {
     display: inline;
     padding: 6%;
     text-decoration: none;
-    color: $caesar_purple;
+    color: $white;
     font-weight: bold;
     font-size: 40px;
+  }
+
+  .colorstrip {
+    background-color: $white;
+    height: 3px;
   }
 
 }
@@ -61,14 +74,31 @@ body {
   font-family: 'Bitter', serif;
   margin: 4% auto;
   width: 20%;
-  background-color: $medium_gray;
-  color: white;
-  border: 2px solid $cloud_gray;
+/*  background-color: $white;*/
+  /*color: white;*
+  /*border: 2px solid $cloud_gray;*/
   border-radius: 4px;
   text-align: center;
   height: 65%;
   text-decoration: none;
   display: block;
+}
+
+.button {
+  background-color: $white;
+  border: 2px solid $cloud_gray;
+  /*padding: 8px 40px;*/
+  width: 200px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-decoration: none;
+  color: $salmon;
+  white-space: nowrap;
+}
+
+.button:hover {
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .search-room-container {
