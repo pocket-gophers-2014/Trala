@@ -30,7 +30,8 @@ body {
 }
 
 .navigation {
-  border-top-color: $THEME_COLOR;
+  @include container_setup();
+  // border-top-color: $THEME_COLOR;
   border-top-width: 5px;
   border-bottom: 1px solid $silver;
 
@@ -79,26 +80,16 @@ body {
 
 
 .front_page_button {
-  font-family: 'Bitter', serif;
-  margin: 4% auto;
-  width: 20%;
-  /*  background-color: $white;*/
-  /*color: white;*
-  /*border: 2px solid $cloud_gray;*/
-  border-radius: 4px;
-  width: 30%;
-  background: $medium_gray;
-  /*border: 2px solid $cloud_gray;*/
+  @include container_setup();
+  border: 2px solid $cloud_gray;
+  background-color: $white;
   border-radius: 6px;
-  text-align: center;
   height: 55%;
   display: block;
 }
 
 .button {
   background-color: $white;
-  border: 2px solid $cloud_gray;
-  /*padding: 8px 40px;*/
   width: 200px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -162,6 +153,7 @@ img:hover {
 
 .fi-inbox, .fi-mic {
   padding-right: 15px;
+  padding: 2px;
   text-align: left;
 }
 
