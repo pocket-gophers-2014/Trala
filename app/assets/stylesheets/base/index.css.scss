@@ -15,6 +15,74 @@ $white: #fff;
 $mint: #01dfa5;
 // font-family: 'Droid Serif', serif;
 
+/* MEDIA QUERIES */
+
+/* All Devices */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 90%;
+}
+
+@media (min-width: 40rem) {
+  .column {
+    float: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .column.full { width: 100%; }
+  .column.two-thirds { width: 66.7%; }
+  .column.half { width: 50%; }
+  .column.third { width: 33.3%; }
+  .column.fourth { width: 25%; }
+  .column.flow-opposite { float: right; }
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+/* Laptop & Desktop screens */
+@media (min-width: 1025px){
+  body{
+    background-color: gray;
+  }
+
+  .row{
+    margin: 10%;
+  }
+  
+}
+
+/* Tablets */
+@media (max-width: 1024px){
+  body{
+    background-color: purple;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 450px){
+  body{
+    background-color: yellow;
+  }
+
+  .button{
+
+  }
+}
+
+/* end media queries section */
+
 html {
   background-color: $milk_gray;
 }
