@@ -1,40 +1,111 @@
 StudioCollection.Model = function() {
   this.state = []
-  this.synced = false
-  this.currentStudioState = {}
+  this.currentStudioState
 }
 
 StudioCollection.Model.prototype = {
 
   createNewStudio: function(studioData) {
     var newStudio = new Studio.Model(studioData)
-    this.state.push(newStudio)
-    this.currentStudio = studioData.name
-    this.synced = true
-    this.addStudioToSubscriber(newStudio)
+    this.state.push(newStudio) 
+    this.currentStudioState = jQuery.extend({}, newStudio)
+    this.addStudioToSubscriber(this.currentStudioState)
+  },
+
+
+
+  // New listener joins studio
+
+  addListenerToStudio: function(studioName) {
+    var studioData = this.fetchStudioData(studioName).latestStudioData
+    if (this.currentStudioState.name !== studioName) {
+      this.currentStudioState = studioData
+      this.requestSyncedData()
+      this.requestMonitorActivation()
+    } 
+  },
+
+  // Studio status management
+
+  interpretStudioStatus: function(returnedStudioData) {
+    if (returnedStudioData.statusValue === "syncTrackData") {
+      this.requestSyncedTrackData(returnedStudioData)
+    }
+    else if (returnedStudioData.statusValue === "syncToMe") {
+      this.syncCurrentStudioState(returnedStudioData)
+    }
+    else if (returnedStudioData.statusValue === "removeListener") {
+      this.updateListenerCount(returnedStudioData)
+    }
+    else if ((returnedStudioData.statusValue === "needSync") && (this.currentStudioState.data.status === "synced")) {
+      this.sendSyncedData()
+    }
+
+  },
+
+  // Firebase ORM
+
+  updateStudioState: function(newStudioData) {
+    this.subscriber.modifyStudioState(newStudioData)
+  },
+
+  requestMonitorActivation: function() {
+    this.subscriber.setConnectionMonitor(this.currentStudioState.name)
   },
 
   addStudioToSubscriber: function(studioData) {
-    var packagedStudioData = this.packageStudioData(studioData)
-    this.subscriber.addStudio(packagedStudioData)
+   // var packagedStudioData = this.packageStudioData(studioData)
+    this.subscriber.addStudio(studioData)
   },
 
-  addListenerToStudio: function(studioName) {
-    var studioData = this.packageStudioData(this.fetchStudio(studioName).studio)
-    if (this.currentStudio !== studioName) {
-      var newListenerCount = studioData.data.listeners + 1
-      studioData.data.listeners = newListenerCount    
-      this.currentStudio = studioName
-    }
-    else if (this.currentStudio === studioName) {
-      studioData.data.currentTrackTime = 0
-      studioData.data.currentTrack = 0
-    }
-    studioData.data.flagtype = "getTimes"
-    this.subscriber.setConnectionMonitor(studioName)
-    this.updateStudioState(studioData)
+  syncCurrentStudioState: function(newStudioData) {
+    this.currentStudioState = newStudioData
+  },
+
+  syncData: function(studioName) {
+    return this.currentStudioState
   },
   
+  updateListenerCount: function(studioData) {
+    var newListenerCount = this.currentStudioState.data.listeners + 1
+    this.currentStudioState.data.listeners = newListenerCount
+    this.updateStudioState({name: this.currentStudioState.name, data: { listeners: newListenerCount }})
+  },
+
+  sendSyncedData: function() {
+    var packagedData = this.packageLatestStudioData()
+    this.updateStudioState(packagedData)
+  },
+
+  packageLatestStudioData: function() {
+    var newTrackData = this.controller.fetchCurrentTrackStatus()
+    var dataToPackage = this.currentStudioState
+    var newListenerCount = dataToPackage.data.listeners + 1
+    dataToPackage.data.currentTrack = newTrackData.currentTrack
+    dataToPackage.data.currentTrackTime = newTrackData.currentTrackTime
+    dataToPackage.data.status = "syncToMe"
+    dataToPackage.data.listeners = newListenerCount
+    dataToPackage.data.sentTimeStamp = Date.now()
+    return dataToPackage
+  },
+  // requestListenerCountIncrease: function() {
+  //   this.updateStudioState({name: this.currentStudioState.name, data: { status: "addListener"}})
+  // },
+
+  requestSyncedTrackData: function() {
+    var newTrackData = this.controller.fetchCurrentTrackStatus()
+    this.updateStudioState({
+                                              name: this.currentStudioState.name, 
+                                              data: { status: "syncToMe", currentTrack: newTrackData.currentTrack, 
+                                              currentTrackTime: newTrackData.currentTrackTime 
+                                            }})
+  },
+
+  // requestSyncedData: function() {
+
+  //   this.updateStudioState({name: this.currentStudioState.name, data: { status: "needSync"})
+  // },
+
   updateCollectionState: function(studioData) {
    var tempStudio = this.fetchStudio(studioData.name)
     if ((tempStudio === false) && (this.cleanStudio(studioData))) {
@@ -65,11 +136,11 @@ StudioCollection.Model.prototype = {
     }
   },
 
-  toggleListenerCount: function(studio) {
-    studio.data.listeners--
-    var studioData = this.packageStudioData(studio)
-    this.updateStudioState(studioData)
-  },
+  // toggleListenerCount: function(studio) {
+  //   studio.data.listeners--
+  //   var studioData = this.packageStudioData(studio)
+  //   this.updateStudioState(studioData)
+  // },
 
   subscriberStateReactor: function(studioData, action) {
     if (action === "add") { 
@@ -81,11 +152,15 @@ StudioCollection.Model.prototype = {
   },
   
   subscriberStudioStateReactor: function(studio) {
-    if ((studio.data.flagtype === "getTimes") && (this.currentStudio === studio.name) && (this.synced)) {
+    if ((studio.data.flagtype === "getTimes") && (this.currentStudioState.name === studio.name) && (this.currentStudioState.synced)) {
       this.controller.fetchTrackState()
+      console.log('fetching data' + Date.now())
     }
-    else if ((studio.data.flagtype === "setTimes") && (this.currentStudio === studio.name) && (this.synced === false)) {
-     this.currentStudioState = { trackTime: studio.data.currentTrackTime, timeWhenSent: studio.data.timeStamp }
+    else if ((studio.data.flagtype === "setTimes") && (this.currentStudioState.name === studio.name) && (this.currentStudioState.synced === false)) {
+     this.currentStudioState.currentTrack = studio.data.currentTrack
+     this.currentStudioState.currentTrackTime = studio.data.currentTrackTime
+     this.syncSentTime = studio.data.timeStamp
+     console.log("inside settime " + Date.now() )
     }
     if (this.cleanStudio(studio)) {
       var studioToModify = this.fetchStudio(studio.name).studio
@@ -101,19 +176,21 @@ StudioCollection.Model.prototype = {
   },
 
   updateStudioTrack: function(trackData) {
-    var studioData = { name: this.currentStudio, data: { flagtype: "setTimes", currentTrackTime: trackData, timeStamp: Date.now() } }
+    console.log(Date.now())
+    var updateTimeStamp = Date.now()
+    var studioData = jQuery.extend({},{ name: this.currentStudioState.name, data: { flagtype: "setTimes", currentTrack: trackData.currentTrack, currentTrackTime: trackData.currentTrackTime, timeStamp: updateTimeStamp   } })
     this.updateStudioState(studioData)
   },
 
-  packageStudioData: function(studio) {
-    var studioData = { name: studio.name, data: { flagtype: null, listeners: studio.listeners, active: studio.active, removelistener: studio.removelistener, playlist: studio.playlist } }
-    return studioData
-  },
+  // packageStudioData: function(studio) {
+  //   var studioData = jQuery.extend({},{ name: studio.name, data: { flagtype: null, listeners: studio.listeners, removelistener: studio.removelistener, playlist: studio.playlist, currentTrack: studio.currentTrack, currentTrackTime: studio.currentTrackTime } })
+  //   return studioData
+  // },
 
-  fetchStudio: function(studioName) {
+  fetchStudioData: function(studioName) {
     for (var i = 0; i < this.state.length; i++) {
       if (studioName === this.state[i].name) {      
-        return { studio: jQuery.extend({},this.state[i]), index: i }
+        return { latestStudioData: jQuery.extend({},this.state[i]), index: i }
       }
     }
     return false
@@ -132,9 +209,7 @@ StudioCollection.Model.prototype = {
     }
   },
 
- updateStudioState: function(newStudioData) {
-  this.subscriber.modifyStudioState(newStudioData)
- },
+ 
 
   registerStudioCollectionSubscriber: function(subscriber) {
     this.subscriber = subscriber

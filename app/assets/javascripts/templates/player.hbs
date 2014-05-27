@@ -1,14 +1,7 @@
-<div class="track-information">
-  <img src={{artwork_url}} alt="Album artwork not available">
-  <p>Now Playing: {{title}} </p>
-  <p>Sound Brought To You By: {{user.username}}</p>
-  <a href={{permalink_url}}>Listen on SoundCloud</a>
-</div>
-
-<div>
-  <audio id="audio_player" controls>
-    <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
-    <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
+<div class="players">
+{{#each playlist}}
+  <audio id="track{{@index}}" controls autoplay>
     <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
   </audio>
+{{/each}} 
 </div>

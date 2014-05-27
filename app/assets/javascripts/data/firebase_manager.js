@@ -1,6 +1,6 @@
 Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
-  this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
-  this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
+  this.studioCollectionRef= new Firebase('https://tralatestbase.firebaseio.com/studioCollection')
+  this.connectionRef = new Firebase('https://tralatestbase.firebaseio.com/.info/connected')
   this.studioCollectionModel = studioCollectionModel
 }
 
@@ -14,7 +14,7 @@ Data.FirebaseManager.prototype = {
   },
 
   setConnectionMonitor: function(studioName) {
-    this.studioRef = new Firebase('https://trala.firebaseio.com/studioCollection/' + studioName)
+    this.studioRef = new Firebase('https://tralatestbase.firebaseio.com/studioCollection/' + studioName)
     this.studioRef.onDisconnect().update({ removelistener: true })
   },
 
@@ -28,18 +28,21 @@ Data.FirebaseManager.prototype = {
   },
 
   studioRemoved: function(data) {
-    var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStateReactor(studioData, "destroy")
+    console.log("STUDIO REMOVED")
+    // var studioData = this.packageStudioData(data)
+    // this.studioCollectionModel.subscriberStateReactor(studioData, "destroy")
   },
 
   studioStateModified: function(data) {
-    var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStudioStateReactor(studioData)
+    console.log("studio MODIFIED")
+    // var studioData = this.packageStudioData(data)
+    // this.studioCollectionModel.subscriberStudioStateReactor(studioData)
   },
   
   newStudioAdded: function(data) {
-    var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStateReactor(studioData, "add")
+    console.log("newS ADDED")
+    // var studioData = this.packageStudioData(data)
+    // this.studioCollectionModel.subscriberStateReactor(studioData, "add")
   },
 
   initialCollectionState: function(data) {
@@ -74,7 +77,6 @@ Data.FirebaseManager.prototype = {
   setDataTriggers: function() {
     this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-    this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
-
+   this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
   }
 }

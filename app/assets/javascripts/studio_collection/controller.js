@@ -4,12 +4,6 @@ StudioCollection.Controller = function(args) {
   this.studioCollectionView = args.studioCollectionView
   this.geoLocation = args.geoLocation
   this.currentUserState = ""
-  Array.prototype.remove = function(from, to) {
-    var rest = this.slice((to || from) + 1 || this.length);
-    this.length = from < 0 ? this.length + from : from;
-    return this.push.apply(this, rest);
-  }
-
   this.tempPlaylist = []
 
 }
@@ -43,12 +37,14 @@ StudioCollection.Controller.prototype = {
   },
 
   initUserStudioState: function(studioName) {
-    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist[0]) 
-    if (this.studioCollectionModel.currentStudio === studioName) {
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist) 
+    if (this.studioCollectionModel.currentStudioState.name === studioName) {
       this.playTrack()
     }     
-      this.studioCollectionModel.addListenerToStudio(studioName) 
+    else {
+      this.studioCollectionModel.addListenerToStudio(studioName)
       this.playTrack()
+    }
    },
 
   renderStudioCollection: function() {
@@ -59,15 +55,21 @@ StudioCollection.Controller.prototype = {
   },
 
   playTrack: function() {
-    document.getElementById('audio_player').addEventListener('canplay', function() {
-      if (this.studioCollectionModel.synced) {
-        document.getElementById('audio_player').play()
+    console.log('playtrack outside')
+    document.getElementsByClassName('active')[0].addEventListener('canplay', function() {
+      if (this.studioCollectionModel.currentStudioState.synced) {
+        document.getElementsByClassName('active')[0].play()
       }
       else {
-        this.updateTrackState()
-        document.getElementById('audio_player').play()
+        document.getElementsByClassName('active')[0].play()
+        this.updateTrackState()    
+        console.log('play track time diff: ' + (Date.now() - this.studioCollectionModel.syncSentTime) / 1000)
       }
     }.bind(this))
+  },
+  
+  toggleTrackPlayer: function() {
+
   },
 
   fetchTrackState: function() {
@@ -76,14 +78,20 @@ StudioCollection.Controller.prototype = {
   },
 
   updateTrackState: function() {
-      var newTime = ((Date.now() - this.studioCollectionModel.currentStudioState.timeWhenSent) / 1000) + this.studioCollectionModel.currentStudioState.trackTime
+    console.log('updatetrackstate')
+    console.log(this.studioCollectionModel.syncSentTime)
+    console.log(this.studioCollectionModel.currentStudioState.currentTrackTime)
+    console.log('time diff: ' + (Date.now() - this.studioCollectionModel.syncSentTime) / 1000)
+      var newTime = ((Date.now() - this.studioCollectionModel.syncSentTime)/ 1000) + this.studioCollectionModel.currentStudioState.currentTrackTime
       console.log(newTime)
+      console.log('post time diff: ' + (Date.now() - this.studioCollectionModel.syncSentTime) / 1000)
       this.studioCollectionView.updateTrackState(newTime)
-      this.studioCollectionModel.synced = true
+      this.studioCollectionModel.currentStudioState.synced = true
   },
 
   fetchCurrentTrackStatus: function() {
-    var trackData = document.getElementById('audio_player').currentTime
+    var trackData = this.studioCollectionView.updatePlayerData()
+    var trackData = { currentTrack: trackData.trackPlaying , currentTrackTime: trackData.trackTime }
     return trackData
   },
 
@@ -112,12 +120,12 @@ StudioCollection.Controller.prototype = {
     this.loadInitial();
   },
 
-  buildPlayer: function(song) { // will take songData array
-    return HandlebarsTemplates['player'](song)
+  buildPlayers: function(playlist) { // will take songData array
+    return HandlebarsTemplates['player'](playlist)
   },
 
-  buildPlaylist: function(playlist) {
-    playlist = { songs: playlist }
+  buildPlaylist: function(list) {
+    playlist = { songs: list }
     return HandlebarsTemplates['song_basket_item'](playlist)
   },
 
@@ -133,12 +141,40 @@ StudioCollection.Controller.prototype = {
     }
   },
 
-  loadStudioWithPlayer: function(song) {
-    player = this.buildPlayer(song)
-    this.studioView.draw(player);
+  loadStudioWithPlayer: function(playlist) {
+    newPlaylist = { playlist: playlist }
+    players = this.buildPlayers(newPlaylist)
+    this.studioView.draw(players);
+    this.setNewActiveTrack()
+  },
+
+  setNewActiveTrack: function() {
+    var currentTrackState = this.studioCollectionView.updateTrackState()
+    if (this.validateTrackNumber(currentTrackState.trackPlaying)) {
+      var newActiveTrackNumber = currentTrackState.trackPlaying + 1
+    }
+    else {
+      var newActiveTrackNumber = 0
+    }
+    this.studioCollectionView.toggleActivePlayer(newActiveTrackNumber)
+  },
+
+  validateTrackNumber: function(trackNumberToValidate) {
+    if (trackNumberToValidate === null) {
+      return false
+    }
+    else if ((trackNumberToValidate < 3) && (trackNumberToValidate > -1)) {
+      return true
+    }
   },
 
   loadInitialStudio: function() {
 
   }
 }
+
+// <div class="track-information">
+//   <img src={{artwork_url}} alt="Album artwork not available">
+//   <p>Now Playing: {{title}} </p>
+//   <p>Sound Brought To You By: {{user.username}}</p>
+// </div>
