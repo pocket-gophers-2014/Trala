@@ -1,11 +1,4 @@
-$orchid_purple: #8b4789;
-$caesar_purple: #816687;
-$pastel_purple: #ddf;
-$alizarin_red: #E74C3C;
-$salmon: #F37366;
-$salmon: #FF7676;
-
-$THEME_COLOR: $salmon;
+//color setup
 $cloud_gray: #e8e8e8;
 $milk_gray: #eee;
 $medium_gray: #ccc;
@@ -13,7 +6,15 @@ $charcoal: #333;
 $silver: #E3E5E7;
 $white: #fff;
 $mint: #01dfa5;
-// font-family: 'Droid Serif', serif;
+$mint_cream: #F5FFFA;
+$white_smoke: #F5F5F5;
+
+$THEME_COLOR: $mint;
+$HIGHLIGHTS: $cloud_gray;
+
+
+// import other files and libraries here
+@import 'mixins.scss';
 
 /* MEDIA QUERIES */
 
@@ -91,35 +92,20 @@ html {
   background-color: $milk_gray;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Oxygen', sans-serif;
-}
-
-.song-header {
-  height: 10px;
-  background-color: black;
-}
+body { font-family: 'Crete Round', serif; }
 
 .navigation {
-  border-top-color: $THEME_COLOR;
-  border-top-width: 5px;
-  border-bottom: 1px solid $silver;
-
+  border-bottom: 1px solid $white_smoke;
+  border-top: 5px solid $cloud_gray;
   position: fixed;
   z-index: 1;
   width: 100%;
   color: $milk_gray;
   height: 70px;
-
-  /*background-color: $charcoal;*/
-  /*background-color: $white;*/
   background-color: $mint;
   color: $cloud_gray;
-
-  text-align: left;
-  // text-shadow: 0.5px 0.5px $cloud_gray;
+  text-align: center;
+  border-radius: 0px;
 
   ul {
     height: auto;
@@ -134,12 +120,6 @@ body {
     font-weight: bold;
     font-size: 40px;
   }
-
-  .colorstrip {
-    background-color: $white;
-    height: 3px;
-  }
-
 }
 
 .container {
@@ -150,34 +130,27 @@ body {
   padding-top: 30px;
 }
 
-
 .front_page_button {
-  font-family: 'Bitter', serif;
-  margin: 4% auto;
-  width: 20%;
-  /*  background-color: $white;*/
-  /*color: white;*
-  /*border: 2px solid $cloud_gray;*/
-  border-radius: 4px;
-  width: 30%;
-  background: $medium_gray;
-  /*border: 2px solid $cloud_gray;*/
-  border-radius: 6px;
-  text-align: center;
+  @include container_setup();
+  border: 2px solid $medium_gray;
+  background-color: $white_smoke;
+  text-decoration: none;
   height: 55%;
   display: block;
 }
 
+div {
+    text-align: center;
+}
+
 .button {
-  background-color: $white;
-  border: 2px solid $cloud_gray;
-  /*padding: 8px 40px;*/
   width: 200px;
   padding-top: 8px;
   padding-bottom: 8px;
   text-decoration: none;
-  color: $salmon;
+  color: $THEME_COLOR;
   white-space: nowrap;
+  text-align: center;
 }
 
 .button:hover {
@@ -190,7 +163,6 @@ body {
   width: 100%;
   text-align: center;
   font-size: 20px;
-  // background-color: $THEME_COLOR;
   border-radius: 3px;
 }
 
@@ -202,19 +174,19 @@ body {
   text-align: center;
   width: 100%;
   background-color: $medium_gray;
+  border-top: $mint_cream;
+
+  h3 { font-size: 20px;}
 }
 
 .studio {
   margin: 4% auto;
   border-radius: 3px;
-
 }
-
 
 h3 {
   text-align: center;
   text-transform: uppercase;
-  font-family: 'Play', sans-serif;
   opacity: 0.5;
   font-size: 25px;
 }
@@ -232,10 +204,31 @@ img:hover {
   opacity: 1.0;
 }
 
-
-[user-icon]:before {
-
+.each-song {
+  img {
+    border-top: 8px solid $mint;
+    border-bottom: 5px solid $cloud_gray;
+  }
 }
+
+.logo-text {
+  text-align: center;
+}
+
+.song-header {
+  color: $white;
+  content: "title";
+  p {
+    font-size: 10px;
+    opacity: 0.5;
+  }
+}
+
+.fi-inbox, .fi-mic {
+  padding: 3%;
+  text-align: left;
+}
+
 
 // // css /////////////////////////////////////////
 

@@ -20,8 +20,12 @@ group :test do
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass',   '~> 3.2.5'
+  gem 'sass-rails',   '~> 3.2.5'
   gem 'uglifier', '>= 1.0.3'
+
+  #add gem for icons and fonts
+  gem 'foundicons-rails'
 
   # handlebars gems
   gem 'handlebars-rails'
