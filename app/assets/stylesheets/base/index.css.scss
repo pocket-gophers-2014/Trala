@@ -13,8 +13,6 @@ $HIGHLIGHTS: $cloud_gray;
 
 // import other files and libraries here
 @import 'mixins.scss';
-@im
-
 
 html {
   background-color: $milk_gray;
@@ -162,8 +160,9 @@ img:hover {
 }
 
 
-[user-icon]:before {
-
+.fi-inbox, .fi-mic {
+  padding-right: 15px;
+  text-align: left;
 }
 
 // // css /////////////////////////////////////////
