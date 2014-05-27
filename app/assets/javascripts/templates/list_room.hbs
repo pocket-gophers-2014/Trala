@@ -5,8 +5,12 @@
   <div class = "room-container">
       <ul class="row clearfix">
           {{#each studio}}
-          <div style="border: 1px solid black" id="{{name}}" class="studio column full">
-            <p id="{{name}}">Name: {{name}} | Listeners: {{listeners}}</p>
+          <div id="{{name}}" class="studio column full">
+            <p id="{{name}}">
+              Name {{name}}
+              <i class="fi-people"> {{listeners}} </i>
+               <i class="fi-location"> {{distance}} </i>
+            </p>
           </div>
           {{/each}}
       </ul>
