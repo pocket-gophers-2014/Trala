@@ -1,5 +1,5 @@
 StudioCollection.View = function(){
-  this.eventDelegate  = {} 
+  this.eventDelegate  = {}
   this.mainContainerSelector = '.main-container'
   this.studioSelector = '.studio'
 }
@@ -22,7 +22,7 @@ StudioCollection.View.prototype = {
   },
 
   addUl: function() {
-    $('.container').append("<ul>")  
+    $('.container').append("<ul>")
   },
 
   draw: function(studioCollectionTemplate) {
@@ -36,6 +36,7 @@ StudioCollection.View.prototype = {
       cbMethod.call( controller, e.target.id )
     }.bind(this))
   },
+
 
   registerEventDelegate: function( controller, cbMethod ) {
     this.eventDelegate = { controller: controller, cbMethod: cbMethod }
