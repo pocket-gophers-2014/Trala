@@ -12,6 +12,7 @@ $white_smoke: #F5F5F5;
 
 $THEME_COLOR: $mint;
 $HIGHLIGHTS: $cloud_gray;
+$BORDER_BUTTON: $charcoal;
 
 
 // import other files and libraries here
@@ -87,14 +88,13 @@ $HIGHLIGHTS: $cloud_gray;
   }
 }
 
-/* end media queries section */
+/********* end media queries section ************/
 
 html {
   background-color: $milk_gray;
 }
 
 body { font-family: 'Crete Round', serif; }
-
 
 .navigation {
   border-bottom: 1px solid $white_smoke;
@@ -122,6 +122,17 @@ body { font-family: 'Crete Round', serif; }
     font-weight: bold;
     font-size: 40px;
   }
+}
+
+h3 {
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-size: 25px;
+}
+
+h3:hover {
+  opacity: 1.0;
 }
 
 .container {
@@ -184,18 +195,16 @@ div {
 .studio {
   margin: 4% auto;
   border-radius: 3px;
+  border: 3px solid $mint_cream;
 }
 
-h3 {
-  text-align: center;
-  text-transform: uppercase;
-  opacity: 0.5;
-  font-size: 25px;
+.room_banner {
+  h3 {
+    opacity: 1.0px;
+    padding: 3%;
+  }
 }
 
-h3:hover {
-  opacity: 1.0;
-}
 
 img {
   border-radius: 3px;
@@ -231,6 +240,10 @@ img:hover {
 .fi-inbox, .fi-mic, .fie-search {
   padding: 2%;
   text-align: left;
+}
+
+.fi-people, .fi-location {
+  padding: 0 10%;
 }
 
 
