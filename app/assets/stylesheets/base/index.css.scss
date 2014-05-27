@@ -53,31 +53,35 @@ $mint: #01dfa5;
 
 /* Laptop & Desktop screens */
 @media (min-width: 1025px){
-  body{
-    background-color: gray;
-  }
-
-  .row{
-    margin: 10%;
+  p{
+    font-size: 2.65em;
   }
   
 }
 
 /* Tablets */
 @media (max-width: 1024px){
-  body{
-    background-color: purple;
+  p{
+    font-size: 2.5em;
+  }
+
+  .studio.column.full{
+    margin-bottom: 50px;
+    margin-left: -35px;
+    padding: 25px;
   }
 }
 
 /* Smartphones */
-@media (max-width: 450px){
-  body{
-    background-color: yellow;
+@media (max-width: 650px){
+  p{
+    font-size: 1.25em;
   }
 
-  .button{
-
+  .studio.column.full{
+    margin-bottom: 75px;
+    margin-left: -35px;
+    padding: 25px;
   }
 }
 

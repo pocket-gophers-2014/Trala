@@ -1,12 +1,12 @@
 
   <div class="room_banner">
-    <h3> Active Room </h3>
+    <h3>Active Rooms</h3>
   </div>
   <div class = "room-container">
       <ul class="row clearfix">
           {{#each studio}}
           <div style="border: 1px solid black" id="{{name}}" class="studio column full">
-            <p id="{{name}}">   Name: {{name}} | Listeners: {{listeners}}</p>
+            <p id="{{name}}">Name: {{name}} | Listeners: {{listeners}}</p>
           </div>
           {{/each}}
       </ul>
