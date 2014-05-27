@@ -134,8 +134,8 @@ img:hover {
 
 .each-song {
   img {
-    border-top: 8px solid $mint;
-    border-bottom: 5px solid $cloud_gray;
+    border-top: 8px solid $medium_gray;
+    border-bottom: 5px solid $HIGHLIGHTS;
   }
 }
 
@@ -152,8 +152,8 @@ img:hover {
   }
 }
 
-.fi-inbox, .fi-mic {
-  padding: 3%;
+.fi-inbox, .fi-mic, .fie-search {
+  padding: 2%;
   text-align: left;
 }
 
