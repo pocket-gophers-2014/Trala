@@ -21,6 +21,7 @@ Data.LocationManager.prototype = {
 		var filteredStudioCollection = []
 		studioCollection.forEach(function(studio) {
 			if ( this._calcDistance(studio.coords, this.startCoords) < distance) {
+				studio.distanceFromCurrentUser = distance
 				filteredStudioCollection.push( studio )
 			}
 		}.bind(this))
