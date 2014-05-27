@@ -6,6 +6,7 @@ $charcoal: #333;
 $silver: #E3E5E7;
 $white: #fff;
 $mint: #01dfa5;
+$white_smoke: #F5F5F5;
 
 $THEME_COLOR: $mint;
 $HIGHLIGHTS: $cloud_gray;
@@ -30,24 +31,16 @@ body {
 }
 
 .navigation {
-  @include container_setup();
-  // border-top-color: $THEME_COLOR;
-  border-top-width: 5px;
-  border-bottom: 1px solid $silver;
-
+  border-bottom: 2px solid $milk_gray;
   position: fixed;
   z-index: 1;
   width: 100%;
   color: $milk_gray;
   height: 70px;
-
-  /*background-color: $charcoal;*/
-  /*background-color: $white;*/
   background-color: $mint;
   color: $cloud_gray;
-
-  text-align: left;
-  // text-shadow: 0.5px 0.5px $cloud_gray;
+  text-align: center;
+  border-radius: 0px;
 
   ul {
     height: auto;
@@ -62,12 +55,6 @@ body {
     font-weight: bold;
     font-size: 40px;
   }
-
-  .colorstrip {
-    background-color: $white;
-    height: 3px;
-  }
-
 }
 
 .container {
@@ -78,24 +65,28 @@ body {
   padding-top: 30px;
 }
 
-
 .front_page_button {
   @include container_setup();
-  border: 2px solid $cloud_gray;
-  background-color: $white;
-  border-radius: 6px;
+  border: 2px solid $medium_gray;
+  background-color: $white_smoke;
+  text-decoration: none;
   height: 55%;
   display: block;
 }
 
+div {
+    text-align: center;
+}
+
 .button {
-  background-color: $white;
+  background-color: $milk_gray;
   width: 200px;
   padding-top: 8px;
   padding-bottom: 8px;
   text-decoration: none;
   color: $THEME_COLOR;
   white-space: nowrap;
+  text-align: center;
 }
 
 .button:hover {
@@ -125,9 +116,7 @@ body {
 .studio {
   margin: 4% auto;
   border-radius: 3px;
-
 }
-
 
 h3 {
   text-align: center;
@@ -150,12 +139,11 @@ img:hover {
   opacity: 1.0;
 }
 
-
 .fi-inbox, .fi-mic {
-  padding-right: 15px;
-  padding: 2px;
+  padding: 3%;
   text-align: left;
 }
+
 
 // // css /////////////////////////////////////////
 
