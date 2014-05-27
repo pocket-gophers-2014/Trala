@@ -7,7 +7,7 @@ describe("Studio Collection Controller", function(){
     studioCollectionController = new StudioCollection.Controller({studioView: testStudioView, studioCollectionModel: testStudioCollectionModel, studioCollectionView: testStudioCollectionView, geoLocation: testGeolocation})
 
     studioCollectionController.currentUserState = "collectionPage"
-xx  });
+  });
 
   it("should be defined", function(){
     expect(studioCollectionController).toBeDefined();
