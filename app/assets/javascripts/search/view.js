@@ -21,7 +21,7 @@ Search.View.prototype = {
   },
 
   bindSongSelectionEvent: function() {
-     $(this.mainContainerSelector).on( 'click', '.each-song > img', function(e) {
+     $(this.mainContainerSelector).on( 'click', '.clickable-song', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
       method.call(this.eventDelegate.controller, e.target.id)

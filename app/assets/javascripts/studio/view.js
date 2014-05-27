@@ -5,7 +5,6 @@ Studio.View = function(){
 
 Studio.View.prototype = {
 	draw: function(playerTemplate) {
-    debugger
     // this.changeHTMLColorEvent()
 		$(this.mainContainer).empty().append(playerTemplate)
 	},
