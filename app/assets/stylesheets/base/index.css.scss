@@ -9,6 +9,7 @@ $mint: #01dfa5;
 $mint_cream: #F5FFFA;
 $white_smoke: #F5F5F5;
 
+
 $THEME_COLOR: $mint;
 $HIGHLIGHTS: $cloud_gray;
 
@@ -16,11 +17,84 @@ $HIGHLIGHTS: $cloud_gray;
 // import other files and libraries here
 @import 'mixins.scss';
 
+/* MEDIA QUERIES */
+
+/* All Devices */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 90%;
+}
+
+@media (min-width: 40rem) {
+  .column {
+    float: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .column.full { width: 100%; }
+  .column.two-thirds { width: 66.7%; }
+  .column.half { width: 50%; }
+  .column.third { width: 33.3%; }
+  .column.fourth { width: 25%; }
+  .column.flow-opposite { float: right; }
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+/* Laptop & Desktop screens */
+@media (min-width: 1025px){
+  p{
+    font-size: 2.65em;
+  }
+  
+}
+
+/* Tablets */
+@media (max-width: 1024px){
+  p{
+    font-size: 2.5em;
+  }
+
+  .studio.column.full{
+    margin-bottom: 50px;
+    margin-left: -35px;
+    padding: 25px;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 650px){
+  p{
+    font-size: 1.25em;
+  }
+
+  .studio.column.full{
+    margin-bottom: 75px;
+    margin-left: -35px;
+    padding: 25px;
+  }
+}
+
+/* end media queries section */
+
 html {
   background-color: $milk_gray;
 }
 
 body { font-family: 'Crete Round', serif; }
+
 
 .navigation {
   border-bottom: 1px solid $white_smoke;
@@ -139,9 +213,11 @@ img:hover {
   }
 }
 
+
 .logo-text {
   text-align: center;
 }
+
 
 .song-header {
   color: $white;
