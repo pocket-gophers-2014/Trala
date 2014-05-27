@@ -9,6 +9,7 @@ $mint: #01dfa5;
 $mint_cream: #F5FFFA;
 $white_smoke: #F5F5F5;
 
+
 $THEME_COLOR: $mint;
 $HIGHLIGHTS: $cloud_gray;
 
@@ -93,6 +94,7 @@ html {
 }
 
 body { font-family: 'Crete Round', serif; }
+
 
 .navigation {
   border-bottom: 1px solid $white_smoke;
@@ -211,9 +213,11 @@ img:hover {
   }
 }
 
+
 .logo-text {
   text-align: center;
 }
+
 
 .song-header {
   color: $white;
