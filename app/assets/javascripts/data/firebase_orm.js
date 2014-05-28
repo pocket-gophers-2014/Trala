@@ -53,23 +53,19 @@ Data.FirebaseORM.prototype = {
     console.log("FB ORM - needSync")
     if (returnedStudioData.data.listenerCount === 0)  {
       var syncedStudioData = this.packageNewStudioData(returnedStudioData, "add")
-      this.newStudioCreated(syncedStudioData)     
+      this.newStudioCreated(syncedStudioData)
+      this.updateStudioState(syncedStudioData)     
     }
 
     if (!this.listenerValidAndSynced(returnedStudioData)) {
       this.subscribedInterface.updateStudioState(syncedStudioData)
     }
 
-    if (this.listenerValidAndSynced) {
-      
+    if (this.listenerValidAndSynced) { 
+      var syncedTrackData = this.retrieveCurrentStudioState()
+      var syncedStudioData = this.packageNewStudioData(syncedStudioData, "add")
+      this.updateStudioState(syncedStudioData)
     }
-    // && (this.listenerValidAndNotSynced(returnedStudioData) || this.listenerNotValid(returnedStudioData)))
-    
-    // if (this.listenerValidAndSynced(returnedStudioData)) {
-    //   var newStudioData = this.packageNewStudioData(returnedStudioData, "add")
-    //  // this.subscribedInterface.updateStudioState(newStudioData)
-    //   this.updateStudioState(newStudioData)
-    // }
   },
 
 // syncToMe status
@@ -93,7 +89,7 @@ Data.FirebaseORM.prototype = {
   
  // Confirms listener in studio and synced
   listenerValidAndSynced: function(studioDataChecksum) {
-    if ((this.subscribedInterface.synced) && (this.subscribedInterface.currentStudioState.name === studioDataChecksum.name)) {
+    if ((this.subscribedInterface.synced) && (this.subscribedInterface.currentStudioState.name === studioDataChecksum.name) && (this.subscribedInterface.first)) {
       return true
     }
     else {
