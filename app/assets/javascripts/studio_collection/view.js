@@ -31,6 +31,8 @@ StudioCollection.View.prototype = {
 
   bindEvents: function() {
     $(this.mainContainerSelector).on('click', this.studioSelector, function(e) {
+      e.preventDefault()
+      window.location.hash = "studio"
       var controller = this.eventDelegate.controller;
       cbMethod = controller[this.eventDelegate.cbMethod]
       cbMethod.call( controller, e.target.id )

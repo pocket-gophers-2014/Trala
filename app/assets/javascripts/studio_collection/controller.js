@@ -128,6 +128,7 @@ StudioCollection.Controller.prototype = {
       this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
       this.initUserStudioState(name)
+      window.location.hash = "studio"
     }
   },
 

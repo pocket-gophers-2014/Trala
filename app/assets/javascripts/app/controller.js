@@ -5,7 +5,9 @@ App.Controller = function(){
 }
 
 App.Controller.prototype = {
-	loadNewStudio: function(){
+	loadNewStudio: function(e){
+		e.preventDefault()
+		
 		var studioController = this.studioController.controller
 		var studioMethod = studioController[this.studioController.callbackMethod]
 		studioMethod.apply( studioController )
@@ -15,9 +17,11 @@ App.Controller.prototype = {
 		searchMethod.apply( searchController )
 	},
 
-	loadStudioCollection: function(){
+	loadStudioCollection: function(e){
+		e.preventDefault();
 		var studioController = this.studioCollectionController.controller
 		var studioMethod = studioController[this.studioCollectionController.callbackMethod]
+		window.location.hash = "studio-collection"
 		studioMethod.apply( studioController )
 	},
 
