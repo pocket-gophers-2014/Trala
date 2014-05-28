@@ -7,15 +7,32 @@ Data.FirebaseORM.prototype = {
   // New Studio Created
   newStudioCreated: function(newStudioData) {
     console.log("New Studio Created FB ORM")
-    //note: call SCM
-    this.subscribedInterface.createNewStudio(newStudioData)
+    if (this.validateStudio(newStudioData)) {
+      this.subscribedInterface.createNewStudio(newStudioData)
+    }
+    else {
+      this.removeStudio(newStudioData.name)
+    }
+  },
+
+  // Create new studio
+  createStudio: function(newStudioData) {
+    this.firebaseManager.createStudio(newStudioData)
   },
 
   // Studio Destroyed
   studioDestroyed: function(studioData) {
     console.log("Studio Destroyed FB ORM")
-    //note: call SCM
     this.subscribedInterface.removeStudio(studioData)
+  },
+
+  validateStudio: function(studioData) {
+    if ((studioData.data.status === "removeListener") && (studioData.data.listenerCount === 1)) {
+      return false
+    }
+    else {
+      return true
+    }
   },
 
 // Studio status management
@@ -44,14 +61,15 @@ Data.FirebaseORM.prototype = {
 // syncToMe status
   syncCurrentStudioState: function(newStudioData) {
     console.log("FB ORM - sync data")
-    if ( (this.listenerValidAndNotSynced(newStudioData)) || (this.listenerNotValid) )  {
+    if ( (this.listenerValidAndNotSynced(newStudioData)) || (this.listenerNotValid(newStudioData)) )  {
       this.subscribedInterface.updateStudioState(newStudioData)
     }
   },
 
   updateListenerCount: function(studioData) {
+    console.log("FB ORM - Removing listener")
     if (this.listenerValidAndSynced) {
-      var latestStudioData = this.packageStudioData(studioData, "deduct")
+      var latestStudioData = this.packageNewStudioData(studioData, "deduct")
       this.updateStudioState(latestStudioData)
     }
     else if ( (this.listenerNotValid(studioData)) && (studioData.data.listenerCount === 1) ) {
@@ -59,11 +77,7 @@ Data.FirebaseORM.prototype = {
     }  
   },
   
-  removeStudio: function(studioData) {
-    this.firebaseManager.destroyStudio(studioData.name)
-  },
-
-  // Confirms listener in studio and synced
+ // Confirms listener in studio and synced
   listenerValidAndSynced: function(studioDataChecksum) {
     if ((this.subscribedInterface.synced) && (this.subscribedInterface.currentStudioState.name === studioDataChecksum.name)) {
       return true
@@ -108,6 +122,10 @@ Data.FirebaseORM.prototype = {
     packagedStudioData.data.syncTimeStamp = Date.now()
     packagedStudioData.data.status = "syncToMe"
     return packagedStudioData
+  },
+
+  removeStudio: function(studioName) {
+    this.firebaseManager.destroyStudio(studioName)
   },
 
   updateStudioState: function(newStudioData) {

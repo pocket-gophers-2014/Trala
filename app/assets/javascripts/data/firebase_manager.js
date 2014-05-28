@@ -5,7 +5,8 @@ Data.FirebaseManager = function(fbRefUrl, fbORM) {
 }
 
 Data.FirebaseManager.prototype = {
-  addStudio: function(studio) {
+  createStudio: function(studio) {
+    console.log("FB M - create studio - studiodata: " + studio)
     this.studioCollectionRef.child(studio.name).set(studio.data)
   },
 

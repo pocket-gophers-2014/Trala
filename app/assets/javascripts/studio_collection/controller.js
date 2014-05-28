@@ -11,6 +11,24 @@ StudioCollection.Controller = function(args) {
 StudioCollection.Controller.prototype = {
   // New Model and ORM response
 
+  // Fresh Studio Creation
+  initStudioCreation: function(studioData) {
+    console.log('SCM - initScreation sdata: ' + studioData.name + '-' + studioData.data)
+    this.studioCollectionModel.freshStudioCreation(studioData)
+    this.loadStudioWithPlayer(studioData.playlist)
+  },
+
+  initUserStudioState: function(studioName) {
+    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist) 
+    if (this.studioCollectionModel.currentStudioState.name === studioName) {
+      this.playTrack()
+    }     
+    else {
+      this.studioCollectionModel.addListenerToStudio(studioName)
+      this.playTrack()
+    }
+   },
+
   // new Studio Added
   newStudioAdded: function(studioData) {
     console.log("Controller notified of new studio")
@@ -102,16 +120,7 @@ StudioCollection.Controller.prototype = {
     }
   },
 
-  initUserStudioState: function(studioName) {
-    this.loadStudioWithPlayer(this.studioCollectionModel.fetchStudio(studioName).studio.playlist) 
-    if (this.studioCollectionModel.currentStudioState.name === studioName) {
-      this.playTrack()
-    }     
-    else {
-      this.studioCollectionModel.addListenerToStudio(studioName)
-      this.playTrack()
-    }
-   },
+
 
 
 
@@ -129,18 +138,11 @@ StudioCollection.Controller.prototype = {
     }.bind(this))
   },
   
-  toggleTrackPlayer: function() {
-
-  },
 
   fetchTrackState: function() {
     var trackData = this.fetchCurrentTrackStatus()
     this.studioCollectionModel.updateStudioTrack(trackData)
   },
-
-
-
-
 
   fetchStudioCollection: function() {
     return this.studioCollectionModel.state
@@ -182,9 +184,9 @@ StudioCollection.Controller.prototype = {
     this.studioView.redrawPlaylist(playlist)
     if (this.tempPlaylist.length > 2) {
       var name = String(Math.floor(Math.random() * 1000))
-      this.createStudio({name: name, data: { playlist: this.tempPlaylist }})
+      console.log('adding songs ' + name + '-' + this.tempPlaylist[0])
+      this.initStudioCreation({name: name, data: { playlist: this.tempPlaylist }})
       this.tempPlaylist = []
-      this.initUserStudioState(name)
     }
   },
 

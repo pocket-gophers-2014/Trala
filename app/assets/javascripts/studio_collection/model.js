@@ -7,7 +7,11 @@ StudioCollection.Model = function() {
 StudioCollection.Model.prototype = {
 
   freshStudioCreation: function(freshStudioData) {
-    this.subscriber.addStudioToSubscriber(freshStudioData)
+    console.log("SCM - freshSC - sdata: " + freshStudioData)
+    this.currentStudioData = new Studio.Model(freshStudioData)
+    this.subscriber.createStudio(this.currentStudioState)
+    this.subscriber.setMonitorActivation(freshStudioData.name)
+    this.synced = true
   },
 
   createNewStudio: function(newStudioData) {
@@ -56,7 +60,7 @@ StudioCollection.Model.prototype = {
     var notSyncedData = this.fetchStudioData(studioName).studioData
     this.currentStudioState = notSyncedData
     this.requestSyncedData(studioData)
-    this.subscriber.requestMonitorActivation(studioName)
+    this.subscriber.setMonitorActivation(studioName)
   },
 
   requestSyncedData: function(studioData) {
