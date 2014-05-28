@@ -56,30 +56,12 @@ $BORDER_BUTTON: $charcoal;
 
 /* Laptop & Desktop screens */
 @media (min-width: 1100px){
-  p{
+  /*body{
+    background-color: red;
+  }*/
+
+  .list_room_text{
     font-size: 2.65em;
-  }
-
-  .button{
-    margin: 25px;
-  }
-
-  a.button{
-    width: 50%;
-    .front_page_button{
-      padding: 20%;
-    }
-    .fi-mic, .fi-inbox{
-      font-size: 2.75em;
-      margin-left: -20px;
-    }
-  }
-}
-
-/* Tablets / Small Screen Laptops */
-@media (max-width: 1099px){
-  p{
-    font-size: 1.75em;
   }
 
   .studio.column.full{
@@ -98,14 +80,54 @@ $BORDER_BUTTON: $charcoal;
       padding: 20%;
     }
     .fi-mic, .fi-inbox{
-      font-size: 2em;
+      font-size: 2.75em;
+    }
+  }
+}
+
+/* Tablets / Small Screen Laptops */
+@media (max-width: 1099px){
+  /*body{
+    background-color: yellow;
+  }*/
+
+  .list_room_text{
+    font-size: 1.75em;
+  }
+
+  .studio.column.full{
+    margin-bottom: 20px;
+    margin-left: -35px;
+    padding: 30px;
+  }
+
+  .button{
+    margin: 25px;
+  }
+
+  a.button{
+    width: 50%;
+    .front_page_button{
+      padding: 20%;
+    }
+    .fi-mic, .fi-inbox{
+      font-size: 1.75em;
     }
   }
 }
 
 /* Small Tablets */
 
-@media (max-width: 825px){
+@media (max-width: 750px){
+
+  /*body{
+    background-color: purple;
+  }*/
+
+  .list_room_text{
+    font-size: 1.5em;
+  }
+
   .button{
     margin: 25px;
   }
@@ -125,7 +147,11 @@ $BORDER_BUTTON: $charcoal;
 
 /* Smartphones */
 @media (max-width: 450px){
-  p{
+  /*body{
+    background-color: green;
+  }*/
+
+  .list_room_text{
     font-size: 1.25em;
   }
 
