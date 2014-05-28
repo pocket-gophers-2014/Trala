@@ -6,13 +6,15 @@ StudioCollection.Model = function() {
 
 StudioCollection.Model.prototype = {
 
+  freshStudioCreation: function(freshStudioData) {
+    this.subscriber.addStudioToSubscriber(freshStudioData)
+  },
+
   createNewStudio: function(newStudioData) {
     console.log("New Studio Created on SCM")
     var newStudio = new Studio.Model(newStudioData)
     this.state.push(newStudio)
     this.notifyStudioCollectionStateUpdate()
-    //this.currentStudioState = jQuery.extend({}, newStudio)
-    //this.addStudioToSubscriber(this.currentStudioState)
   },
 
   removeStudio: function(studioData) {
@@ -42,6 +44,7 @@ StudioCollection.Model.prototype = {
       this.notifyCurrentStudioStateUpdate()  
     }
     else if (!this.synced) {
+      console.log('SCM - syncing track data')
       this.syncTrackTime()
       this.synced = true
       this.notifyCorrectStudioState()
@@ -53,10 +56,11 @@ StudioCollection.Model.prototype = {
     var notSyncedData = this.fetchStudioData(studioName).studioData
     this.currentStudioState = notSyncedData
     this.requestSyncedData(studioData)
+    this.subscriber.requestMonitorActivation(studioName)
   },
 
   requestSyncedData: function(studioData) {
-    this.subscriber.setStudioToSync
+    this.subscriber.setStudioToSync(studioData.name)
   },
 
   syncTrackTime: function() {
@@ -67,6 +71,7 @@ StudioCollection.Model.prototype = {
 
  // Notify
   notifyCorrectStudioState: function() {
+    console.log("SCM - notifying controller to update track state")
     this.controller.updatePlayerState()
   },
 
@@ -80,17 +85,6 @@ StudioCollection.Model.prototype = {
     this.controller.currentStudioStateUpdate(this.currentStudioState)
   },
 
-  // New listener joins studio
-
-  addListenerToStudio: function(studioName) {
-    var studioData = this.fetchStudioData(studioName).latestStudioData
-    if (this.currentStudioState.name !== studioName) {
-      this.currentStudioState = studioData
-      this.requestSyncedData()
-      this.requestMonitorActivation()
-    } 
-  },
-
   // Fetch latest studio state data
   fetchCurrentStudioData: function() {
     console.log("SCM - Fetching latest studio data")
@@ -102,17 +96,17 @@ StudioCollection.Model.prototype = {
   },
     
 
-  packageLatestStudioData: function() {
-    var newTrackData = this.controller.fetchCurrentTrackStatus()
-    var dataToPackage = this.currentStudioState
-    var newListenerCount = dataToPackage.data.listeners + 1
-    dataToPackage.data.currentTrack = newTrackData.currentTrack
-    dataToPackage.data.currentTrackTime = newTrackData.currentTrackTime
-    dataToPackage.data.status = "syncToMe"
-    dataToPackage.data.listeners = newListenerCount
-    dataToPackage.data.sentTimeStamp = Date.now()
-    return dataToPackage
-  },
+  // packageLatestStudioData: function() {
+  //   var newTrackData = this.controller.fetchCurrentTrackStatus()
+  //   var dataToPackage = this.currentStudioState
+  //   var newListenerCount = dataToPackage.data.listeners + 1
+  //   dataToPackage.data.currentTrack = newTrackData.currentTrack
+  //   dataToPackage.data.currentTrackTime = newTrackData.currentTrackTime
+  //   dataToPackage.data.status = "syncToMe"
+  //   dataToPackage.data.listeners = newListenerCount
+  //   dataToPackage.data.sentTimeStamp = Date.now()
+  //   return dataToPackage
+  // },
 
   fetchStudioData: function(studioName) {
     for (var i = 0; i < this.state.length; i++) {

@@ -15,7 +15,7 @@ Data.FirebaseManager.prototype = {
 
   setConnectionMonitor: function(studioName) {
     this.studioRef = new Firebase('https://tralatestbase.firebaseio.com/studioCollection/' + studioName)
-    this.studioRef.onDisconnect().update({ removelistener: true })
+    this.studioRef.onDisconnect().update({ status: "removeListener" })
   },
 
   modifyStudioState: function(newStudioData) {
