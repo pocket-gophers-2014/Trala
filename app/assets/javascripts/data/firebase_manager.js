@@ -27,22 +27,22 @@ Data.FirebaseManager.prototype = {
     this.studioCollectionRef.set(null)
   },
 
-  studioRemoved: function(data) {
-    console.log("STUDIO REMOVED")
-    // var studioData = this.packageStudioData(data)
-    // this.studioCollectionModel.subscriberStateReactor(studioData, "destroy")
+  studioDestroyed: function(data) {
+    console.log("FB - STUDIO REMOVED")
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.fbOrmStudioDestroyed(studioData)
   },
 
   studioStateModified: function(data) {
-    console.log("studio MODIFIED")
-    // var studioData = this.packageStudioData(data)
-    // this.studioCollectionModel.subscriberStudioStateReactor(studioData)
+    console.log("FB - studio MODIFIED")
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.fbOrmInterpretStudioStatus(studioData)
   },
   
-  newStudioAdded: function(data) {
-    console.log("newS ADDED")
-    // var studioData = this.packageStudioData(data)
-    // this.studioCollectionModel.subscriberStateReactor(studioData, "add")
+  newStudioCreated: function(data) {
+    console.log("FB - New Studio Created FB MANAGER")
+    var studioData = this.packageStudioData(data)
+    this.studioCollectionModel.fbOrmNewStudioCreated(studioData)
   },
 
   initialCollectionState: function(data) {
@@ -75,8 +75,8 @@ Data.FirebaseManager.prototype = {
   },
 
   setDataTriggers: function() {
-    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this)) 
+    this.studioCollectionRef.on('child_added', this.newStudioCreated.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-   this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
+    this.studioCollectionRef.on('child_removed', this.studioDestroyed.bind(this))
   }
 }

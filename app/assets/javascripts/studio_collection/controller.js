@@ -9,6 +9,56 @@ StudioCollection.Controller = function(args) {
 }
 
 StudioCollection.Controller.prototype = {
+  // New Model and ORM response
+
+  // new Studio Added
+  newStudioAdded: function(studioData) {
+    console.log("Controller notified of new studio")
+    // check user page state
+    // if user on collection page
+    var temPlateData = { studioName: studioData.name, studioListenerCount: studioData.listenerCount }
+    this.studioCollectionView.renderNewStudio(templateData)
+  },
+
+  // studio Removed
+  studioRemoved: function(studioData) {
+    console.log("Controller notified of removed studio")
+    // check user page state
+    // if user on collection page
+    var studioNameToRemove = studioData.name
+    this.studioCollectionView.removeStudio(studioNameToRemove)
+  },
+
+  currentStudioStateUpdate: function(newStudioData) {
+    console.log("Controller notified of current studio state update")
+    this.studioCollectionView.updateCurrentStudio(newStudioData)
+  },
+
+  fetchCurrentTrackStatus: function() {
+    console.log("Controller - fetched current track state")
+    var trackData = this.studioCollectionView.updatePlayerData()
+    var trackData = { currentTrack: trackData.trackPlaying , currentTrackTime: trackData.trackTime }
+    return trackData
+  },
+
+  studioStateUpdate: function() {
+    var studioCollection = this.studioCollectionModel.state
+    this.renderCollectionPage(studioCollection)
+  },
+
+  renderCollectionPage: function(studioCollection) {
+    console.log("Controller - Rendering collection page")
+    this.currentUserState = "collectionPage"
+    var studioCollectionTemplateData = { studio: studioCollection }
+    var studioCollectionTemplate = this.buildStudioCollectionTemplate(studioCollection)
+    this.studioCollectionView.renderCollectionPage(studioCollectionTemplate)
+  },
+
+
+
+
+
+
   createStudio: function(studioData) {
     this.studioCollectionModel.createNewStudio(studioData)
   },
@@ -47,12 +97,7 @@ StudioCollection.Controller.prototype = {
     }
    },
 
-  renderStudioCollection: function() {
-    this.currentUserState = "collectionPage"
-    var studioCollection = { studio: this.fetchStudioCollection() }
-    var studioCollectionTemplate = this.buildStudioCollectionTemplate(studioCollection)
-    this.studioCollectionView.draw(studioCollectionTemplate)
-  },
+
 
   playTrack: function() {
     console.log('playtrack outside')
@@ -89,11 +134,7 @@ StudioCollection.Controller.prototype = {
       this.studioCollectionModel.currentStudioState.synced = true
   },
 
-  fetchCurrentTrackStatus: function() {
-    var trackData = this.studioCollectionView.updatePlayerData()
-    var trackData = { currentTrack: trackData.trackPlaying , currentTrackTime: trackData.trackTime }
-    return trackData
-  },
+
 
   fetchStudioCollection: function() {
     return this.studioCollectionModel.state
