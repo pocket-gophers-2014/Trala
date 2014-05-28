@@ -1,5 +1,5 @@
 StudioCollection.View = function(){
-  this.eventDelegate  = {} 
+  this.eventDelegate  = {}
   this.mainContainerSelector = '.main-container'
   this.studioSelector = '.studio'
 }
@@ -22,7 +22,7 @@ StudioCollection.View.prototype = {
   },
 
   addUl: function() {
-    $('.container').append("<ul>")  
+    $('.container').append("<ul>")
   },
 
   draw: function(studioCollectionTemplate) {
@@ -37,8 +37,13 @@ StudioCollection.View.prototype = {
     }.bind(this))
   },
 
+
   registerEventDelegate: function( controller, cbMethod ) {
     this.eventDelegate = { controller: controller, cbMethod: cbMethod }
+  },
+  
+  syncPlayer: function(trackData) {
+    document.querySelector('.active').currentTime = trackData.currentTrackTime
   },
 
   updatePlayerData: function() {
@@ -48,7 +53,7 @@ StudioCollection.View.prototype = {
   },
 
   toggleActivePlayer: function(newTrackNumber) {
-    document.querySelector('.active').classList.remove('active')
+  //  document.querySelector('.active').classList.remove('active')
     document.querySelector('#track' + newTrackNumber).classList.add('active')
   }
 

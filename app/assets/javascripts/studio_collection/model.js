@@ -8,7 +8,7 @@ StudioCollection.Model.prototype = {
 
   freshStudioCreation: function(freshStudioData) {
     console.log("SCM - freshSC - sdata: " + freshStudioData)
-    this.currentStudioData = new Studio.Model(freshStudioData)
+    this.currentStudioState = new Studio.Model(freshStudioData)
     this.subscriber.createStudio(this.currentStudioState)
     this.subscriber.setMonitorActivation(freshStudioData.name)
     this.synced = true
@@ -51,20 +51,19 @@ StudioCollection.Model.prototype = {
       console.log('SCM - syncing track data')
       this.syncTrackTime()
       this.synced = true
-      this.notifyCorrectStudioState()
+      
     }
   },
 
   // New user joins studio
   initStudioState: function(studioName) {
     var notSyncedData = this.fetchStudioData(studioName).studioData
-    this.currentStudioState = notSyncedData
-    this.requestSyncedData(studioData)
+    this.currentStudioState = notSyncedData  
     this.subscriber.setMonitorActivation(studioName)
   },
 
-  requestSyncedData: function(studioData) {
-    this.subscriber.setStudioToSync(studioData.name)
+  requestSyncedData: function(studioName) {
+    this.subscriber.setStudioToSync(studioName)
   },
 
   syncTrackTime: function() {
@@ -94,23 +93,10 @@ StudioCollection.Model.prototype = {
     console.log("SCM - Fetching latest studio data")
     var currentTrackData = this.controller.fetchCurrentTrackStatus()
     var currentStudioData = this.currentStudioState
-    currentStudioData.data.currentTrack = latestTrackData.currentTrack
-    currentStudioData.data.currentTrackTime = latestTrackData.currentTrackTime
+    currentStudioData.data.currentTrack = currentTrackData.currentTrack
+    currentStudioData.data.currentTrackTime = currentTrackData.currentTrackTime
     return currentStudioData
   },
-    
-
-  // packageLatestStudioData: function() {
-  //   var newTrackData = this.controller.fetchCurrentTrackStatus()
-  //   var dataToPackage = this.currentStudioState
-  //   var newListenerCount = dataToPackage.data.listeners + 1
-  //   dataToPackage.data.currentTrack = newTrackData.currentTrack
-  //   dataToPackage.data.currentTrackTime = newTrackData.currentTrackTime
-  //   dataToPackage.data.status = "syncToMe"
-  //   dataToPackage.data.listeners = newListenerCount
-  //   dataToPackage.data.sentTimeStamp = Date.now()
-  //   return dataToPackage
-  // },
 
   fetchStudioData: function(studioName) {
     for (var i = 0; i < this.state.length; i++) {
@@ -241,10 +227,6 @@ StudioCollection.Model.prototype = {
   //     this.subscriber.destroyStudio(studioData.name) 
   //   }
   // },
-
- 
-
-
 
 }
 

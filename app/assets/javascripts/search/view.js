@@ -8,11 +8,12 @@ Search.View = function(){
 
 Search.View.prototype = {
   bindEvents: function() {
-    this.bindSearchEvent();
+    this.bindSearchOnSubmit();
+    this.bindSearchOnKeyUp()
     this.bindSongSelectionEvent();
   },
 
-  bindSearchEvent: function() {
+  bindSearchOnSubmit: function() {
     $(this.mainContainerSelector).on( 'submit', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
@@ -20,8 +21,16 @@ Search.View.prototype = {
     }.bind(this))
   },
 
+  bindSearchOnKeyUp: function() {
+    $(this.mainContainerSelector).on( 'keyup', 'input', function(e) {
+      e.preventDefault()
+      var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
+      method.call(this.eventDelegate.controller, $(e.target).val())
+    }.bind(this))
+  },
+
   bindSongSelectionEvent: function() {
-     $(this.mainContainerSelector).on( 'click', '.each-song > img', function(e) {
+     $(this.mainContainerSelector).on( 'click', '.clickable-song', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.songSelection]
       method.call(this.eventDelegate.controller, e.target.id)

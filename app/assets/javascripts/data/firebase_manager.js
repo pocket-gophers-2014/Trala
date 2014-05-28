@@ -45,11 +45,6 @@ Data.FirebaseManager.prototype = {
     this.fbORM.newStudioCreated(studioData)
   },
 
-  // initialCollectionState: function(data) {
-  //   var studioCollectionData = this.packageStudioCollectionData(data)
-  //   this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
-  // },
-
   packageStudioData: function(data) {
     var studioData = { name: data.name(), data: data.val() }
     return studioData
@@ -59,7 +54,7 @@ Data.FirebaseManager.prototype = {
     var tempData = []
     data.forEach(function(data) {
       var tempObj = { name: data.name(), data: data.val() }
-     tempData.push(tempObj) 
+     tempData.push(tempObj)
    })
     return tempData
   },

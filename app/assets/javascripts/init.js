@@ -27,13 +27,16 @@ $(document).ready(function() {
   fbTest.setDataTriggers()
   firebaseORM.registerFirebaseManager(fbTest)
 
+
+  // studioCollectionController.initStudioCollection()
+
   // App Controller Setup
   var appController = new App.Controller()
   var appView = new App.View()
 
   appView.registerEventDelegate(appController)
   appView.bindEvents()
-  appController.registerStudioCollectionController(studioCollectionController, "renderStudioCollection")
+  appController.registerStudioCollectionController(studioCollectionController, "renderCollectionPage")
   appController.registerStudioController(studioCollectionController, "loadInitialStudio")
 
 

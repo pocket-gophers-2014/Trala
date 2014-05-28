@@ -1,7 +1,7 @@
 Studio.Model = function(studio) {
   this.name = studio.name
   this.data = {}
-  this.data.listenerCount = studio.data.listenerCount || 0
+  this.data.listenerCount = studio.data.listenerCount || 1
   this.data.playlist = studio.data.playlist
   this.data.currentTrack = studio.data.currentTrack || 0
   this.data.currentTrackTime = studio.data.currentTrackTime || 0

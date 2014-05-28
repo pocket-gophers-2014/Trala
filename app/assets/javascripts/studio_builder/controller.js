@@ -11,7 +11,7 @@
 //     this.view.redrawPlaylist(playlist)
 //     if (this.tempPlaylist.length > 2) {
 //       var name = String(Math.floor(Math.random() * 1000))
-//       this.notifyNewStudioSubscribers({name: name, data: { playlist: this.tempPlaylist }})
+//       this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.tempPlaylist } } )
 //       this.tempPlaylist = []
 //       this.initUserStudioState(name)
 //     }

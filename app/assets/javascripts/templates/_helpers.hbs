@@ -1,21 +1,22 @@
-Handlebars.registerHelper('listItem', function (form, to, context, options)) {
-  var song_result = "";
-  for (var i = from, j = to; i < j; i++) {
-    song_result += song_result + options.fn(context[i]);
-  }
-  return song;
-});
 
+  Handlebars.registerHelper ('truncate', function (str, len) {
+        if (str.length > len) {
+            var new_str = str.substr (0, len+1);
 
-{{!-- Handlebars.registerHelper('listTopTen, function (form, to, context, options)) {
-  var song_result = "";
-  for (var i = from, j = to; i < j; i++) {
-    song_result += song_result + options.fn(context[i]);
-  }
-  return song;
-});
+            while (new_str.length) {
+                var ch = new_str.substr ( -1 );
+                new_str = new_str.substr ( 0, -1 );
 
-    {{var topTen = function(songData) { }}
-       {{ return songData.slice(1,10); }}
-      {{ } }}
- --}}
+                if (ch == ' ') {
+                    break;
+                }
+            }
+
+            if ( new_str == '' ) {
+                new_str = str.substr ( 0, len );
+            }
+
+            return new Handlebars.SafeString ( new_str +'...' );
+        }
+        return str;
+    });

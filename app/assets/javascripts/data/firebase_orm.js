@@ -105,8 +105,8 @@ Data.FirebaseORM.prototype = {
     }
   },
 
-  retrieveCurrentStudioState: function(studioDataChecksum) {
-    var currentStudioData = this.subscribedInterface.fetchCurrentStudioData(studioDataChecksum)
+  retrieveCurrentStudioState: function() {
+    var currentStudioData = this.subscribedInterface.fetchCurrentStudioData()
     return currentStudioData
   },
 
@@ -138,11 +138,6 @@ Data.FirebaseORM.prototype = {
 
   setMonitorActivation: function(studioName) {
     this.firebaseManager.setConnectionMonitor(studioName)
-  },
-
-  addStudioToSubscriber: function(studioData) {
-   // var packagedStudioData = this.packageStudioData(studioData)
-    this.firebaseManager.addStudio(studioData)
   },
 
   registerFirebaseManager: function(manager) {

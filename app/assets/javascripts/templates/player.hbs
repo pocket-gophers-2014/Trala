@@ -1,7 +1,25 @@
+<div class="studio_middle_container">
+  <h1> {{listeners}}</h1>
+  <i class="fa fa-users fa-4x"></i>
+</div>
+
 <div class="players">
-{{#each playlist}}
-  <audio id="track{{@index}}" controls autoplay>
-    <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
-  </audio>
-{{/each}} 
+  {{#each playlist}}
+    <div class="track-information">
+      <div class="column full">
+        <div class="listener-container">
+        </div>
+      </div>
+      <footer class="column full">
+        <p><i class="fa fa-play-circle-o fa-2x"></i> </p> <br>
+         {{title}} <br>
+      </footer>
+    </div>
+
+      <div class="audio-player">
+        <audio id="track{{@index}}" controls>
+          <source src="{{stream_url}}?client_id={{client_id}}" type="audio/mpeg">
+        </audio>
+      </div>
+  {{/each}} 
 </div>

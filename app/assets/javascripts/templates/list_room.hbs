@@ -1,15 +1,18 @@
-<div class="room_banner">
-  <h3> Active Room </h3>
-  <p> Tralalala, join a rooooooom! <p>
-</div>
-<div class = "room-container">
-  <ul>
-      {{#each studio}}
-      <div style="border: 1px solid black" id="{{name}}" class="studio">
-        <p>Name: {{name}}</p></br>
-        <p>Listeners: {{listeners}}</p>
-        <p></p>
-      </div>
-      {{/each}}
-  </ul>
-</div>
+
+  <div class="room_banner">
+    <h3>Active Rooms</h3>
+  </div>
+  <div class = "room-container">
+      <ul class="row clearfix">
+          {{#each studio}}
+          <div id="{{name}}" class="studio column full">
+            <p id="{{name}}">
+              <span class="list_room_text"> Name    {{name}}</span>
+              <span class="list_room_text"> <i class="fi-people"> {{listeners}} </i> </span>
+              <span class="list_room_text"> <i class="fi-location"> {{distance}} ft </i> </span>
+            </p>
+          </div>
+          {{/each}}
+      </ul>
+  </div>
+
