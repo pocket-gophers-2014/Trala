@@ -281,6 +281,8 @@ div {
 
 
 .each-song {
+  // changechange
+  position: relative;
   img {
     border-top: 8px solid $medium_gray;
     border-bottom: 5px solid $cloud_gray;
@@ -329,6 +331,17 @@ footer {
   margin-top: -20%;
   margin-left: -30%;
 }
+
+
+ // CHANGECHANGE
+#song-title {
+  z-index: 100;
+  color: black;
+  position: absolute;
+  bottom: 10px;
+  left: 35px;
+}
+
 
 
 
