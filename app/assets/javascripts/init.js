@@ -17,11 +17,15 @@ $(document).ready(function() {
   studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
   studioCollectionView.bindEvents()
 
-  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', studioCollectionModel)
-  studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
+  
   studioCollectionModel.registerController(studioCollectionController)
   // studioCollectionController.initStudioCollection()
+ // new firebaseORM interface
+  firebaseORM = new Data.FirebaseORM(studioCollectionModel)
+  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', firebaseORM)
+  studioCollectionModel.registerStudioCollectionSubscriber(firebaseORM)
   fbTest.setDataTriggers()
+  firebaseORM.registerFirebaseManager(fbTest)
 
   // App Controller Setup
   var appController = new App.Controller()

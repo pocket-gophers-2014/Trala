@@ -54,11 +54,13 @@ StudioCollection.Controller.prototype = {
     this.studioCollectionView.renderCollectionPage(studioCollectionTemplate)
   },
 
+  initListenerToStudio: function(studioName) {
+    this.studioCollectionModel.initStudioState(studioName)
+  },
 
 
 
-
-
+// Old
   createStudio: function(studioData) {
     this.studioCollectionModel.createNewStudio(studioData)
   },

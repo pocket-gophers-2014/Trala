@@ -1,7 +1,7 @@
-Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
+Data.FirebaseManager = function(fbRefUrl, fbORM) {
   this.studioCollectionRef= new Firebase('https://tralatestbase.firebaseio.com/studioCollection')
   this.connectionRef = new Firebase('https://tralatestbase.firebaseio.com/.info/connected')
-  this.studioCollectionModel = studioCollectionModel
+  this.fbORM = fbORM
 }
 
 Data.FirebaseManager.prototype = {
@@ -19,7 +19,6 @@ Data.FirebaseManager.prototype = {
   },
 
   modifyStudioState: function(newStudioData) {
-
     this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
@@ -30,25 +29,25 @@ Data.FirebaseManager.prototype = {
   studioDestroyed: function(data) {
     console.log("FB - STUDIO REMOVED")
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.fbOrmStudioDestroyed(studioData)
+    this.fbORM.studioDestroyed(studioData)
   },
 
   studioStateModified: function(data) {
     console.log("FB - studio MODIFIED")
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.fbOrmInterpretStudioStatus(studioData)
+    this.fbORM.interpretStudioStatus(studioData)
   },
   
   newStudioCreated: function(data) {
     console.log("FB - New Studio Created FB MANAGER")
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.fbOrmNewStudioCreated(studioData)
+    this.fbORM.newStudioCreated(studioData)
   },
 
-  initialCollectionState: function(data) {
-    var studioCollectionData = this.packageStudioCollectionData(data)
-    this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
-  },
+  // initialCollectionState: function(data) {
+  //   var studioCollectionData = this.packageStudioCollectionData(data)
+  //   this.studioCollectionModel.initialStateGenerate(studioCollectionData)    
+  // },
 
   packageStudioData: function(data) {
     var studioData = { name: data.name(), data: data.val() }

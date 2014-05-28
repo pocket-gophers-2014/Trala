@@ -28,13 +28,33 @@ StudioCollection.Model.prototype = {
       this.currentStudioState = newStudioData
       var studioIndexToUpdate = this.fetchStudioData(newStudioData.name)
       this.state[studioIndexToUpdate] = new Studio.Model(newStudioData)
-      this.notifyCurrentStudioStateUpdate()  
+      this.studioStateChecksumUpdate()
     }
     else {
       var studioIndexToUpdate = this.fetchStudioData(newStudioData.name)
       this.state[studioIndexToUpdate] = new Studio.Model(newStudioData)
       this.notifyStudioCollectionStateUpdate()
     }
+  },
+  
+  studioStateChecksumUpdate: function() {
+    if (this.synced) {
+      this.notifyCurrentStudioStateUpdate()  
+    }
+    else {
+      this.notifyCorrectStudioState()
+    }
+  },
+
+  // New user joins studio
+  initStudioState: function(studioName) {
+    var notSyncedData = this.fetchStudioData(studioName).studioData
+    this.currentStudioState = notSyncedData
+    this.requestSyncedData(studioData)
+  },
+
+  requestSyncedData: function(studioData) {
+    this.subscriber.setStudioToSync
   },
 
  // Notify
@@ -68,134 +88,7 @@ StudioCollection.Model.prototype = {
     currentStudioData.data.currentTrackTime = latestTrackData.currentTrackTime
     return currentStudioData
   },
-  
-
-  // Firebase ORM
-
-  // New Studio Created
-
-  fbOrmNewStudioCreated: function(newStudioData) {
-    console.log("New Studio Created FB ORM")
-    //note: call SCM
-    this.createNewStudio(newStudioData)
-  },
-
-  // Studio Destroyed
-  fbOrmStudioDestroyed: function(studioData) {
-    console.log("Studio Destroyed FB ORM")
-    //note: call SCM
-    this.removeStudio(studioData)
-  },
-
-
-// Studio status management
-
-  fbOrmInterpretStudioStatus: function(returnedStudioData) {
-    if (returnedStudioData.statusValue === "needSync") {
-      this.fbOrmNeedSyncRequested(returnedStudioData)
-    }
-    else if (returnedStudioData.statusValue === "syncToMe") {
-      this.fbOrmSyncCurrentStudioState(returnedStudioData)
-    }
-    else if (returnedStudioData.statusValue === "removeListener") {
-      this.updateListenerCount(returnedStudioData)
-    }
-    else if ((returnedStudioData.statusValue === "needSync") && (this.currentStudioState.data.status === "synced")) {
-      this.sendSyncedData()
-    }
-  },
-
-  // Confirms listener in studio and synced
-  fbOrmListenerValidAndSynced: function(studioDataChecksum) {
-    //call to SCM state
-    if ((this.synced) && (this.currentStudioState.name === studioDataChecksum.name)) {
-      return true
-    }
-    else {
-      return false
-    }
-  }, 
-
-  fbOrmListenerValidAndNotSynced: function(studioDataChecksum) {
-    // call to SCM state
-    if ((!this.synced) && (this.currentStudioState.name === studioDataChecksum.name)) {
-      return true
-    }
-    else {
-      return false
-    } 
-  },
-  
-  fbOrmListenerNotValid: function(studioDataChecksum) {
-    //call to SCM state
-    if ((this.currentStudioState.name !== studioDataChecksum.name)) {
-      return true
-    }
-    else {
-      return false
-    }
-  },
-
-  fbOrmRetrieveCurrentStudioState: function(studioDataChecksum) {
-    //call to SCM
-    var currentStudioData = this.fetchCurrentStudioData(studioDataChecksum)
-    return currentStudioData
-  },
-
-  // needSync status
-  fbOrmNeedSyncRequested: function(returnedStudioData) {
-    // call SCM state
-    if (fbOrmListenerSyncedAndValid(returnedStudioData)) {
-      var newStudioData = this.fbOrmRetrieveCurrentStudioState(returnedStudioData)
-      var newListenerCount = newStudioData.data.listenerCount + 1
-      newStudioData.data.listenerCount = newListenerCount
-      newStudioData.data.syncTimeStamp = Date.now()
-      newStudioData.data.status = "syncToMe"
-      // call to SCM
-      this.updateStudioState(newStudioData)
-      this.fbOrmUpdateStudioState(newStudioData)
-    }
-  },
-
-  fbOrmUpdateStudioState: function(newStudioData) {
-    this.subscriber.modifyStudioState(newStudioData)
-  },
-
-  // syncToMe status
-  
-  fbOrmSyncCurrentStudioState: function(newStudioData) {
-    if ( (this.fbOrmListenerValidAndNotSynced(newStudioData)) || (this.fbOrmListenerNotValid) )  {
-      //call to SCM
-      this.updateStudioState(newStudioData)
-    }
-  },
-
-
-  requestMonitorActivation: function() {
-    this.subscriber.setConnectionMonitor(this.currentStudioState.name)
-  },
-
-  addStudioToSubscriber: function(studioData) {
-   // var packagedStudioData = this.packageStudioData(studioData)
-    this.subscriber.addStudio(studioData)
-  },
-
-
-
-  syncData: function(studioName) {
-    return this.currentStudioState
-  },
-  
-  updateListenerCount: function(studioData) {
-    var newListenerCount = this.currentStudioState.data.listeners + 1
-    this.currentStudioState.data.listeners = newListenerCount
-    this.updateStudioState({name: this.currentStudioState.name, data: { listeners: newListenerCount }})
-  },
-
-  sendSyncedData: function() {
-    var packagedData = this.packageLatestStudioData()
-    this.updateStudioState(packagedData)
-  },
+    
 
   packageLatestStudioData: function() {
     var newTrackData = this.controller.fetchCurrentTrackStatus()
@@ -208,18 +101,35 @@ StudioCollection.Model.prototype = {
     dataToPackage.data.sentTimeStamp = Date.now()
     return dataToPackage
   },
+
+  fetchStudioData: function(studioName) {
+    for (var i = 0; i < this.state.length; i++) {
+      if (studioName === this.state[i].name) {      
+        return { studioData: jQuery.extend({},this.state[i]), index: i }
+      }
+    }
+    return false
+  },
+
+  registerStudioCollectionSubscriber: function(subscriber) {
+    this.subscriber = subscriber
+  },
+
+  registerController: function(controller) {
+    this.controller = controller
+  }
   // requestListenerCountIncrease: function() {
   //   this.updateStudioState({name: this.currentStudioState.name, data: { status: "addListener"}})
   // },
 
-  requestSyncedTrackData: function() {
-    var newTrackData = this.controller.fetchCurrentTrackStatus()
-    this.updateStudioState({
-                                              name: this.currentStudioState.name, 
-                                              data: { status: "syncToMe", currentTrack: newTrackData.currentTrack, 
-                                              currentTrackTime: newTrackData.currentTrackTime 
-                                            }})
-  },
+  // requestSyncedTrackData: function() {
+  //   var newTrackData = this.controller.fetchCurrentTrackStatus()
+  //   this.updateStudioState({
+  //                                             name: this.currentStudioState.name, 
+  //                                             data: { status: "syncToMe", currentTrack: newTrackData.currentTrack, 
+  //                                             currentTrackTime: newTrackData.currentTrackTime 
+  //                                           }})
+  // },
 
   // requestSyncedData: function() {
 
@@ -307,14 +217,7 @@ StudioCollection.Model.prototype = {
   // //   return studioData
   // // },
 
-  fetchStudioData: function(studioName) {
-    for (var i = 0; i < this.state.length; i++) {
-      if (studioName === this.state[i].name) {      
-        return { latestStudioData: jQuery.extend({},this.state[i]), index: i }
-      }
-    }
-    return false
-  },
+
 
   // removeStudio: function(studioData) {
   //   var studioToRemove = this.fetchStudio(studioData.name)
@@ -331,12 +234,7 @@ StudioCollection.Model.prototype = {
 
  
 
-  registerStudioCollectionSubscriber: function(subscriber) {
-    this.subscriber = subscriber
-  },
 
-  registerController: function(controller) {
-    this.controller = controller
-  }
 
 }
+
