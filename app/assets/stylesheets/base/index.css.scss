@@ -72,12 +72,13 @@ $BORDER_BUTTON: $charcoal;
   }
 
   a.button{
-    width: 50%;
+    width: 75%;
     .front_page_button{
       padding: 20%;
+      width: 100%;
     }
     .fi-mic, .fi-inbox{
-      font-size: 2.75em;
+      font-size: 3.0em;
     }
   }
 }
@@ -100,12 +101,12 @@ $BORDER_BUTTON: $charcoal;
   }
 
   a.button{
-    width: 50%;
+    width: 75%;
     .front_page_button{
       padding: 20%;
     }
     .fi-mic, .fi-inbox{
-      font-size: 1.75em;
+      font-size: 2.25em;
     }
   }
 }
@@ -123,14 +124,14 @@ $BORDER_BUTTON: $charcoal;
   }
 
   a.button{
-    width: 50%;
+    width: 75%;
     .front_page_button{
       padding: 10%;
-      width: 75%;
+      width: 100%;
 
     }
     .fi-mic, .fi-inbox{
-      font-size: 1.5em;
+      font-size: 1.75em;
     }
   }
 }
