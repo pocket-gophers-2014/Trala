@@ -166,6 +166,7 @@ body { font-family: 'Crete Round', serif; }
   }
 }
 
+
 h3 {
   text-align: center;
   text-transform: uppercase;
@@ -180,6 +181,15 @@ h3:hover {
 .logo-icon {
   i {
     text-align: left;
+  }
+  font-family: 'Kameron', serif;
+}
+
+.logo-text {
+  li {
+    a {
+      text-decoration: none;
+    }
   }
 }
 
