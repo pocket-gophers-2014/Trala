@@ -41,7 +41,9 @@ StudioCollection.Model.prototype = {
     if (this.synced) {
       this.notifyCurrentStudioStateUpdate()  
     }
-    else {
+    else if (!this.synced) {
+      this.syncTrackTime()
+      this.synced = true
       this.notifyCorrectStudioState()
     }
   },
@@ -57,10 +59,20 @@ StudioCollection.Model.prototype = {
     this.subscriber.setStudioToSync
   },
 
+  syncTrackTime: function() {
+    var timeDifference = ((Date.now() - this.currentStudioState.data.syncTimeStamp) / 1000 ) 
+    var newTrackTime = timeDifference + this.currentStudioState.data.currentTrackTime
+    this.currentStudioState.data.currentTrackTime = newTrackTime
+  },
+
  // Notify
+  notifyCorrectStudioState: function() {
+    this.controller.updatePlayerState()
+  },
+
   notifyStudioCollectionStateUpdate: function() {
     console.log("Notify Controller of studio state update")
-    this.controller.studioStateUpdate()
+    this.controller.collectionStateUpdate()
   },
 
   notifyCurrentStudioStateUpdate: function() {

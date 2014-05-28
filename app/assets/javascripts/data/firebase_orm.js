@@ -69,7 +69,7 @@ Data.FirebaseORM.prototype = {
   },
 
   retrieveCurrentStudioState: function(studioDataChecksum) {
-    var currentStudioData = this.subcribedInterface.fetchCurrentStudioData(studioDataChecksum)
+    var currentStudioData = this.subscribedInterface.fetchCurrentStudioData(studioDataChecksum)
     return currentStudioData
   },
 

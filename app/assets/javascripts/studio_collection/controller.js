@@ -41,7 +41,17 @@ StudioCollection.Controller.prototype = {
     return trackData
   },
 
-  studioStateUpdate: function() {
+  updatePlayerState: function() {
+    var syncedStudioData = this.currentStudioState
+    var syncedTrackData = { currentTrack: syncedStudioData.data.currentTrack, currentTrackTime: syncedStudioData.data.currentTrackTime }
+    this.syncPlayerState(syncedTrackData)
+  },
+
+  syncPlayerState: function(trackData) {
+    this.studioCollectionView.syncPlayer(trackData)
+  },
+
+  collectionStateUpdate: function() {
     var studioCollection = this.studioCollectionModel.state
     this.renderCollectionPage(studioCollection)
   },
@@ -57,7 +67,11 @@ StudioCollection.Controller.prototype = {
   initListenerToStudio: function(studioName) {
     this.studioCollectionModel.initStudioState(studioName)
   },
-
+  
+  updateTrackState: function() {
+    this.studioCollectionView.updateTrackState(newTime)
+    this.studioCollectionModel.currentStudioState.synced = true
+  },
 
 
 // Old
@@ -124,17 +138,7 @@ StudioCollection.Controller.prototype = {
     this.studioCollectionModel.updateStudioTrack(trackData)
   },
 
-  updateTrackState: function() {
-    console.log('updatetrackstate')
-    console.log(this.studioCollectionModel.syncSentTime)
-    console.log(this.studioCollectionModel.currentStudioState.currentTrackTime)
-    console.log('time diff: ' + (Date.now() - this.studioCollectionModel.syncSentTime) / 1000)
-      var newTime = ((Date.now() - this.studioCollectionModel.syncSentTime)/ 1000) + this.studioCollectionModel.currentStudioState.currentTrackTime
-      console.log(newTime)
-      console.log('post time diff: ' + (Date.now() - this.studioCollectionModel.syncSentTime) / 1000)
-      this.studioCollectionView.updateTrackState(newTime)
-      this.studioCollectionModel.currentStudioState.synced = true
-  },
+
 
 
 
