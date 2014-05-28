@@ -51,6 +51,11 @@ Data.FirebaseORM.prototype = {
 // needSync status
   needSyncRequested: function(returnedStudioData) {
     console.log("FB ORM - needSync")
+    if ((returnedStudioData.data.listenerCount === 0) && (this.listenerValidAndNotSynced(returnedStudioData))) {
+      var syncedStudioData = this.packageNewStudioData(returnedStudioData, "add")
+      this.newStudioCreated(syncedStudioData)
+      this.subscribedInterface.updateStudioState(syncedStudioData)
+    }
     if (this.listenerValidAndSynced(returnedStudioData)) {
       var newStudioData = this.packageNewStudioData(returnedStudioData, "add")
      // this.subscribedInterface.updateStudioState(newStudioData)
@@ -111,7 +116,7 @@ Data.FirebaseORM.prototype = {
   },
 
   packageNewStudioData: function(studioToPackage, type) {
-    var packagedStudioData = this.retrieveCurrentStudioState(studioToPackage)
+    var packagedStudioData = studioToPackage
     if (type === "add") {
       var newListenerCount = packagedStudioData.data.listenerCount + 1
     }
@@ -132,7 +137,7 @@ Data.FirebaseORM.prototype = {
     this.firebaseManager.modifyStudioState(newStudioData)
   },
 
-  setStudioToSync: function(studioToSync) {
+  sendSyncRequest: function(studioToSync) {
     this.firebaseManager.modifyStudioState({ name: studioToSync, data: { status: "needSync"} })
   },
 

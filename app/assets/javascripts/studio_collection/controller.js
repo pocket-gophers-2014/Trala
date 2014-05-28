@@ -15,9 +15,9 @@ StudioCollection.Controller.prototype = {
   initStudioCreation: function(studioData) {
     console.log('SCM - initScreation sdata: ' + studioData.name + '-' + studioData.data)
     this.studioCollectionModel.freshStudioCreation(studioData)
-    this.loadStudioWithPlayer(this.studioCollectionModel.currentStudioState)
-    this.studioCollectionView.toggleActivePlayer('0')
-    this.playTrack()
+   // this.loadStudioWithPlayer(this.studioCollectionModel.currentStudioState)
+   // this.studioCollectionView.toggleActivePlayer('0')
+   // this.playTrack()
   },
 
   initUserStudioState: function(studioName) {

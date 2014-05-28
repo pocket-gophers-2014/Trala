@@ -42,7 +42,9 @@ Data.FirebaseManager.prototype = {
   newStudioCreated: function(data) {
     console.log("FB - New Studio Created FB MANAGER")
     var studioData = this.packageStudioData(data)
-    this.fbORM.newStudioCreated(studioData)
+    if (studioData.data.listenerCount !== 0)
+      this.fbORM.newStudioCreated(studioData)
+    }
   },
 
   packageStudioData: function(data) {
@@ -50,24 +52,24 @@ Data.FirebaseManager.prototype = {
     return studioData
   },
 
-  packageStudioCollectionData: function(data) {
-    var tempData = []
-    data.forEach(function(data) {
-      var tempObj = { name: data.name(), data: data.val() }
-     tempData.push(tempObj)
-   })
-    return tempData
-  },
+  // packageStudioCollectionData: function(data) {
+  //   var tempData = []
+  //   data.forEach(function(data) {
+  //     var tempObj = { name: data.name(), data: data.val() }
+  //    tempData.push(tempObj)
+  //  })
+  //   return tempData
+  // },
 
-  connectionStateUpdate: function(snapData) {
-    if (snapData.val()) {
-      console.log("here")
-    }
-    else {
-      console.log("gone")
-    }
+  // connectionStateUpdate: function(snapData) {
+  //   if (snapData.val()) {
+  //     console.log("here")
+  //   }
+  //   else {
+  //     console.log("gone")
+  //   }
 
-  },
+  // },
 
   setDataTriggers: function() {
     this.studioCollectionRef.on('child_added', this.newStudioCreated.bind(this)) 

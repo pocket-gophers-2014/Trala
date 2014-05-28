@@ -1,17 +1,37 @@
 StudioCollection.Model = function() {
   this.state = []
-  this.currentStudioState
+  this.currentStudioState = {}
   this.synced = false
+  this.studioCreator = false
 }
 
 StudioCollection.Model.prototype = {
 
   freshStudioCreation: function(freshStudioData) {
     console.log("SCM - freshSC - sdata: " + freshStudioData)
-    this.currentStudioState = new Studio.Model(freshStudioData)
-    this.subscriber.createStudio(this.currentStudioState)
-    this.subscriber.setMonitorActivation(freshStudioData.name)
-    this.synced = true
+    //this.currentStudioState = new Studio.Model(freshStudioData)
+    var newStudioData = new Studio.Model(freshStudioData)
+    this.subscriber.createStudio(newStudioData)
+  //  this.subscriber.setMonitorActivation(freshStudioData.name)
+  //  this.synced = true
+  },
+
+  // New user joins studio
+  initStudioState: function(studioName) {
+    //var notSyncedData = this.fetchStudioData(studioName).studioData
+    this.currentStudioState.name = studioName 
+    this.requestSyncedData(studioName)
+   // this.subscriber.setMonitorActivation(studioName)
+  },
+
+  requestSyncedData: function(studioName) {
+    this.subscriber.setStudioToSync(studioName)
+  },
+
+  syncTrackTime: function() {
+    var timeDifference = ((Date.now() - this.currentStudioState.data.syncTimeStamp) / 1000 ) 
+    var newTrackTime = timeDifference + this.currentStudioState.data.currentTrackTime
+    this.currentStudioState.data.currentTrackTime = newTrackTime
   },
 
   createNewStudio: function(newStudioData) {
@@ -32,6 +52,7 @@ StudioCollection.Model.prototype = {
     console.log("SCM - updating studio state")
     if (newStudioData.name === this.currentStudioState.name) {
       this.currentStudioState = newStudioData
+      this.updateCollectionState(newStudioData)
       var studioIndexToUpdate = this.fetchStudioData(newStudioData.name)
       this.state[studioIndexToUpdate] = new Studio.Model(newStudioData)
       this.studioStateChecksumUpdate()
@@ -42,7 +63,21 @@ StudioCollection.Model.prototype = {
       this.notifyStudioCollectionStateUpdate()
     }
   },
+
+  updateCollectionState: function(studioData) {
+    var studioIndexToUpdate = this.fetchStudioData(studioData.name)
+    this.state[studioIndexToUpdate] = new Studio.Model(studioData)
+  },
   
+  fetchStudioData: function(studioName) {
+    for (var i = 0; i < this.state.length; i++) {
+      if (studioName === this.state[i].name) {      
+        return { studioData: jQuery.extend({},this.state[i]), index: i }
+      }
+    }
+    return false
+  },
+
   studioStateChecksumUpdate: function() {
     if (this.synced) {
       this.notifyCurrentStudioStateUpdate()  
@@ -55,22 +90,6 @@ StudioCollection.Model.prototype = {
     }
   },
 
-  // New user joins studio
-  initStudioState: function(studioName) {
-    var notSyncedData = this.fetchStudioData(studioName).studioData
-    this.currentStudioState = notSyncedData  
-    this.subscriber.setMonitorActivation(studioName)
-  },
-
-  requestSyncedData: function(studioName) {
-    this.subscriber.setStudioToSync(studioName)
-  },
-
-  syncTrackTime: function() {
-    var timeDifference = ((Date.now() - this.currentStudioState.data.syncTimeStamp) / 1000 ) 
-    var newTrackTime = timeDifference + this.currentStudioState.data.currentTrackTime
-    this.currentStudioState.data.currentTrackTime = newTrackTime
-  },
 
  // Notify
   notifyCorrectStudioState: function() {
@@ -98,14 +117,7 @@ StudioCollection.Model.prototype = {
     return currentStudioData
   },
 
-  fetchStudioData: function(studioName) {
-    for (var i = 0; i < this.state.length; i++) {
-      if (studioName === this.state[i].name) {      
-        return { studioData: jQuery.extend({},this.state[i]), index: i }
-      }
-    }
-    return false
-  },
+
 
   registerStudioCollectionSubscriber: function(subscriber) {
     this.subscriber = subscriber
