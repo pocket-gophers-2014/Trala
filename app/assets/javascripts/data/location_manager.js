@@ -1,9 +1,5 @@
 Data.LocationManager = function() {
 	this.startCoords = {}
-
-	Number.prototype.toRad = function() {
-  return this * Math.PI / 180;
-	}
 }
 
 Data.LocationManager.prototype = {
