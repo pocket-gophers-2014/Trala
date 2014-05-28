@@ -42,7 +42,7 @@ Data.FirebaseManager.prototype = {
   newStudioCreated: function(data) {
     console.log("FB - New Studio Created FB MANAGER")
     var studioData = this.packageStudioData(data)
-    if (studioData.data.listenerCount !== 0)
+    if (studioData.data.listenerCount !== 0) {
       this.fbORM.newStudioCreated(studioData)
     }
   },

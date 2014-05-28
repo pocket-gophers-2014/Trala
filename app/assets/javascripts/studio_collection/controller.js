@@ -15,6 +15,7 @@ StudioCollection.Controller.prototype = {
   initStudioCreation: function(studioData) {
     console.log('SCM - initScreation sdata: ' + studioData.name + '-' + studioData.data)
     this.studioCollectionModel.freshStudioCreation(studioData)
+    this.initUserStudioState(studioData.name)
    // this.loadStudioWithPlayer(this.studioCollectionModel.currentStudioState)
    // this.studioCollectionView.toggleActivePlayer('0')
    // this.playTrack()
@@ -22,15 +23,51 @@ StudioCollection.Controller.prototype = {
 
   initUserStudioState: function(studioName) {
     this.studioCollectionModel.initStudioState(studioName)
-    var currentStudioData = this.studioCollectionModel.currentStudioState
-    this.loadStudioWithPlayer(currentStudioData)
+    // var currentStudioData = this.studioCollectionModel.currentStudioState
+    // this.loadStudioWithPlayer(currentStudioData)
 
-     this.studioCollectionView.toggleActivePlayer('0')
-    this.updatePlayerState()
-
+    //  this.studioCollectionView.toggleActivePlayer('0')
+    // this.updatePlayerState()
+   },
+   
+   buildStudio: function(studioBuildData) {
+    console.log("building STUDIO")
+    this.loadStudioWithPlayer(studioBuildData)
+    setTimeout(this.initTrackPlay.bind(this), 2000)
    },
 
+  loadStudioWithPlayer: function(studioData) {
+    var studioTemplateData = studioData.data
+    players = this.buildPlayers(studioTemplateData)
+    this.studioView.draw(players);
+  },
 
+   initTrackPlay: function() {
+    var trackData = this.studioCollectionModel.sendTrackData()
+    this.setActiveTrack(trackData.currentTrack)
+    console.log("in inittrackplay!!")
+    console.log(document.querySelector('.active'))
+    $('.active').trigger('load')
+    this.playActiveTrack(trackData.currentTrackTime)
+   },
+
+   playActiveTrack: function(trackTime) {
+    var beforeLoadTime = Date.now()
+    console.log("In playactive track!!!")
+    console.log(document.querySelector('.active'))
+    $('.active').bind('loadeddata', function(){
+      console.log("PLAYER CAN PLAY NOW")
+      var afterLoadTime = Date.now()
+      var newTrackTime = ((afterLoadTime - beforeLoadTime)/1000) + trackTime
+      $('.active').prop('currentTime' , newTrackTime)
+      $('.active').trigger('play')
+      this.studioCollectionModel.setStateSynced()
+    }.bind(this, trackTime))
+   },
+
+   setActiveTrack: function(trackNumber) {
+    document.querySelector('#' + trackNumber).classList.add('active')
+   },
   // new Studio Added
   newStudioAdded: function(studioData) {
     console.log("Controller notified of new studio")
@@ -206,11 +243,7 @@ StudioCollection.Controller.prototype = {
     }
   },
 
-  loadStudioWithPlayer: function(studioData) {
-    var studioTemplateData = studioData.data
-    players = this.buildPlayers(studioTemplateData)
-    this.studioView.draw(players);
-  },
+
 
   setNewActiveTrack: function() {
     var currentTrackState = this.studioCollectionView.updateTrackState()

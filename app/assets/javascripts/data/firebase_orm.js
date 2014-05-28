@@ -51,16 +51,25 @@ Data.FirebaseORM.prototype = {
 // needSync status
   needSyncRequested: function(returnedStudioData) {
     console.log("FB ORM - needSync")
-    if ((returnedStudioData.data.listenerCount === 0) && (this.listenerValidAndNotSynced(returnedStudioData))) {
+    if (returnedStudioData.data.listenerCount === 0)  {
       var syncedStudioData = this.packageNewStudioData(returnedStudioData, "add")
-      this.newStudioCreated(syncedStudioData)
+      this.newStudioCreated(syncedStudioData)     
+    }
+
+    if (!this.listenerValidAndSynced(returnedStudioData)) {
       this.subscribedInterface.updateStudioState(syncedStudioData)
     }
-    if (this.listenerValidAndSynced(returnedStudioData)) {
-      var newStudioData = this.packageNewStudioData(returnedStudioData, "add")
-     // this.subscribedInterface.updateStudioState(newStudioData)
-      this.updateStudioState(newStudioData)
+
+    if (this.listenerValidAndSynced) {
+      
     }
+    // && (this.listenerValidAndNotSynced(returnedStudioData) || this.listenerNotValid(returnedStudioData)))
+    
+    // if (this.listenerValidAndSynced(returnedStudioData)) {
+    //   var newStudioData = this.packageNewStudioData(returnedStudioData, "add")
+    //  // this.subscribedInterface.updateStudioState(newStudioData)
+    //   this.updateStudioState(newStudioData)
+    // }
   },
 
 // syncToMe status

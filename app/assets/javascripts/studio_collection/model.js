@@ -25,7 +25,7 @@ StudioCollection.Model.prototype = {
   },
 
   requestSyncedData: function(studioName) {
-    this.subscriber.setStudioToSync(studioName)
+    this.subscriber.sendSyncRequest(studioName)
   },
 
   syncTrackTime: function() {
@@ -48,20 +48,34 @@ StudioCollection.Model.prototype = {
     this.notifyStudioCollectionStateUpdate()
   },
 
+  setStateSynced: function() {
+    this.synced = true
+    if (this.currentStudioState.data.listenerCount === 1) {
+      this.first = true
+    }
+  },
+
   updateStudioState: function(newStudioData) {
     console.log("SCM - updating studio state")
     if (newStudioData.name === this.currentStudioState.name) {
-      this.currentStudioState = newStudioData
-      this.updateCollectionState(newStudioData)
-      var studioIndexToUpdate = this.fetchStudioData(newStudioData.name)
-      this.state[studioIndexToUpdate] = new Studio.Model(newStudioData)
-      this.studioStateChecksumUpdate()
+      this.currentStudioState = newStudioData    
+      this.initStudioBuild() 
+ //     this.studioStateChecksumUpdate()
     }
     else {
-      var studioIndexToUpdate = this.fetchStudioData(newStudioData.name)
-      this.state[studioIndexToUpdate] = new Studio.Model(newStudioData)
+      this.updateCollectionState(newStudioData)
       this.notifyStudioCollectionStateUpdate()
     }
+  },
+  
+  initStudioBuild: function() {
+    var studioData = this.currentStudioState
+    this.controller.buildStudio(studioData)
+  },
+
+  sendTrackData: function() {
+    var trackData = {currentTrack: this.currentStudioState.data.currentTrack, currentTrackTime: this.currentStudioState.data.currentTrackTime }
+    return trackData
   },
 
   updateCollectionState: function(studioData) {
