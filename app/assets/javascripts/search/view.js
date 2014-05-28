@@ -8,15 +8,24 @@ Search.View = function(){
 
 Search.View.prototype = {
   bindEvents: function() {
-    this.bindSearchEvent();
+    this.bindSearchOnSubmit();
+    this.bindSearchOnKeyUp()
     this.bindSongSelectionEvent();
   },
 
-  bindSearchEvent: function() {
+  bindSearchOnSubmit: function() {
     $(this.mainContainerSelector).on( 'submit', function(e) {
       e.preventDefault()
       var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
       method.call(this.eventDelegate.controller, $(e.target).find('input').val())
+    }.bind(this))
+  },
+
+  bindSearchOnKeyUp: function() {
+    $(this.mainContainerSelector).on( 'keyup', 'input', function(e) {
+      e.preventDefault()
+      var method = this.eventDelegate.controller[this.eventDelegate.cbMethods.search]
+      method.call(this.eventDelegate.controller, $(e.target).val())
     }.bind(this))
   },
 
