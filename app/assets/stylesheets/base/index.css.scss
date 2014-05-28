@@ -176,6 +176,10 @@ $BORDER_BUTTON: $charcoal;
   .column.full{
     padding-top: 10%;
   }
+
+  .each-song.column.fourth{
+    width: 50%;
+  }
 }
 
 /* Smartphones */
@@ -211,6 +215,14 @@ $BORDER_BUTTON: $charcoal;
 
   .column.full{
     padding-top: 15%;
+  }
+
+  .each-song.column.fourth{
+    width: 100%;
+  }
+
+  form{
+    margin-bottom: 10%;
   }
 }
 
