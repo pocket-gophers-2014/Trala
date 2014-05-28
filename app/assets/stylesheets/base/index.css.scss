@@ -30,7 +30,7 @@ $BORDER_BUTTON: $charcoal;
 .container {
   margin: 0 auto;
   max-width: 48rem;
-  width: 90%;
+  width: 70%;
 }
 
 @media (min-width: 40rem) {
@@ -69,7 +69,7 @@ $BORDER_BUTTON: $charcoal;
   }
 
   .studio.column.full{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     margin-left: -35px;
     padding: 25px;
   }
@@ -98,14 +98,14 @@ body { font-family: 'Crete Round', serif; }
 
 .navigation {
   border-bottom: 1px solid $white_smoke;
-  border-top: 5px solid $cloud_gray;
+  border-top: 5px solid $HIGHLIGHTS;
   position: fixed;
   z-index: 1;
   width: 100%;
   color: $milk_gray;
   height: 70px;
-  background-color: $mint;
-  color: $cloud_gray;
+  background-color: $THEME_COLOR;
+  color: $HIGHLIGHTS;
   text-align: center;
   border-radius: 0px;
 
@@ -135,12 +135,29 @@ h3:hover {
   opacity: 1.0;
 }
 
+.logo-icon {
+  i {
+    text-align: left;
+  }
+}
+
+// end of main page //
+
+img {
+  border-radius: 3px;
+  opacity: 0.8;
+}
+
+img:hover {
+  opacity: 1.0;
+}
+
 .container {
-  padding-top: 75px;
+  padding-top: 45%;
 }
 
 .room-container {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .front_page_button {
@@ -192,6 +209,8 @@ div {
   h3 { font-size: 20px;}
 }
 
+// inside list_room page //
+
 .studio {
   margin: 4% auto;
   border-radius: 3px;
@@ -201,23 +220,27 @@ div {
 .room_banner {
   h3 {
     opacity: 1.0px;
-    padding: 3%;
+    padding: 0 2%;
+    margin: 0px;
   }
 }
 
-
-img {
-  border-radius: 3px;
-  opacity: 0.8;
+.column{
+  p {
+    font-size: 18px;
+  }
 }
 
-img:hover {
-  opacity: 1.0;
+.list_room_text {
+  padding: 0 3%;
 }
+
+// end list_room page //
+
 
 .each-song {
   img {
-    border-top: 8px solid $mint;
+    border-top: 8px solid $medium_gray;
     border-bottom: 5px solid $cloud_gray;
   }
 }
@@ -237,102 +260,38 @@ img:hover {
   }
 }
 
-.fi-inbox, .fi-mic, .fie-search {
+.fie-search { padding: 0 1%;}
+
+.fi-inbox, .fi-mic{
   padding: 2%;
   text-align: left;
 }
 
-.fi-people, .fi-location {
-  padding: 0 10%;
+footer {
+  p {
+    font-size: 12px;
+  }
+
+  footer.column {
+    background-color: $mint_cream;
+    margin-top: 10%;
+  }
+}
+// inside studi0
+.studio_middle_container {
+  @include container_setup();
+  border: 2px solid $cloud_gray;
+  position: fixed;
+  top: 50%;
+  left: 70%;
+  margin-top: -100px;
+  margin-left: -300px;
 }
 
 
+
+
 // // css /////////////////////////////////////////
-
-// body {
-//   background-image:url("spots_bg.jpg");
-// }
-
-// h1 {
-//   color: $pastel_purple;
-// }
-
-// h3 {
-//   text-align: center;
-//   font-family: 'Play', sans-serif;
-//   opacity: 0.5;
-// }
-
-// p {
-//   margin: 20px auto;
-//   padding: 20px auto;
-//   text-align: center;
-// }
-
-// .main_page_navbar {
-//   margin: 0;
-//   padding: 0;
-//   color: white;
-// }
-
-// .dropdown_menu {
-//   text-align: right;
-// }
-
-// .main_title {
-//   text-align: center;
-// }
-
-// .logo {
-//   background-color: #021934;
-//   font-family: 'Pacifico', cursive;
-//   text-align: center;
-//   font-size: 350%;
-//   color: white;
-//   width: 100%;
-// }
-
-// .song-basket {
-//   margin: 2% auto;
-//   width: 50%;
-//   text-align: center;
-//   font-size: 14px;
-// }
-
-// .search-results {
-//   margin: 2% auto;
-//   width: 25%;
-//   text-align: center;
-//   font-size: 14px;
-//   /*background-color: #F2F1A0;*/
-//   border-radius: 5px;
-//   opacity: 0.3;
-// }
-
-// .search-results:hover {
-//   opacity: 1.0;
-// }
-
-// .room-container {
-//   height: 5%;
-//   margin: 2% auto;
-//   width: 30%;
-//   background-color: $milk_gray;
-//   border: 2px solid white;
-//   border-radius: 10px;
-//   text-align: center;
-//   text: gray;
-// }
-
-// .song-basket {
-//   height: 5%;
-//   margin: 2% auto;
-//   background-color: $caesar_purple;
-//   color: white;
-//   border-radius: 5px;
-//   font-size: 12px
-// }
-
 // #enter-room-msg {
 //   color: $charcoal;
 // }
