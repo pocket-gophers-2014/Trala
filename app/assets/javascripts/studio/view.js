@@ -17,9 +17,3 @@ Studio.View.prototype = {
     $('html').css( 'background', 'red' )
   }
 }
-
-
-
- // change the color
-// var backgroundChange = function(color) { $('html').css('background', color ) }
-
