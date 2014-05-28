@@ -1,13 +1,14 @@
 {{#each songData}}
   <div class="each-song column fourth">
   	<div class="song-header" >
-      <p> {{title}} </p>
+      {{!-- <p> {{title}} </p> --}}
        {{#if artwork_url }}
       <img src="{{artwork_url}}"  id="{{id}}" class="clickable-song">
       {{else}}
       {{!-- display pic of empty track --}}
       <img src="http://static.midomi.com/images/no_album_art.jpg">
     {{/if}}
+      <p id="song-title"> {{title}} </p>
     </div>
   </div>
  {{/each}}
