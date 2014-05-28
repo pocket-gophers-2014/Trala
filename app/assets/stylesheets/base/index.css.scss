@@ -60,6 +60,19 @@ $BORDER_BUTTON: $charcoal;
     font-size: 2.65em;
   }
 
+  .button{
+    margin: 25px;
+  }
+
+  a.button{
+    width: 50%;
+    .front_page_button{
+      padding: 20%;
+    }
+    .fi-mic, .fi-inbox{
+      font-size: 2.75em;
+    }
+  }
 }
 
 /* Tablets */
@@ -73,6 +86,20 @@ $BORDER_BUTTON: $charcoal;
     margin-left: -35px;
     padding: 25px;
   }
+
+  .button{
+    margin: 25px;
+  }
+
+  a.button{
+    width: 50%;
+    .front_page_button{
+      padding: 20%;
+    }
+    .fi-mic, .fi-inbox{
+      font-size: 2em;
+    }
+  }
 }
 
 /* Smartphones */
@@ -85,6 +112,21 @@ $BORDER_BUTTON: $charcoal;
     margin-bottom: 75px;
     margin-left: -35px;
     padding: 25px;
+  }
+
+  .button{
+    margin: 25px;
+  }
+
+  a.button{
+    .front_page_button{
+      padding: 10%;
+      width: 75%;
+
+    }
+    .fi-mic, .fi-inbox{
+      font-size: 1.5em;
+    }
   }
 }
 
