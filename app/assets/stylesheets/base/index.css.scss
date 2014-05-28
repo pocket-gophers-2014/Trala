@@ -134,6 +134,10 @@ $BORDER_BUTTON: $charcoal;
       font-size: 1.75em;
     }
   }
+
+  .column.full{
+    padding-top: 10%;
+  }
 }
 
 /* Smartphones */
@@ -158,11 +162,14 @@ $BORDER_BUTTON: $charcoal;
     .front_page_button{
       padding: 10%;
       width: 75%;
-
     }
     .fi-mic, .fi-inbox{
       font-size: 1.25em;
     }
+  }
+
+  .column.full{
+    padding-top: 15%;
   }
 }
 
@@ -231,7 +238,7 @@ img:hover {
 }
 
 .container {
-  padding-top: 45%;
+  padding-top: 10%;
 }
 
 .room-container {
