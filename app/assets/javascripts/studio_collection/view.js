@@ -6,6 +6,13 @@ StudioCollection.View = function(){
 
 StudioCollection.View.prototype = {
   renderStudioCollection: function(elementData) {
+    /* OH MY GOD MY EYES!  It burns, it burns!  Templates would be great here.
+    *
+    * but i still l<3ve you
+    *
+    * I'm at least glad you've segregated this into a view file. Nice OO
+    *
+    * */
         $('.container ul').append("<li> Name: " + elementData.name + "Listeners: " + elementData.data.listeners + "</li>")
   },
 
@@ -29,6 +36,7 @@ StudioCollection.View.prototype = {
     $(this.mainContainerSelector).empty().append(studioCollectionTemplate)
   },
 
+  /* I feel like these two procedures could be one */
   bindEvents: function() {
     $(this.mainContainerSelector).on('click', this.studioSelector, function(e) {
       var controller = this.eventDelegate.controller;
@@ -36,7 +44,6 @@ StudioCollection.View.prototype = {
       cbMethod.call( controller, e.target.id )
     }.bind(this))
   },
-
 
   registerEventDelegate: function( controller, cbMethod ) {
     this.eventDelegate = { controller: controller, cbMethod: cbMethod }

@@ -1,3 +1,6 @@
+/* this is not the right name, this is like a Playerview or something like that
+ *
+* */
 Studio.View = function(){
 	this.mainContainer = '.main-container'
   this.playlistSongsSelector = '.search-footer-container'

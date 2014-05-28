@@ -12,7 +12,7 @@ Studio.Model.prototype = {
   },
 
   updateCurrentTrackTime: function() {
-    
+    /* herpa derpa wtf */
   },
 
   addUser: function(user) {

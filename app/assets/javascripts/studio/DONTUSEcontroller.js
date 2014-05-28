@@ -1,3 +1,12 @@
+/* rm 'dis
+*
+* you really have to be careful with this becasue even if it has an atrocious
+* filesystem name e.g. DONTUSEcontroller, Rails will still source it.
+*
+* it's tempting to leave stuff in....but that's what git is for.  delete
+* it.  Someone else is going to step on this landmine.
+*
+* */
 Studio.Controller = function(args){
 	// debugger
 	this.model = args.model

@@ -1,3 +1,4 @@
+/* probably a rename due to express wrapping SC */
 Data.SongManager = function() {
     this.clientId = "d74d7683ae187691bec3da7a1798abce"
     this.soundcloud = {}

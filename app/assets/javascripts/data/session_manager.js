@@ -1,3 +1,4 @@
+/* delete me? */
 Data.SessionManager = function() {
    // this.userID = ""
    // this.CurrentPage = ""

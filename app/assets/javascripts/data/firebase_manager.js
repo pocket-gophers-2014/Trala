@@ -1,5 +1,8 @@
 Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
   // mock
+  /* I'm against hard-coding API id's, magic URLs ,etc...pass through from
+   * rails via the templates
+   */
   this.studioCollectionRef= new Firebase('https://tralatest.firebaseio.com/studioCollection')
   this.connectionRef = new Firebase('https://tralatest.firebaseio.com/.info/connected')
   this.studioCollectionModel = studioCollectionModel
@@ -72,6 +75,7 @@ Data.FirebaseManager.prototype = {
 
   },
 
+  /* Here the name could be something like: registerFirebaseCallbackHanders */
   setDataTriggers: function() {
    // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
     this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this))

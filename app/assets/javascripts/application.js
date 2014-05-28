@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//# here is where i would put those prototype overloads
+//= core_js_overrides
 //= require handlebars
 //= require firebase
 //= require_tree ./templates

@@ -1,3 +1,4 @@
+// fist of death warning.
 // StudioBuilder.Controller = function(view) {
 // 	this.newStudioSubscriber = {}
 // 	this.view = view
