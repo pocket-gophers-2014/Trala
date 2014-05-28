@@ -39,16 +39,21 @@ $(document).ready(function() {
   appController.registerStudioCollectionController(studioCollectionController, "renderCollectionPage")
   appController.registerStudioController(studioCollectionController, "loadInitialStudio")
 
+  studioBuilderView = new StudioBuilder.View()
+  studioBuilderController = new StudioBuilder.Controller(studioBuilderView)
+  studioBuilderController.registerNewStudioSubscriber( studioCollectionController, 'initStudioCreation'  )
+
 
   //Studio Setup - TODO cleanup when search is complete
   songManager = new Data.SongManager();
   songManager.init()
   var searchView = new Search.View()
   searchController = new Search.Controller( searchView,  songManager )
-  searchController.registerSongSelectionSubscriber(studioCollectionController, "addSong")
+  searchController.registerSongSelectionSubscriber(studioBuilderController, "addSong")
   appController.registerSearchController(searchController, "loadWidget")
   searchView.registerEventDelegate(searchController, { search: "searchSongs", songSelection: "selectSong" })
   searchView.bindEvents()
   // studioController.init();
+
 
 })

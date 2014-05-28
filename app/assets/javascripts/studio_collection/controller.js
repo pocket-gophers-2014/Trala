@@ -225,26 +225,6 @@ StudioCollection.Controller.prototype = {
     return HandlebarsTemplates['player'](templateData)
   },
 
-  buildPlaylist: function(list) {
-    playlist = { songs: list }
-    return HandlebarsTemplates['song_basket_item'](playlist)
-  },
-
-  // studio builder
-  addSong: function(song) {
-    this.tempPlaylist.push(song)
-    playlist = this.buildPlaylist(this.tempPlaylist)
-    this.studioView.redrawPlaylist(playlist)
-    if (this.tempPlaylist.length > 2) {
-      var name = String(Math.floor(Math.random() * 1000))
-      console.log('adding songs ' + name + '-' + this.tempPlaylist[0])
-      this.initStudioCreation({name: name, data: { playlist: this.tempPlaylist }})
-      this.tempPlaylist = []
-    }
-  },
-
-
-
   setNewActiveTrack: function() {
     var currentTrackState = this.studioCollectionView.updateTrackState()
     if (this.validateTrackNumber(currentTrackState.trackPlaying)) {
