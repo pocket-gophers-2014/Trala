@@ -19,6 +19,7 @@ $BORDER_BUTTON: $charcoal;
 @import 'mixins.scss';
 @import 'media_queries.css';
 
+
 html {
   background-color: $milk_gray;
 }
@@ -206,6 +207,10 @@ div {
   text-align: left;
 }
 
+.fa-thumbs-o-down {
+  padding: 0 5%;
+}
+
 footer {
   p {
     font-size: 12px;
@@ -216,7 +221,8 @@ footer {
     margin-top: 10%;
   }
 }
-// inside studi0
+
+// inside studio
 .studio_middle_container {
   @include container_setup();
   border: 2px solid $cloud_gray;
@@ -226,15 +232,4 @@ footer {
   margin-top: -20%;
   margin-left: -30%;
 }
-
-
-
-
-// // css /////////////////////////////////////////
-// #enter-room-msg {
-//   color: $charcoal;
-// }
-
-
-// /*88888888888888888888888888888888888888888888888*/
 
