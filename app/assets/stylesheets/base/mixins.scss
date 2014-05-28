@@ -1,3 +1,36 @@
+@function white($opacity) {
+  @return rgba(0,0,0, $opacity)
+}
+
+@mixin navigation-list {
+  background-color: $THEME_COLOR;
+  border-bottom: 1px solid $white_smoke;
+  border-top: 2px solid $HIGHLIGHTS;
+  list-style-type:none;
+  width: 100%;
+  height: 70px;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+
+  > li {
+        display:inline;
+        float:left;
+        padding: 6%;
+        text-decoration: none;
+  }
+}
+
+@mixin logo-font() {
+  font: {
+    family: Crete Round;
+    size: 250%;
+    weight: bold;
+  }
+  color: white;
+  text-shadow: 12px;
+}
+
 @mixin container_setup() {
   margin: 2% auto;
   padding: 2%;
@@ -6,13 +39,6 @@
   border-radius: 5px;
 }
 
-@mixin large-text() {
-  font: {
-    family: Pacifico;
-    size: 350%;
-    weight: bold;
-  }
-  color: white;
-  text-shadow: 12px;
-}
+
+
 
