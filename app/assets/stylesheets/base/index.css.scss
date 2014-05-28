@@ -56,7 +56,6 @@ $BORDER_BUTTON: $charcoal;
 
 /* Laptop & Desktop screens */
 @media (min-width: 1100px){
-
   .list_room_text{
     font-size: 2.65em;
   }
@@ -81,11 +80,22 @@ $BORDER_BUTTON: $charcoal;
       font-size: 3.0em;
     }
   }
+
+  .each-song.column.fourth{
+    margin: 2% 0;
+    width: 25%;
+  }
+
+  .song-header{
+    #song-title{
+      margin-top: -5px;
+      font-size: 1.15em;
+    }
+  }
 }
 
 /* Tablets / Small Screen Laptops */
 @media (max-width: 1099px){
-
   .list_room_text{
     font-size: 1.75em;
   }
@@ -109,12 +119,28 @@ $BORDER_BUTTON: $charcoal;
       font-size: 2.25em;
     }
   }
+
+  .each-song.column.fourth{
+    margin: 2% 0;
+    width: 33%;
+  }
+
+  .song-header{
+    #song-title{
+      margin-top: -5px;
+      font-size: 1.35em;
+    }
+  }
+
+  .clickable-song{
+    height: 130px;
+    width: 130px;
+  }
 }
 
 /* Small Tablets */
 
 @media (max-width: 750px){
-
   .list_room_text{
     font-size: 1.5em;
   }
@@ -138,11 +164,27 @@ $BORDER_BUTTON: $charcoal;
   .column.full{
     padding-top: 10%;
   }
+
+  .each-song.column.fourth{
+    width: 50%;
+    margin: 0% auto;
+  }
+
+  .clickable-song{
+    height: 110px;
+    width: 110px;
+  }
+
+.song-header{
+  #song-title{
+      margin-top: 5px;
+      font-size: 1.00em;
+    }
+  } 
 }
 
 /* Smartphones */
 @media (max-width: 450px){
-
   .list_room_text{
     font-size: 1.25em;
   }
@@ -170,6 +212,14 @@ $BORDER_BUTTON: $charcoal;
 
   .column.full{
     padding-top: 15%;
+  }
+
+  .each-song.column.fourth{
+    width: 100%;
+  }
+
+  form{
+    margin-bottom: 10%;
   }
 }
 
@@ -382,6 +432,8 @@ footer {
   color: black;
   position: relative;
   bottom: 10px;
+  height: 50px;
+  margin-bottom: 25px;
 }
 
 
