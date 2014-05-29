@@ -1,7 +1,7 @@
 $(document).ready(function() {
   //geoLocaitonSetup
   locationManager = new Data.LocationManager()
-  locationManager.registerCoords()
+  locationManager.registerBrowserCoords()
 
   studioCollectionModel = new StudioCollection.Model()
   studioCollectionView = new StudioCollection.View()
@@ -11,7 +11,6 @@ $(document).ready(function() {
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
                                                                 studioView: studioView,
-                                                                geoLocation: locationManager
                                                                  })
 
   studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
@@ -40,7 +39,7 @@ $(document).ready(function() {
   appController.registerStudioController(studioCollectionController, "loadInitialStudio")
 
   studioBuilderView = new StudioBuilder.View()
-  studioBuilderController = new StudioBuilder.Controller(studioBuilderView)
+  studioBuilderController = new StudioBuilder.Controller(studioBuilderView, locationManager)
   studioBuilderController.registerNewStudioSubscriber( studioCollectionController, 'initStudioCreation'  )
 
 

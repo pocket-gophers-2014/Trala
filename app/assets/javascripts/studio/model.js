@@ -7,6 +7,7 @@ Studio.Model = function(studio) {
   this.data.currentTrackTime = studio.data.currentTrackTime || 0
   this.data.status = studio.data.status || "synced"
   this.data.syncTimeStamp = studio.data.syncTimeStamp || 0
+  this.data.broswerCoords = studio.data.browserCoords
  }
 
 Studio.Model.prototype = {

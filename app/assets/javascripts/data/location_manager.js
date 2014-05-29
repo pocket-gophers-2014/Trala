@@ -3,11 +3,11 @@ Data.LocationManager = function() {
 }
 
 Data.LocationManager.prototype = {
-	getCoords: function() {
+	getBrowserCoords: function() {
 		return this.startCoords;
 	},
 
-	registerCoords: function(){
+	registerBrowserCoords: function(){
 		if( navigator.geolocation ){
 			navigator.geolocation.getCurrentPosition(this._setCoords.bind(this))
 		}

@@ -1,6 +1,7 @@
-StudioBuilder.Controller = function(view) {
+StudioBuilder.Controller = function(view, locationManager) {
 	this.newStudioSubscriber = {}
 	this.view = view
+	this.locationManager = locationManager
 	this.playlist = []
 }
 
@@ -15,7 +16,8 @@ StudioBuilder.Controller.prototype = {
 
   packageStudioData: function() {
   	var name = String(Math.floor(Math.random() * 1000))
-    this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.playlist } } )
+  	var browserCoords = locationManager.getBrowserCoords()
+    this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.playlist, browserCoords: browserCoords } } )
   },
 
   buildPlaylist: function(playlist) {

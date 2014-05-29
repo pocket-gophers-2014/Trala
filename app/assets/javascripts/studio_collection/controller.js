@@ -2,7 +2,6 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
-  this.geoLocation = args.geoLocation
   this.currentUserState = ""
   this.tempPlaylist = []
 
