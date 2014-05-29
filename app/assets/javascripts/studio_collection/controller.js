@@ -23,6 +23,9 @@ StudioCollection.Controller.prototype = {
    
    buildStudio: function(studioBuildData) {
     this.loadStudioWithPlayer(studioBuildData)
+    
+      var tdiff = (Date.now() - studioBuildData.data.syncTimeStamp) / 1000
+      console.log("BUILD STUDIO Time difference: " + tdiff)
     var preLoadTime = Date.now()
     setTimeout(this.initTrackPlay.bind(this, preLoadTime), 2000)
    },
@@ -33,20 +36,22 @@ StudioCollection.Controller.prototype = {
     this.studioView.draw(players);
   },
 
-   initTrackPlay: function(preLoadTime) {
+  initTrackPlay: function(preLoadTime) {
+    var tdiff = (Date.now() - this.studioCollectionModel.currentStudioState.data.syncTimeStamp) / 1000
+    console.log("INITTRACKPLAY - Time difference: " + tdiff)
     var trackData = this.studioCollectionModel.syncedTrackData()
     this.setActiveTrack(trackData.currentTrack)
     var trackTime = trackData.currentTrackTime
-    this.activePlayer.load()
-    this.activePlayer.addEventListener('load', this.playActiveTrack.bind(this, trackTime), false)
-   //this.activePlayer.addEventListener('canplay', this.playActiveTrack.bind(this), false)
-    //this.playActiveTrack(trackData.currentTrackTime, preLoadTime)
+    this.activePlayer.load() 
+    this.boundListenerEvent = this.playActiveTrack.bind(this, trackTime, preLoadTime)
+    this.activePlayer.addEventListener('load', this.boundListenerEvent, false)
+    this.activePlayer.addEventListener('canplay', this.boundListenerEvent, false)
    },
 
-   playActiveTrack: function() { 
-    this.activePlayer.load()
-    debugger
+   playActiveTrack: function(trackTime, preLoadTime) { 
       var afterLoadTime = Date.now()
+      var tDiff = ((afterLoadTime - preLoadTime)/1000)
+      console.log("Time difference at play track point: " + tDiff )
       if (trackTime === 0) {
         this.activePlayer.play()
       }
@@ -55,7 +60,8 @@ StudioCollection.Controller.prototype = {
         this.activePlayer.play()
         this.activePlayer.currentTime = newTrackTime
       }
-      this.activePlayer.removeEventListener('load', this.playActiveTrack.bind(this), false)
+      this.activePlayer.removeEventListener('load', this.boundListenerEvent, false)
+      this.activePlayer.removeEventListener('canplay', this.boundListenerEvent, false)
       this.studioCollectionModel.setStateSynced()
    },
 
@@ -63,7 +69,7 @@ StudioCollection.Controller.prototype = {
     document.querySelector('#' + trackNumber).classList.add('active')
     this.activePlayer = document.querySelector('.active')
    },
-  // new Studio Added
+
   newStudioAdded: function(studioData) {
     console.log("Controller notified of new studio")
     // check user page state
