@@ -54,7 +54,7 @@ $BORDER_BUTTON: $charcoal;
   display: table;
 }
 
-/* Laptop & Desktop screens */
+/*** LAPTOP & DESKTOP SCREENS ***/
 @media (min-width: 1100px){
   .list_room_text{
     font-size: 2.65em;
@@ -94,7 +94,7 @@ $BORDER_BUTTON: $charcoal;
   }
 }
 
-/* Tablets / Small Screen Laptops */
+/*** TABLETS / SMALL SCREEN LAPTOPS ***/
 @media (max-width: 1099px){
   .list_room_text{
     font-size: 1.75em;
@@ -136,9 +136,17 @@ $BORDER_BUTTON: $charcoal;
     height: 130px;
     width: 130px;
   }
+
+  .studio_middle_container {
+    i{
+      margin-top: 35%;
+    }
+    vertical-align: middle;
+    text-align: center;
+  }
 }
 
-/* Small Tablets */
+/*** SMALL TABLETS ***/
 
 @media (max-width: 750px){
   .list_room_text{
@@ -175,15 +183,23 @@ $BORDER_BUTTON: $charcoal;
     width: 110px;
   }
 
-.song-header{
-  #song-title{
+  .song-header{
+    #song-title{
       margin-top: 5px;
       font-size: 1.00em;
     }
   } 
+
+  .studio_middle_container {
+    i{
+      margin-top: 15%;
+    }
+    vertical-align: middle;
+    text-align: center;
+  }
 }
 
-/* Smartphones */
+/*** SMARTPHONES ***/
 @media (max-width: 450px){
   .list_room_text{
     font-size: 1.25em;
@@ -220,6 +236,14 @@ $BORDER_BUTTON: $charcoal;
 
   form{
     margin-bottom: 10%;
+  }
+
+  .studio_middle_container {
+    i{
+      margin-top: 15%;
+    }
+    vertical-align: middle;
+    text-align: center;
   }
 }
 
@@ -416,13 +440,9 @@ footer {
 }
 // inside studi0
 .studio_middle_container {
-  @include container_setup();
-  border: 2px solid $cloud_gray;
-  position: fixed;
-  top: 50%;
-  left: 70%;
-  margin-top: -20%;
-  margin-left: -30%;
+  margin-bottom: 25%;
+  vertical-align: middle;
+  text-align: center;
 }
 
 
