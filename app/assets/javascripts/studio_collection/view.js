@@ -54,7 +54,7 @@ StudioCollection.View.prototype = {
 
   toggleActivePlayer: function(newTrackNumber) {
   //  document.querySelector('.active').classList.remove('active')
-    document.querySelector('#track' + newTrackNumber).classList.add('active')
+    document.querySelector('#' + newTrackNumber).classList.add('active')
   }
 
 }

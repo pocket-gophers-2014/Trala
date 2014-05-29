@@ -22,13 +22,7 @@ StudioCollection.Model.prototype = {
     this.subscriber.sendSyncRequest(studioName)
   },
 
-  syncTrackTime: function() {
-    var timeDifference = ((Date.now() - this.currentStudioState.data.syncTimeStamp) / 1000 ) 
-    var newTrackTime = timeDifference + this.currentStudioState.data.currentTrackTime
-    this.currentStudioState.data.currentTrackTime = newTrackTime
-  },
-
-  createNewStudio: function(newStudioData) {
+ createNewStudio: function(newStudioData) {
     this.updateCollectionState(newStudioData)
     this.notifyStudioCollectionStateUpdate()
   },

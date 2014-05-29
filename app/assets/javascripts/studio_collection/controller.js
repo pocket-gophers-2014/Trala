@@ -9,9 +9,7 @@ StudioCollection.Controller = function(args) {
 }
 
 StudioCollection.Controller.prototype = {
-  // New Model and ORM response
 
-  // Fresh Studio Creation
   initStudioCreation: function(studioData) {
     this.studioCollectionModel.freshStudioCreation(studioData)
     this.initUserStudioState(studioData.name)
@@ -23,9 +21,8 @@ StudioCollection.Controller.prototype = {
    
    buildStudio: function(studioBuildData) {
     this.loadStudioWithPlayer(studioBuildData)
-    
-      var tdiff = (Date.now() - studioBuildData.data.syncTimeStamp) / 1000
-      console.log("BUILD STUDIO Time difference: " + tdiff)
+    var tdiff = (Date.now() - studioBuildData.data.syncTimeStamp) / 1000
+    console.log("BUILD STUDIO Time difference: " + tdiff)
     var preLoadTime = Date.now()
     setTimeout(this.initTrackPlay.bind(this, preLoadTime), 2000)
    },
