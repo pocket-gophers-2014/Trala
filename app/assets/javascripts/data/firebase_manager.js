@@ -1,12 +1,11 @@
-Data.FirebaseManager = function(fbRefUrl, studioCollectionModel) {
-  // mock
-  this.studioCollectionRef= new Firebase('https://tralatest.firebaseio.com/studioCollection')
-  this.connectionRef = new Firebase('https://tralatest.firebaseio.com/.info/connected')
-  this.studioCollectionModel = studioCollectionModel
+Data.FirebaseManager = function(fbRefUrl, fbORM) {
+  this.studioCollectionRef= new Firebase('https://trala.firebaseio.com/studioCollection')
+  this.connectionRef = new Firebase('https://trala.firebaseio.com/.info/connected')
+  this.fbORM = fbORM
 }
 
 Data.FirebaseManager.prototype = {
-  addStudio: function(studio) {
+  createStudio: function(studio) {
     this.studioCollectionRef.child(studio.name).set(studio.data)
   },
 
@@ -16,11 +15,10 @@ Data.FirebaseManager.prototype = {
 
   setConnectionMonitor: function(studioName) {
     this.studioRef = new Firebase('https://trala.firebaseio.com/studioCollection/' + studioName)
-    this.studioRef.onDisconnect().update({ removelistener: true })
+    this.studioRef.onDisconnect().update({ status: "removeListener" })
   },
 
   modifyStudioState: function(newStudioData) {
-
     this.studioCollectionRef.child(newStudioData.name).update(newStudioData.data)
   },
 
@@ -28,24 +26,21 @@ Data.FirebaseManager.prototype = {
     this.studioCollectionRef.set(null)
   },
 
-  studioRemoved: function(data) {
+  studioDestroyed: function(data) {
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStateReactor(studioData, "destroy")
+    this.fbORM.studioDestroyed(studioData)
   },
 
   studioStateModified: function(data) {
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStudioStateReactor(studioData)
+    this.fbORM.interpretStudioStatus(studioData)
   },
-
-  newStudioAdded: function(data) {
+  
+  newStudioCreated: function(data) {
     var studioData = this.packageStudioData(data)
-    this.studioCollectionModel.subscriberStateReactor(studioData, "add")
-  },
-
-  initialCollectionState: function(data) {
-    var studioCollectionData = this.packageStudioCollectionData(data)
-    this.studioCollectionModel.initialStateGenerate(studioCollectionData)
+    if (studioData.data.listenerCount !== 0) {
+      this.fbORM.newStudioCreated(studioData)
+    }
   },
 
   packageStudioData: function(data) {
@@ -53,30 +48,9 @@ Data.FirebaseManager.prototype = {
     return studioData
   },
 
-  packageStudioCollectionData: function(data) {
-    var tempData = []
-    data.forEach(function(data) {
-      var tempObj = { name: data.name(), data: data.val() }
-     tempData.push(tempObj)
-   })
-    return tempData
-  },
-
-  connectionStateUpdate: function(snapData) {
-    if (snapData.val()) {
-      console.log("here")
-    }
-    else {
-      console.log("gone")
-    }
-
-  },
-
   setDataTriggers: function() {
-   // this.studioCollectionRef.once('value', this.initialCollectionState.bind(this))
-    this.studioCollectionRef.on('child_added', this.newStudioAdded.bind(this))
+    this.studioCollectionRef.on('child_added', this.newStudioCreated.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
-   // this.studioCollectionRef.on('child_removed', this.studioRemoved.bind(this))
-   // this.connectionRef.on('value', this.connectionStateUpdate.bind(this))
+    this.studioCollectionRef.on('child_removed', this.studioDestroyed.bind(this))
   }
 }

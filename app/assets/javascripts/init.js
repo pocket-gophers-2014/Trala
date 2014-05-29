@@ -1,7 +1,7 @@
 $(document).ready(function() {
   //geoLocaitonSetup
   locationManager = new Data.LocationManager()
-  locationManager.registerCoords()
+  locationManager.registerBrowserCoords()
 
   studioCollectionModel = new StudioCollection.Model()
   studioCollectionView = new StudioCollection.View()
@@ -10,18 +10,22 @@ $(document).ready(function() {
 
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
+                                                                locationManager: locationManager,
                                                                 studioView: studioView,
-                                                                geoLocation: locationManager
                                                                  })
 
   studioCollectionView.registerEventDelegate(studioCollectionController, 'initUserStudioState')
   studioCollectionView.bindEvents()
 
-  // mock
-  fbTest = new Data.FirebaseManager('https://tralatest.firebaseio.com/studioCollection', studioCollectionModel)
-  studioCollectionModel.registerStudioCollectionSubscriber(fbTest)
+  
   studioCollectionModel.registerController(studioCollectionController)
+  // studioCollectionController.initStudioCollection()
+ // new firebaseORM interface
+  firebaseORM = new Data.FirebaseORM(studioCollectionModel)
+  fbTest = new Data.FirebaseManager('https://trala.firebaseio.com/studioCollection', firebaseORM)
+  studioCollectionModel.registerStudioCollectionSubscriber(firebaseORM)
   fbTest.setDataTriggers()
+  firebaseORM.registerFirebaseManager(fbTest)
 
 
   // studioCollectionController.initStudioCollection()
@@ -32,8 +36,12 @@ $(document).ready(function() {
 
   appView.registerEventDelegate(appController)
   appView.bindEvents()
-  appController.registerStudioCollectionController(studioCollectionController, "renderStudioCollection")
+  appController.registerStudioCollectionController(studioCollectionController, "renderCollectionPage")
   appController.registerStudioController(studioCollectionController, "loadInitialStudio")
+
+  studioBuilderView = new StudioBuilder.View()
+  studioBuilderController = new StudioBuilder.Controller(studioBuilderView, locationManager)
+  studioBuilderController.registerNewStudioSubscriber( studioCollectionController, 'initStudioCreation'  )
 
 
   //Studio Setup - TODO cleanup when search is complete
@@ -41,10 +49,11 @@ $(document).ready(function() {
   songManager.init()
   var searchView = new Search.View()
   searchController = new Search.Controller( searchView,  songManager )
-  searchController.registerSongSelectionSubscriber(studioCollectionController, "addSong")
+  searchController.registerSongSelectionSubscriber(studioBuilderController, "addSong")
   appController.registerSearchController(searchController, "loadWidget")
   searchView.registerEventDelegate(searchController, { search: "searchSongs", songSelection: "selectSong" })
   searchView.bindEvents()
   // studioController.init();
+
 
 })

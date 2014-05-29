@@ -3,3 +3,4 @@ StudioCollection = {}
 Data = {}
 Search = {}
 App = {}
+StudioBuilder = {}

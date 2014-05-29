@@ -41,9 +41,20 @@ StudioCollection.View.prototype = {
   registerEventDelegate: function( controller, cbMethod ) {
     this.eventDelegate = { controller: controller, cbMethod: cbMethod }
   },
+  
+  syncPlayer: function(trackData) {
+    document.querySelector('.active').currentTime = trackData.currentTrackTime
+  },
 
-  updateTrackState: function(trackData) {
-    document.getElementById('audio_player').currentTime = trackData
+  updatePlayerData: function() {
+    var updatedTrackTime = document.querySelector('.active').currentTime
+    var updatedTrackNumber = document.querySelector('.active').id
+    return { trackTime: updatedTrackTime, trackPlaying: updatedTrackNumber }
+  },
+
+  toggleActivePlayer: function(newTrackNumber) {
+  //  document.querySelector('.active').classList.remove('active')
+    document.querySelector('#' + newTrackNumber).classList.add('active')
   }
 
 }
