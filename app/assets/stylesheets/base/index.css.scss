@@ -1,53 +1,18 @@
-//import other files and libraries here
-@import 'theme_colors.css.scss';
-@import 'mixins.scss';
-@import 'media_queries.css';
+//import other files, partials, libraries here
+//import order is important!
 
-html {
-  background-color: $milk_gray;
-}
+@import 'theme_colors.css.scss';    //load colors
+@import 'mixins.scss';              //load mixins, functions
+@import 'media_queries.css';        //for all screen resolutions
+@import 'base_elements.css.scss';   //for constant elements on page
+@import 'search_room.css.scss';     //load search room
+@import 'list_room.css.scss';
+@import 'inside_room.css.scss';
 
-body { font-family: 'Crete Round', serif; }
-
+// home page
 .navigation {
   @include navigation-list();
   @include logo-font();
-}
-
-h3 {
-  text-align: center;
-  text-transform: uppercase;
-  opacity: 0.5;
-  font-size: 25px;
-}
-
-h3:hover {
-  opacity: 1.0;
-}
-
-.logo-icon {
-  i {
-    text-align: left;
-  }
-}
-
-// end of main page //
-
-img {
-  border-radius: 3px;
-  opacity: 0.8;
-}
-
-img:hover {
-  opacity: 1.0;
-}
-
-.container {
-  padding-top: 10%;
-}
-
-.room-container {
-  padding-top: 20px;
 }
 
 .front_page_button {
@@ -57,10 +22,6 @@ img:hover {
   text-decoration: none;
   height: 55%;
   display: block;
-}
-
-div {
-    text-align: center;
 }
 
 .button {
@@ -78,118 +39,7 @@ div {
   white-space: nowrap;
 }
 
-.search-room-container {
-  margin: 2% auto;
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  border-radius: 3px;
-}
-
-.search-footer-container, .track-information {
-  position: fixed;
-  left:0px;
-  bottom:0px;
-  clear: both;
-  text-align: center;
-  width: 100%;
-  background-color: $medium_gray;
-  border-top: $mint_cream;
-
-  h3 { font-size: 20px;}
-}
-
-// inside list_room page //
-
-.studio {
-  margin: 4% auto;
-  border-radius: 3px;
-  border: 3px solid $mint_cream;
-}
-
-.room_banner {
-  h3 {
-    opacity: white(0.8);
-    padding: 0 2%;
-    margin: 0px;
-  }
-}
-
-.column{
-  p {
-    font-size: 18px;
-  }
-}
-
-.list_room_text {
-  padding: 0 3%;
-}
-
-// end list_room page //
-
-
-.each-song {
-  // changechange
-  position: relative;
-  img {
-    border-top: 8px solid $medium_gray;
-    border-bottom: 5px solid $cloud_gray;
-  }
-}
-
-
-.logo-text {
-  text-align: center;
-}
-
-
-.song-header {
-  color: $white;
-  content: "title";
-  p {
-    font-size: 10px;
-    opacity: 0.5;
-  }
-}
-
-.fie-search { padding: 0 1%;}
-
-.fi-inbox, .fi-mic{
-  padding: 2%;
-  text-align: left;
-}
-
-footer {
-  p {
-    font-size: 12px;
-  }
-
-  footer.column {
-    background-color: $mint_cream;
-    margin-top: 10%;
-  }
-}
-// inside studi0
-.studio_middle_container {
-  @include container_setup();
-  border: 2px solid $cloud_gray;
-  position: fixed;
-  top: 50%;
-  left: 70%;
-  margin-top: -20%;
-  margin-left: -30%;
-}
-
-
- // CHANGECHANGE
-#song-title {
-  z-index: 100;
-  color: black;
-  position: relative;
-  bottom: 10px;
-  height: 50px;
-  margin-bottom: 25px;
-}
+// end of main page //
 
 
 

@@ -1,0 +1,57 @@
+@import 'theme_colors.css.scss';
+@import 'mixins.scss';
+// search room styles
+
+.container {
+  padding-top: 10%;
+}
+
+.room-container {
+  padding-top: 20px;
+}
+
+.search-room-container {
+  margin: 2% auto;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 3px;
+}
+
+.search-footer-container, .track-information {
+  position: fixed;
+  left:0px;
+  bottom:0px;
+  clear: both;
+  text-align: center;
+  width: 100%;
+  background-color: $medium_gray;
+  border-top: $mint_cream;
+
+  h3 {
+    font-size: 20px;
+  }
+}
+
+.each-song {
+  // changechange
+  position: relative;
+  img {
+    border-top: 8px solid $medium_gray;
+    border-bottom: 5px solid $cloud_gray;
+  }
+}
+
+.logo-text {
+  text-align: center;
+}
+
+.song-header {
+  color: $white;
+  content: "title";
+  p {
+    font-size: 10px;
+    opacity: 0.5;
+  }
+}
+// end search room //
