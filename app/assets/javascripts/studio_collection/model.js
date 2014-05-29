@@ -46,7 +46,7 @@ StudioCollection.Model.prototype = {
       this.updateCollectionState(newStudioData)
       this.currentStudioState = newStudioData   
       console.log("Sync time stamp:" + this.currentStudioState.data.syncTimeStamp)
-      var tdiff = (Date.now() - this.currentStudioState.data.syncTimeStamp + 2000) / 1000
+      var tdiff = (Date.now() - this.currentStudioState.data.syncTimeStamp + 3000) / 1000
       console.log("Time difference: " + tdiff)
       this.initStudioBuild() 
     }
