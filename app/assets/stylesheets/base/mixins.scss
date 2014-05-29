@@ -1,3 +1,9 @@
+@import 'theme_colors.css.scss';
+
+@function white($opacity) {
+  @return rgba(0,0,0, $opacity)
+}
+
 @mixin container_setup() {
   margin: 2% auto;
   padding: 2%;
@@ -6,13 +12,44 @@
   border-radius: 5px;
 }
 
-@mixin large-text() {
+@mixin navigation-list {
+  border-bottom: 1px solid $white_smoke;
+  background-color: $THEME_COLOR;
+  color: $HIGHLIGHTS;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  border-radius: 0px;
+  overflow: visible;
+  float: left;
+
+  ul {
+    height: auto;
+    margin: 0px;
+  }
+
+  li {
+    display: block;
+    text-decoration: none;
+    color: $white;
+    font-weight: bold;
+    font-size: 40px;
+  }
+}
+
+@mixin logo-font() {
   font: {
-    family: Pacifico;
-    size: 350%;
+    family: Crete Round;
+    size: 250%;
     weight: bold;
   }
   color: white;
   text-shadow: 12px;
 }
+
+
+
+
 

@@ -1,0 +1,65 @@
+@import 'theme_colors.css.scss';
+@import 'mixins.scss';
+
+// base elements
+
+html {
+  background-color: $milk_gray;
+}
+
+body { font-family: 'Crete Round', serif; }
+
+
+h3 {
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-size: 25px;
+}
+
+h3:hover {
+  opacity: 1.0;
+}
+
+.logo-icon {
+  i {
+    text-align: left;
+  }
+}
+
+div {
+  text-align: center;
+  text-decoration: none;
+}
+
+img {
+  border-radius: 3px;
+  opacity: 0.8;
+}
+
+img:hover {
+  opacity: 1.0;
+}
+
+footer {
+  p {
+    font-size: 12px;
+  }
+
+  footer.column {
+    background-color: $mint_cream;
+    margin-top: 10%;
+  }
+}
+
+
+
+.fie-search {
+  padding: 0 1%;
+}
+
+.fi-inbox, .fi-mic {
+  padding: 2%;
+  text-align: left;
+}
+

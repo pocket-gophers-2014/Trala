@@ -1,0 +1,38 @@
+@import 'theme_colors.css.scss';    //load colors
+@import 'mixins.scss';              //load mixins, functions
+
+// home page
+.navigation {
+  @include navigation-list();
+  @include logo-font();
+}
+
+.front_page_button {
+  @include container_setup();
+  border: 2px solid $medium_gray;
+  background-color: $white_smoke;
+  text-decoration: none;
+  height: 60%;
+  display: block;
+}
+
+.button {
+  width: 200px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  text-decoration: none;
+  color: $THEME_COLOR;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.button:hover {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#logo-word {
+  text-decoration: none;
+}
+

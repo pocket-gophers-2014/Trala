@@ -1,15 +1,4 @@
-//import other files, partials, libraries here
-//import order is important!
-@import 'theme_colors.css.scss';    //load colors
-@import 'mixins.scss';              //load mixins, functions
-@import 'base_elements.css.scss';   //for constant elements on page
-@import 'home_page.css.scss';
-@import 'search_room.css.scss';     //load search room
-@import 'list_room.css.scss';
-@import 'inside_room.css.scss';
-
-
-/* MEDIA QUERIES */   //for all screen resolutions
+/* MEDIA QUERIES */
 
 /* All Devices */
 *, *:before, *:after {

@@ -18,8 +18,10 @@ Data.SongManager.prototype = {
         streamable: true
       },
       function(tracks) {
-        tracks = this.appendClientIdToTracks(tracks)
-        tracks = this.dropTracksWithoutArtwork(tracks)
+        tracks = this.appendClientIdToTracks( tracks )
+        tracks = this.dropTracksWithoutArtwork( tracks )
+        tracks = this.dropTracksWithoutUrl( tracks )
+        tracks = this.editTitle( tracks )
         callback(tracks)
     	}.bind(this))
   },
@@ -39,7 +41,26 @@ Data.SongManager.prototype = {
       }
     }
     return tracksWithArt
+  },
+
+  dropTracksWithoutUrl: function(tracks) {
+    tracksWithUrl = []
+    for (var i = 0; i < tracks.length; i++ ) {
+      if ( tracks[i].stream_url !== null ) {
+        tracksWithUrl.push(tracks[i])
+      }
+    }
+    return tracksWithUrl
+  },
+
+  editTitle: function( tracks ) {
+    allTracks = []
+    for (var i = 0; i < tracks.length; i++ ) {
+      tracks[i]["title"] = tracks[i]["title"].replace(/^-\d\d|-/, '')
+      tracks[i]["title"] = tracks[i]["title"].substring( 0, 20 ) + " ..."
+      allTracks.push( tracks[i] )
+    }
+    return allTracks
   }
 
 }
-
