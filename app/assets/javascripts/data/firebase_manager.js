@@ -1,6 +1,6 @@
 Data.FirebaseManager = function(fbRefUrl, fbORM) {
-  this.studioCollectionRef= new Firebase('https://tralatestbase.firebaseio.com/studioCollection')
-  this.connectionRef = new Firebase('https://tralatestbase.firebaseio.com/.info/connected')
+  this.studioCollectionRef= new Firebase('https://tralafuck.firebaseio.com/studioCollection')
+  this.connectionRef = new Firebase('https://tralafuck.firebaseio.com/.info/connected')
   this.fbORM = fbORM
 }
 
@@ -14,7 +14,7 @@ Data.FirebaseManager.prototype = {
   },
 
   setConnectionMonitor: function(studioName) {
-    this.studioRef = new Firebase('https://tralatestbase.firebaseio.com/studioCollection/' + studioName)
+    this.studioRef = new Firebase('https://tralafuck.firebaseio.com/studioCollection/' + studioName)
     this.studioRef.onDisconnect().update({ status: "removeListener" })
   },
 

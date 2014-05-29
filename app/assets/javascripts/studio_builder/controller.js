@@ -1,34 +1,37 @@
-// StudioBuilder.Controller = function(view) {
-// 	this.newStudioSubscriber = {}
-// 	this.view = view
-// 	this.playlist = []
-// }
+StudioBuilder.Controller = function(view, locationManager) {
+	this.newStudioSubscriber = {}
+	this.view = view
+	this.locationManager = locationManager
+	this.playlist = []
+}
 
-// StudioBuilder.Controller.prototype = {
-// 	addSong: function(song) {
-//     this.tempPlaylist.push(song)
-//     playlist = this.buildPlaylist(this.tempPlaylist)
-//     this.view.redrawPlaylist(playlist)
-//     if (this.tempPlaylist.length > 2) {
-//       var name = String(Math.floor(Math.random() * 1000))
-//       this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.tempPlaylist } } )
-//       this.tempPlaylist = []
-//       this.initUserStudioState(name)
-//     }
-//   },
+StudioBuilder.Controller.prototype = {
+	addSong: function(song) {
+    this.playlist.push(song)
+    this.view.redrawPlaylist(this.buildPlaylist(this.playlist))
+    if (this.playlist.length > 2) {
+      this.notifyNewStudioSubscribers( this.packageStudioData() );
+    }
+  },
 
-//   buildPlaylist: function(playlist) {
-//     playlist = { songs: playlist }
-//     return HandlebarsTemplates['song_basket_item'](playlist)
-//   },
+  packageStudioData: function() {
+  	var name = String(Math.floor(Math.random() * 1000))
+  	var browserCoords = locationManager.getBrowserCoords()
+    this.notifyNewStudioSubscribers( {name: name, data: { playlist: this.playlist, browserCoords: browserCoords } } )
+  },
 
-// 	registerNewStudioSubscriber: function( controller, cbMethod ) {
-// 		this.newStudioSubscriber = { controller: controller cbMethod: cbMethod }
-// 	},
+  buildPlaylist: function(playlist) {
+    playlist = { songs: playlist }
+    return HandlebarsTemplates['song_basket_item'](playlist)
+  },
 
-// 	notifyNewStudioSubscribers: function(studioData) {
-// 		var controller = this.newStudioSubscriber.controller
-// 		var cbMethod = controller[this.newStudioSubscriber.cbMethod]
-// 		cbMethod.call( controller, studioData )
-// 	}
-// }
+	registerNewStudioSubscriber: function( controller, cbMethod ) {
+		this.newStudioSubscriber = { controller: controller, cbMethod: cbMethod }
+	},
+
+	notifyNewStudioSubscribers: function(studioData) {
+		var controller = this.newStudioSubscriber.controller
+		var cbMethod = controller[this.newStudioSubscriber.cbMethod]
+		cbMethod.call( controller, studioData )
+	}
+}
