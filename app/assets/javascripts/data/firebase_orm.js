@@ -4,29 +4,24 @@ Data.FirebaseORM = function(subscribedInterface){
 }
 
 Data.FirebaseORM.prototype = {
-  // New Studio Created
+
   newStudioCreated: function(newStudioData) {
-    console.log("New Studio Created FB ORM")
-    if (this.validateStudio(newStudioData)) {
-      this.subscribedInterface.createNewStudio(newStudioData)
+    if (this.canDestroyStudio(newStudioData)) {
+      this.removeStudio(newStudioData.name)   
     }
     else {
-      this.removeStudio(newStudioData.name)
+      this.subscribedInterface.createNewStudio(newStudioData)
     }
   },
 
-  // Create new studio
   createStudio: function(newStudioData) {
     this.firebaseManager.createStudio(newStudioData)
   },
 
-  // Studio Destroyed
   studioDestroyed: function(studioData) {
-    console.log("Studio Destroyed FB ORM")
     this.subscribedInterface.removeStudio(studioData)
   },
 
-// Studio status management
   interpretStudioStatus: function(returnedStudioData) {
     if (returnedStudioData.data.status === "needSync") {
       this.needSyncRequested(returnedStudioData)
@@ -42,9 +37,7 @@ Data.FirebaseORM.prototype = {
     }
   },
 
-// needSync status
   needSyncRequested: function(returnedStudioData) {
-    console.log("FB ORM - needSync")
     if ((returnedStudioData.data.listenerCount === 0) && (this.listenerValidAndNotSynced(returnedStudioData)))  {
       var syncedStudioData = this.packageNewStudioData(returnedStudioData, "add")
       this.subscribedInterface.updateStudioState(syncedStudioData) 
@@ -57,16 +50,13 @@ Data.FirebaseORM.prototype = {
     }
   },
 
-// syncToMe status
   syncCurrentStudioState: function(newStudioData) {
-    console.log("FB ORM - sync data")
     if ( (this.listenerValidAndNotSynced(newStudioData)) || (this.listenerNotValid(newStudioData)) )  {
       this.subscribedInterface.updateStudioState(newStudioData)
     }
   },
 
   syncStudioData: function(syncedStudioData) {
-    console.log("updating FB with synced data")
     var packagedSyncedData = this.packageNewStudioData(syncedStudioData, "none")
     this.updateStudioState(packagedSyncedData)
   },
@@ -76,9 +66,8 @@ Data.FirebaseORM.prototype = {
   },
 
   toggleListenerCount: function(studioData) {
-    console.log("FB ORM - Removing listener")
-    if (!this.validateStudio(studioData)) {
-      this.removeStudio(studioData)
+    if (this.canDestroyStudio(studioData)) {
+      this.removeStudio(studioData.name)
     }
     else {
       if (this.listenerValidAndSynced) {
@@ -89,16 +78,15 @@ Data.FirebaseORM.prototype = {
     }
   },
   
-  validateStudio: function(studioData) {
-    if ((studioData.data.status === "removeListener") && (studioData.data.listenerCount === 1)) {
-      return false
+  canDestroyStudio: function(studioData) {
+    if ((studioData.data.status === "removeListener") && (studioData.data.listenerCount < 2)) {
+      return true
     }
     else {
-      return true
+      return false
     }
   },
 
- // Confirms listener in studio and synced
   listenerValidAndSynced: function(studioDataChecksum) {
     if ((this.subscribedInterface.synced) && (this.subscribedInterface.currentStudioState.name === studioDataChecksum.name) && (this.subscribedInterface.first)) {
       return true

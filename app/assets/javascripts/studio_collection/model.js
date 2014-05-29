@@ -3,18 +3,15 @@ StudioCollection.Model = function() {
   this.currentStudioState = {}
   this.synced = false
   this.studioCreator = false
-  this.syncPending = false
 }
 
 StudioCollection.Model.prototype = {
 
   freshStudioCreation: function(freshStudioData) {
-    console.log("SCM - freshSC - sdata: " + freshStudioData)
     var newStudioData = new Studio.Model(freshStudioData)
     this.subscriber.createStudio(newStudioData)
   },
 
-  // New user joins studio
   initStudioState: function(studioName) {
     this.currentStudioState.name = studioName 
     this.subscriber.setMonitorActivation(studioName)
@@ -22,7 +19,6 @@ StudioCollection.Model.prototype = {
   },
 
   requestSyncedData: function(studioName) {
-    this.syncPending = true
     this.subscriber.sendSyncRequest(studioName)
   },
 
@@ -33,14 +29,11 @@ StudioCollection.Model.prototype = {
   },
 
   createNewStudio: function(newStudioData) {
-    console.log("New Studio Created on SCM")
-    var newStudio = new Studio.Model(newStudioData)
-    this.state.push(newStudio)
+    this.updateCollectionState(newStudioData)
     this.notifyStudioCollectionStateUpdate()
   },
 
   removeStudio: function(studioData) {
-    console.log("Removing Studio from SCM")
     var studioToRemove = this.fetchStudioData(studioData.name)
     this.state.remove(studioToRemove.index)
     this.notifyStudioCollectionStateUpdate()
@@ -55,7 +48,6 @@ StudioCollection.Model.prototype = {
   },
 
   updateStudioState: function(newStudioData) {
-    console.log("SCM - updating studio state")
     if (newStudioData.name === this.currentStudioState.name) {
       this.updateCollectionState(newStudioData)
       this.currentStudioState = newStudioData    
@@ -72,7 +64,7 @@ StudioCollection.Model.prototype = {
     this.controller.buildStudio(studioData)
   },
 
-  sendTrackData: function() {
+  syncedTrackData: function() {
     var trackData = {currentTrack: this.currentStudioState.data.currentTrack, currentTrackTime: this.currentStudioState.data.currentTrackTime }
     return trackData
   },
@@ -113,14 +105,11 @@ StudioCollection.Model.prototype = {
       this.notifyCurrentStudioStateUpdate()  
     }
     else if (!this.synced) {
-      console.log('SCM - syncing track data')
       this.syncTrackTime()
       this.synced = true
-      this.syncPending = false  
     }
   },
 
- // Notify
   notifyCorrectStudioState: function() {
     console.log("SCM - notifying controller to update track state")
     this.controller.updatePlayerState()
@@ -136,9 +125,7 @@ StudioCollection.Model.prototype = {
   //  this.controller.currentStudioStateUpdate(this.currentStudioState)
   },
 
-  // Fetch latest studio state data
   fetchCurrentStudioData: function() {
-    console.log("SCM - Fetching latest studio data")
     var currentTrackData = this.controller.fetchCurrentTrackStatus()
     var currentStudioData = this.currentStudioState
     currentStudioData.data.currentTrack = currentTrackData.currentTrack

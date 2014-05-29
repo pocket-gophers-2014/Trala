@@ -6,7 +6,6 @@ Data.FirebaseManager = function(fbRefUrl, fbORM) {
 
 Data.FirebaseManager.prototype = {
   createStudio: function(studio) {
-    console.log("FB M - create studio - studiodata: " + studio)
     this.studioCollectionRef.child(studio.name).set(studio.data)
   },
 
@@ -28,19 +27,16 @@ Data.FirebaseManager.prototype = {
   },
 
   studioDestroyed: function(data) {
-    console.log("FB - STUDIO REMOVED")
     var studioData = this.packageStudioData(data)
     this.fbORM.studioDestroyed(studioData)
   },
 
   studioStateModified: function(data) {
-    console.log("FB - studio MODIFIED")
     var studioData = this.packageStudioData(data)
     this.fbORM.interpretStudioStatus(studioData)
   },
   
   newStudioCreated: function(data) {
-    console.log("FB - New Studio Created FB MANAGER")
     var studioData = this.packageStudioData(data)
     if (studioData.data.listenerCount !== 0) {
       this.fbORM.newStudioCreated(studioData)
