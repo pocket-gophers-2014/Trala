@@ -16,18 +16,10 @@ StudioCollection.Controller.prototype = {
     console.log('SCM - initScreation sdata: ' + studioData.name + '-' + studioData.data)
     this.studioCollectionModel.freshStudioCreation(studioData)
     this.initUserStudioState(studioData.name)
-   // this.loadStudioWithPlayer(this.studioCollectionModel.currentStudioState)
-   // this.studioCollectionView.toggleActivePlayer('0')
-   // this.playTrack()
   },
 
   initUserStudioState: function(studioName) {
     this.studioCollectionModel.initStudioState(studioName)
-    // var currentStudioData = this.studioCollectionModel.currentStudioState
-    // this.loadStudioWithPlayer(currentStudioData)
-
-    //  this.studioCollectionView.toggleActivePlayer('0')
-    // this.updatePlayerState()
    },
    
    buildStudio: function(studioBuildData) {
@@ -58,7 +50,7 @@ StudioCollection.Controller.prototype = {
     $('.active').bind('loadeddata', function(){
       console.log("PLAYER CAN PLAY NOW")
       var afterLoadTime = Date.now()
-      var newTrackTime = ((afterLoadTime - beforeLoadTime)/1000) + trackTime
+      var newTrackTime = ((afterLoadTime - beforeLoadTime)/1000) + trackTime + 2
       $('.active').prop('currentTime' , newTrackTime)
       $('.active').trigger('play')
       this.studioCollectionModel.setStateSynced()

@@ -52,25 +52,6 @@ Data.FirebaseManager.prototype = {
     return studioData
   },
 
-  // packageStudioCollectionData: function(data) {
-  //   var tempData = []
-  //   data.forEach(function(data) {
-  //     var tempObj = { name: data.name(), data: data.val() }
-  //    tempData.push(tempObj)
-  //  })
-  //   return tempData
-  // },
-
-  // connectionStateUpdate: function(snapData) {
-  //   if (snapData.val()) {
-  //     console.log("here")
-  //   }
-  //   else {
-  //     console.log("gone")
-  //   }
-
-  // },
-
   setDataTriggers: function() {
     this.studioCollectionRef.on('child_added', this.newStudioCreated.bind(this)) 
     this.studioCollectionRef.on('child_changed', this.studioStateModified.bind(this))
