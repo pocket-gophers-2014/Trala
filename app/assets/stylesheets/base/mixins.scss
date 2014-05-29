@@ -4,6 +4,14 @@
   @return rgba(0,0,0, $opacity)
 }
 
+@mixin container_setup() {
+  margin: 2% auto;
+  padding: 2%;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
 @mixin navigation-list {
   border-bottom: 1px solid $white_smoke;
   background-color: $THEME_COLOR;
@@ -41,13 +49,6 @@
   text-shadow: 12px;
 }
 
-@mixin container_setup() {
-  margin: 2% auto;
-  padding: 2%;
-  text-align: center;
-  font-size: 14px;
-  border-radius: 5px;
-}
 
 
 
