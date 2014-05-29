@@ -17,6 +17,7 @@ Data.FirebaseORM.prototype = {
 
   // Create new studio
   createStudio: function(newStudioData) {
+    debugger
     this.firebaseManager.createStudio(newStudioData)
   },
 

@@ -10,6 +10,7 @@ $(document).ready(function() {
 
   studioCollectionController = new StudioCollection.Controller({studioCollectionModel:studioCollectionModel,
                                                                 studioCollectionView: studioCollectionView,
+                                                                locationManager: locationManager,
                                                                 studioView: studioView,
                                                                  })
 

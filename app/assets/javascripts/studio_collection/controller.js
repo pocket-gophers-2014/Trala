@@ -2,6 +2,7 @@ StudioCollection.Controller = function(args) {
   this.studioView = args.studioView
   this.studioCollectionModel = args.studioCollectionModel
   this.studioCollectionView = args.studioCollectionView
+  this.locatonManager = args.locationManager
   this.currentUserState = ""
   this.tempPlaylist = []
 
@@ -122,6 +123,8 @@ StudioCollection.Controller.prototype = {
     console.log("Controller - Rendering collection page")
     this.currentUserState = "collectionPage"
     var studioCollection = this.studioCollectionModel.state
+    studioCollection = locationManager.filterByDistance(studioCollection, 10000)
+    // debugger
     var studioCollectionTemplateData = { studio: studioCollection }
     var studioCollectionTemplate = this.buildStudioCollectionTemplate(studioCollectionTemplateData)
     this.studioCollectionView.draw(studioCollectionTemplate)
