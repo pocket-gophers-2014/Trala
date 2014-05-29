@@ -28,18 +28,18 @@ Search.Controller.prototype = {
 
     buildResultsTemplate: function( songData ) {
         var songData = { songData: songData }
-        return HandlebarsTemplates['search_result_template']( songData)
+        return HandlebarsTemplates['search_result_template']( songData )
     },
 
     setCurrentResults: function( songData ) {
         this.searchResults = songData
     },
 
-    registerSongSelectionSubscriber: function(controller, cbMethod) {
-        this.songSelectionSubscriber = {controller: controller, cbMethod: cbMethod }
+    registerSongSelectionSubscriber: function( controller, cbMethod ) {
+        this.songSelectionSubscriber = { controller: controller, cbMethod: cbMethod }
     },
 
-    selectSong: function(songID) {
+    selectSong: function( songID ) {
         song = this.getSongFromCurrentResults( songID )
         this.notifySongSelectionSubscriber( song )
     },
@@ -54,9 +54,9 @@ Search.Controller.prototype = {
         return tempSong
     },
 
-    notifySongSelectionSubscriber:  function(song) {
+    notifySongSelectionSubscriber: function( song ) {
         controller = this.songSelectionSubscriber.controller
         cbMethod = controller[this.songSelectionSubscriber.cbMethod]
-        cbMethod.call(controller, song)
+        cbMethod.call( controller, song )
     }
 }
