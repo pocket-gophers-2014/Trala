@@ -1,3 +1,5 @@
+@import 'theme_colors.css.scss';
+
 @function white($opacity) {
   @return rgba(0,0,0, $opacity)
 }
