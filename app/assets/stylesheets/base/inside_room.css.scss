@@ -3,14 +3,11 @@
 
 
 // inside studi0
+
 .studio_middle_container {
-  @include container_setup();
-  border: 2px solid $cloud_gray;
-  position: fixed;
-  top: 50%;
-  left: 70%;
-  margin-top: -20%;
-  margin-left: -30%;
+  margin-bottom: 25%;
+  vertical-align: middle;
+  text-align: center;
 }
 
  // CHANGECHANGE
