@@ -1,35 +1,13 @@
-[![Build Status](https://travis-ci.org/pocket-gophers-2014/Trala.svg?branch=master)](https://travis-ci.org/pocket-gophers-2014/Trala)
-
 Trala
-[trah-lah]
 
-noun 
-nonsense syllables sung as a refrain, expressing gaiety.
+Where
 
-Is it a playlist? Is it a tracklist? Is it a user-manipulated widget? Is it any of these things?
+tralatrala.herokuapp.com
 
-Nah-- not quite.
+Who
 
-**Trala** is here to give you access to create music events on the fly. To allow you and those around you to dance, sing ... well, you know-- live-- all on one continually streaming sound.
+Alex Ziegler, Lindsey Menges, Anh Kim Hoang, Mitchell Tasic, Phil Wittig
 
-A community-inspired, community-involving world of music that doesn't miss a beat.
+What
 
-It's up to you not to miss one either.
-
-
-Team = [ Anh,
-Alex,
-Lindsey,
-Mitch,
-Phil ]
-
-######Anh's Notes
-# style view <br>
-
-### notes: <br>
-
-stylesheet folder are organized in subdirectories: <br>
-  +base: styles that will never change, mixins, reset, grids, spaces, helper <br>
-
-  +application: default layout, typography, objects, modules <br>
-  +shared: popup, markdown
+Trala is a mobile-first, location-based social music app that enables you to discover other music lovers in your area that are currently jamming out. Create a studio and share the music you love with those around you, or join a studio and synced up in real time with what everyone is listening to.

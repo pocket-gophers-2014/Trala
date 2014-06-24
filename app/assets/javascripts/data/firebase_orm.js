@@ -1,6 +1,6 @@
 // Dat der firebaseORM soN
-Data.FirebaseORM = function(subscribedInterface){
-  this.subscribedInterface = subscribedInterface
+Data.FirebaseORM = function(){
+  this.subscribedInterface = {}
 }
 
 Data.FirebaseORM.prototype = {
@@ -154,5 +154,9 @@ Data.FirebaseORM.prototype = {
 
   registerFirebaseManager: function(manager) {
     this.firebaseManager = manager
+  },
+
+  registerSubscriber: function(subscriber) {
+    this.subscribedInterface = subscriber;
   }
 }
