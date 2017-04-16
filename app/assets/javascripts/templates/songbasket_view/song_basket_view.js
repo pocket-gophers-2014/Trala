@@ -1,0 +1,4 @@
+function SongBasketView = ()
+
+SongBasketView.prototype = {}
+
